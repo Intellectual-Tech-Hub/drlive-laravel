@@ -6,23 +6,19 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+
+    public function login()
     {
-        $this->middleware('auth');
+        return view('admin.auth.login');
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
+    public function loginsubmit(Request $request)
+    {
+        return $request;
+    }
+
     public function index()
     {
-        return view('home');
+        return view('admin.index');
     }
 }

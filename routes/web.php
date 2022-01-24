@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,10 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Auth::routes();
+
+Route::redirect('/','/loginform');
+Route::get('/loginform', [App\Http\Controllers\HomeController::class, 'login'])->name('login.form');
+Route::post('/loginform/submit', [App\Http\Controllers\HomeController::class, 'loginsubmit'])->name('login.form.submit');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
