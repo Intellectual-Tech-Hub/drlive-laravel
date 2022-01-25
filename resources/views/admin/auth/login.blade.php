@@ -65,9 +65,9 @@
         
                                         <div class="mb-3">
                                             <label for="username" class="form-label">Username</label>
-                                            <input type="text" name="email" value="{{ old('email') }}" class="form-control" placeholder="Enter username">
+                                            <input type="text" name="email" value="{{ old('email') }}" class="form-control" placeholder="Enter email">
                                             @error('email')
-                                                <span class="danger">{{ $message }}</span>
+                                                <span class="badge badge-soft-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
                 
@@ -75,10 +75,9 @@
                                             <label class="form-label">Password</label>
                                             <div class="input-group auth-pass-inputgroup">
                                                 <input type="password" name="password" class="form-control" placeholder="Enter password" aria-label="Password" aria-describedby="password-addon">
-                                                <button class="btn btn-light " type="button"><i class="mdi mdi-eye-outline"></i></button>
                                             </div>
                                             @error('password')
-                                                <span class="danger">{{ $message }}</span>
+                                                <span class="badge badge-soft-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
 

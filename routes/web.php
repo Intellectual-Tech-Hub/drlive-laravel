@@ -21,6 +21,7 @@ Auth::routes();
 Route::redirect('/','/loginform');
 Route::get('/loginform', [App\Http\Controllers\HomeController::class, 'login'])->name('login.form');
 Route::post('/loginform/submit', [App\Http\Controllers\HomeController::class, 'loginsubmit'])->name('login.form.submit');
+Route::get('/userlogout', [App\Http\Controllers\HomeController::class, 'logout'])->name('user.logout');
 
 //Admin Routes
 Route::group(['prefix'=>'admin', 'middleware'=>['auth']], function () {

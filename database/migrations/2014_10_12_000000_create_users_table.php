@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('pin')->nullable();
             $table->string('place')->nullable();
             $table->string('gender');
+            $table->string('image')->nullable();
             $table->string('status')->default(1);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
