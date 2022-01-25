@@ -22,6 +22,13 @@ class UserTableSeeder extends Seeder
                 'gender' => 'male',
                 'phone' => 9074787667,
                 'password' => Hash::make('password'),
+            ),
+            array(
+                'first_name' => 'doctor',
+                'email' => 'doctor@gmail.com',
+                'gender' => 'male',
+                'phone' => 9074787666,
+                'password' => Hash::make('password'),
             )
         );
 

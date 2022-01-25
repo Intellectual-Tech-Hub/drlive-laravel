@@ -30,7 +30,7 @@
         </li>
 
         <li>
-            <a href="#" class="waves-effect">
+            <a href="{{ route('users.index') }}" class="waves-effect">
                 <i class="fa fa-users"></i>
                 <span key="t-chat">Users</span>
             </a>
