@@ -24,9 +24,6 @@
                     <a href="#" key="t-vertical">Roles</a>
                 </li>
                 <li>
-                    <a href="#" key="t-vertical">Permissions</a>
-                </li>
-                <li>
                     <a href="#" key="t-vertical">Assign Permission</a>
                 </li>
             </ul>
