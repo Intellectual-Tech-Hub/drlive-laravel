@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Brian2694\Toastr\Facades\Toastr;
 
 class HomeController extends Controller
 {
@@ -14,7 +15,10 @@ class HomeController extends Controller
 
     public function loginsubmit(Request $request)
     {
-        return $request;
+        $this->validate($request, [
+            'email' => 'required|email',
+            'password' => 'required'
+        ]);
     }
 
     public function index()

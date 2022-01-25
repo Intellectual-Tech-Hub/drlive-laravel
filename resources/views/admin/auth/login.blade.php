@@ -18,6 +18,8 @@
         <!-- App Css-->
         <link href="{{ asset('assets/css/app.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
 
+        <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
+
     </head>
 
     <body>
@@ -64,6 +66,9 @@
                                         <div class="mb-3">
                                             <label for="username" class="form-label">Username</label>
                                             <input type="text" name="email" value="{{ old('email') }}" class="form-control" placeholder="Enter username">
+                                            @error('email')
+                                                <span class="danger">{{ $message }}</span>
+                                            @enderror
                                         </div>
                 
                                         <div class="mb-3">
@@ -72,6 +77,9 @@
                                                 <input type="password" name="password" class="form-control" placeholder="Enter password" aria-label="Password" aria-describedby="password-addon">
                                                 <button class="btn btn-light " type="button"><i class="mdi mdi-eye-outline"></i></button>
                                             </div>
+                                            @error('password')
+                                                <span class="danger">{{ $message }}</span>
+                                            @enderror
                                         </div>
 
                                         <div class="form-check">
@@ -116,5 +124,8 @@
         
         <!-- App js -->
         <script src="{{ asset('assets/js/app.js') }}"></script>
+
+        <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+        {!! Toastr::message() !!}
     </body>
 </html>
