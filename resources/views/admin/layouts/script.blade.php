@@ -15,4 +15,7 @@
 <script src="{{ asset('assets/js/app.js') }}"></script>
 
 <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+
+@stack('script')
+
 {!! Toastr::message() !!}

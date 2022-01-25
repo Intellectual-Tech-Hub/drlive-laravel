@@ -21,7 +21,7 @@
             </a>
             <ul class="sub-menu" aria-expanded="true">
                 <li>
-                    <a href="#" key="t-vertical">Roles</a>
+                    <a href="{{ route('roles.index') }}" key="t-vertical">Roles</a>
                 </li>
                 <li>
                     <a href="#" key="t-vertical">Assign Permission</a>

@@ -27,5 +27,6 @@ Route::get('/userlogout', [App\Http\Controllers\HomeController::class, 'logout']
 Route::group(['prefix'=>'admin', 'middleware'=>['auth']], function () {
 
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::resource('/roles', App\Http\Controllers\admin\RoleController::class);
 
 });
