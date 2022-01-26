@@ -48,19 +48,7 @@ class PermissionTableSeeder extends Seeder
                 'guard_name' => 'web'
             ),
             array(
-                'name' => 'permission_assign_list',
-                'guard_name' => 'web'
-            ),
-            array(
-                'name' => 'permission_assign_create',
-                'guard_name' => 'web'
-            ),
-            array(
-                'name' => 'permission_assign_update',
-                'guard_name' => 'web'
-            ),
-            array(
-                'name' => 'permission_assign_delete',
+                'name' => 'permission_assign',
                 'guard_name' => 'web'
             ),
             array(

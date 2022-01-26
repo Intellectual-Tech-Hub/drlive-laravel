@@ -10,6 +10,15 @@ use Brian2694\Toastr\Facades\Toastr;
 
 class RoleController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('permission:role_list');
+        $this->middleware('permission:role_create', ['only' => ['create','store']]);
+        $this->middleware('permission:role_update', ['only' => ['edit','update']]);
+        $this->middleware('permission:role_delete', ['only' => ['destroy']]);
+    }
+
     /**
      * Display a listing of the resource.
      *

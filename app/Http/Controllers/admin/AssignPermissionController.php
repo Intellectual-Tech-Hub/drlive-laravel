@@ -11,6 +11,11 @@ use Brian2694\Toastr\Facades\Toastr;
 class AssignPermissionController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('permission:permission_assign', ['only' => ['index','rolepermission','rolepermissionassign']]);
+    }
+
     public function index()
     {
         $roles = Role::all();
