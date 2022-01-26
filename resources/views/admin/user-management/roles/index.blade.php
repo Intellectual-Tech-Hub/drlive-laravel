@@ -45,12 +45,16 @@
                         <td>{{ $role->name }}</td>
                         <td>{{ $role->guard_name }}</td>
                         <td>
-                            <a href="{{route('roles.edit',$role->id)}}" class="btn btn-primary btn-sm float-left mr-1" style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" title="edit" data-placement="bottom"><i class="fas fa-edit"></i></a>
-                            <form method="POST" action="{{route('roles.destroy',$role->id)}}">
-                            @csrf
-                            @method('delete')
-                                <button class="btn btn-danger btn-sm warning" data-id={{$role->id}} style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" data-placement="bottom" title="Delete"><i class="fas fa-trash-alt"></i></button>
-                            </form>
+                            @if ($role->id != 1 && $role->id != 2 && $role->id != 3)
+                                <a href="{{route('roles.edit',$role->id)}}" class="btn btn-primary btn-sm float-left mr-1" style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" title="edit" data-placement="bottom"><i class="fas fa-edit"></i></a>
+                                <form method="POST" action="{{route('roles.destroy',$role->id)}}">
+                                @csrf
+                                @method('delete')
+                                    <button class="btn btn-danger btn-sm warning" data-id={{$role->id}} style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" data-placement="bottom" title="Delete"><i class="fas fa-trash-alt"></i></button>
+                                </form>
+                            @else
+                            <span class="badge rounded-pill bg-success">System Role</span>
+                            @endif
                         </td>
                     </tr>
                     @endforeach
