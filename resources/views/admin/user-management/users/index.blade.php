@@ -19,7 +19,9 @@
 </div>
 <!-- end page title -->
 <div class="card-header py-3">
+    @can('user_create')
     <a href="{{ route('users.create') }}" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="bottom" title="Add User Role"><i class="fas fa-plus"></i> Add User</a>
+    @endcan
 </div>
 
 <div class="row">

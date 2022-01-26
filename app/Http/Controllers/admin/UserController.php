@@ -8,10 +8,20 @@ use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Brian2694\Toastr\Facades\Toastr;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('permission:user_list');
+        $this->middleware('permission:user_create', ['only' => ['create','store']]);
+        $this->middleware('permission:user_update', ['only' => ['edit','update']]);
+        $this->middleware('permission:user_delete', ['only' => ['destroy']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
