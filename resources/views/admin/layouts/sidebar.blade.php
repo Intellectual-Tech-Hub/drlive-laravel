@@ -24,7 +24,7 @@
                     <a href="{{ route('roles.index') }}" key="t-vertical">Roles</a>
                 </li>
                 <li>
-                    <a href="#" key="t-vertical">Assign Permission</a>
+                    <a href="{{ route('role.lists') }}" key="t-vertical">Assign Permission</a>
                 </li>
             </ul>
         </li>

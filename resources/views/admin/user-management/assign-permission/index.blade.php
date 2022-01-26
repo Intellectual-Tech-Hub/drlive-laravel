@@ -5,12 +5,12 @@
 <div class="row">
     <div class="col-12">
         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-            <h4 class="mb-sm-0 font-size-18">User Roles</h4>
+            <h4 class="mb-sm-0 font-size-18">Assign Permission</h4>
 
             <div class="page-title-right">
                 <ol class="breadcrumb m-0">
                     <li class="breadcrumb-item"><a href="{{ route('home') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item active">User Roles</li>
+                    <li class="breadcrumb-item active">Assign Permission</li>
                 </ol>
             </div>
 
@@ -18,9 +18,6 @@
     </div>
 </div>
 <!-- end page title -->
-<div class="card-header py-3">
-    <a href="{{ route('roles.create') }}" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="bottom" title="Add User Role"><i class="fas fa-plus"></i> Add Role</a>
-</div>
 
 <div class="row">
     <div class="col-12">
@@ -30,7 +27,7 @@
                     <thead>
                     <tr>
                         <th>S.I</th>
-                        <th>Name</th>
+                        <th>Role Name</th>
                         <th>Guard Name</th>
                         <th>Action</th>
                     </tr>
@@ -39,18 +36,16 @@
 
                     <tbody>
 
-                    @foreach ($roles as $role)
+                    @foreach($roles as $role)
                     <tr>
                         <td>{{ $loop->index +1 }}</td>
                         <td>{{ $role->name }}</td>
                         <td>{{ $role->guard_name }}</td>
                         <td>
-                            <a href="{{route('roles.edit',$role->id)}}" class="btn btn-primary btn-sm float-left mr-1" style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" title="edit" data-placement="bottom"><i class="fas fa-edit"></i></a>
-                            <form method="POST" action="{{route('roles.destroy',$role->id)}}">
-                            @csrf
-                            @method('delete')
-                                <button class="btn btn-danger btn-sm warning" data-id={{$role->id}} style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" data-placement="bottom" title="Delete"><i class="fas fa-trash-alt"></i></button>
-                            </form>
+                            <a href="{{ route('role.permission',$role->id) }}" class="btn btn-dark waves-effect waves-light">
+                                <i class="bx bx-loader bx-spin font-size-16 align-middle me-2"></i>
+                                Assign Permission
+                            </a>
                         </td>
                     </tr>
                     @endforeach

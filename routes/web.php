@@ -26,8 +26,13 @@ Route::get('/userlogout', [App\Http\Controllers\HomeController::class, 'logout']
 //Admin Routes
 Route::group(['prefix'=>'admin', 'middleware'=>['auth']], function () {
 
+    //dashboard
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    //user management
     Route::resource('/roles', App\Http\Controllers\admin\RoleController::class);
     Route::resource('/users', App\Http\Controllers\admin\UserController::class);
+    Route::get('/role/lists', [App\Http\Controllers\admin\AssignPermissionController::class, 'index'])->name('role.lists');
+    Route::get('/role/permission/{id}', [App\Http\Controllers\admin\AssignPermissionController::class, 'rolepermission'])->name('role.permission');
+    Route::post('/role/permission/assign', [App\Http\Controllers\admin\AssignPermissionController::class, 'rolepermissionassign'])->name('role.permission.assign');
 
 });
