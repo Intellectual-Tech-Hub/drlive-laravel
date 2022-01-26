@@ -20,7 +20,7 @@
 <!-- end page title -->
 <div class="card-header py-3">
     @can('user_create')
-        <a href="{{ route('users.create') }}" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="bottom" title="Add User Role"><i class="fas fa-plus"></i> Add User</a>
+    <a href="{{ route('users.create') }}" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="bottom" title="Add User Role"><i class="fas fa-plus"></i> Add User</a>
     @endcan
 </div>
 
@@ -65,12 +65,16 @@
                             @endif
                         </td>
                         <td>
+                            @can('user_update')
                             <a href="{{route('users.edit',$user->id)}}" class="btn btn-primary btn-sm float-left mr-1" style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" title="edit" data-placement="bottom"><i class="fas fa-edit"></i></a>
+                            @endcan
+                            @can('user_delete')
                             <form method="POST" action="{{route('users.destroy',$user->id)}}">
                             @csrf
                             @method('delete')
                                 <button class="btn btn-danger btn-sm warning" data-id={{$user->id}} style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" data-placement="bottom" title="Delete"><i class="fas fa-trash-alt"></i></button>
                             </form>
+                            @endcan
                         </td>
                     </tr>
                     @endforeach

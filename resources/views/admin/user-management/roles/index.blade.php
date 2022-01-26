@@ -19,7 +19,9 @@
 </div>
 <!-- end page title -->
 <div class="card-header py-3">
+    @can('role_create')
     <a href="{{ route('roles.create') }}" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="bottom" title="Add User Role"><i class="fas fa-plus"></i> Add Role</a>
+    @endcan
 </div>
 
 <div class="row">
@@ -46,12 +48,16 @@
                         <td>{{ $role->guard_name }}</td>
                         <td>
                             @if ($role->id != 1 && $role->id != 2 && $role->id != 3)
+                                @can('role_update')
                                 <a href="{{route('roles.edit',$role->id)}}" class="btn btn-primary btn-sm float-left mr-1" style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" title="edit" data-placement="bottom"><i class="fas fa-edit"></i></a>
+                                @endcan
+                                @can('role_delete')
                                 <form method="POST" action="{{route('roles.destroy',$role->id)}}">
                                 @csrf
                                 @method('delete')
                                     <button class="btn btn-danger btn-sm warning" data-id={{$role->id}} style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" data-placement="bottom" title="Delete"><i class="fas fa-trash-alt"></i></button>
                                 </form>
+                                @endcan
                             @else
                             <span class="badge rounded-pill bg-success">System Role</span>
                             @endif

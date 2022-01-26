@@ -20,21 +20,27 @@
                 <span class="fas fa-arrow-circle-down"></span>
             </a>
             <ul class="sub-menu" aria-expanded="true">
+                @can('role_list')
                 <li>
                     <a href="{{ route('roles.index') }}" key="t-vertical">Roles</a>
                 </li>
+                @endcan
+                @can('permission_assign')
                 <li>
                     <a href="{{ route('role.lists') }}" key="t-vertical">Assign Permission</a>
                 </li>
+                @endcan
             </ul>
         </li>
 
+        @can('user_list')
         <li>
             <a href="{{ route('users.index') }}" class="waves-effect">
                 <i class="fa fa-users"></i>
                 <span key="t-chat">Users</span>
             </a>
         </li>
+        @endcan
 
     </ul>
 </div>
