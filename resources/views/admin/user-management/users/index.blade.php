@@ -35,6 +35,7 @@
                         <th>Email</th>
                         <th>Gender</th>
                         <th>Role</th>
+                        <th>Status</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -51,8 +52,15 @@
                         <td>{{ $user->gender }}</td>
                         <td>
                             @foreach ($user->getRoleNames() as $rolename)
-                                {{ $rolename }}
+                                <span class="badge rounded-pill bg-success">{{ $rolename }}</span>
                             @endforeach
+                        </td>
+                        <td>
+                            @if ($user->status == 1)
+                                Active
+                            @else
+                                Inactive
+                            @endif
                         </td>
                         <td>
                             <a href="{{route('users.edit',$user->id)}}" class="btn btn-primary btn-sm float-left mr-1" style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" title="edit" data-placement="bottom"><i class="fas fa-edit"></i></a>

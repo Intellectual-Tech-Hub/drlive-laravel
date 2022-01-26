@@ -69,7 +69,7 @@ class UserController extends Controller
             $imagename = time() . '.' . $request->file('image')->getClientOriginalName();
             $image->storeAs('public/user', $imagename);
             $user->image = $imagename;
-            }
+        }
 
         $user->assignRole($request->role);
         
@@ -105,7 +105,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::findOrfail($id);
+        $roles = Role::all();
+        return view('admin.user-management.users.edit',compact('user','roles'));
     }
 
     /**
@@ -117,7 +119,53 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'first_name' => 'required|string',
+            'email' => 'required|email',
+            'phone' => 'required',
+            'gender' => 'required',
+            'role' => 'required',
+            'status' => 'required',
+        ]);
+
+        $user = User::findOrfail($id);
+        $user->first_name = $request->first_name;
+        $user->last_name = $request->last_name;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+        $user->address = $request->address;
+        $user->pin = $request->pin;
+        $user->place = $request->place;
+        $user->gender = $request->gender;
+        $user->status = $request->status;
+
+        if ($request->password) {
+            $user->password = Hash::make($request->password);
+        }
+        else {
+            $user->password = $user->password;
+        }
+
+        if ($request->file('image')) {
+            $image = $request->file('image');
+            $imagename = time() . '.' . $request->file('image')->getClientOriginalName();
+            $image->storeAs('public/user', $imagename);
+            $user->image = $imagename;
+        }
+
+        $user->removeRole($user->roles[0]['id']);
+        $user->assignRole($request->role);
+        
+        $status = $user->save();
+
+        if ($status) {
+            Toastr::success('User updated successfully','Success');
+            return redirect()->route('users.index');
+        }
+        else {
+            Toastr::error('User updation failed','Failed');
+            return redirect()->route('users.index');
+        }
     }
 
     /**
@@ -128,6 +176,16 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::findOrfail($id);
+        $status = $user->delete();
+
+        if ($status) {
+            Toastr::success('User deleted successfully','Success');
+            return redirect()->route('users.index');
+        }
+        else {
+            Toastr::error('User deletion failed','Failed');
+            return redirect()->route('users.index');
+        }        
     }
 }

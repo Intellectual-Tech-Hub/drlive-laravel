@@ -71,7 +71,7 @@
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label for="formrow-email-input" class="form-label">Address</label>
-                                <textarea name="address" class="form-control" id="formrow-email-input">{{ old('first_name') }}</textarea>
+                                <textarea name="address" class="form-control" id="formrow-email-input">{{ old('address') }}</textarea>
                                 @error('address')
                                     <span class="badge badge-soft-danger">{{ $message }}</span>
                                 @enderror
