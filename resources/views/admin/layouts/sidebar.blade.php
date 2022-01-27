@@ -31,12 +31,12 @@
             <ul class="sub-menu" aria-expanded="true">
                 @can('doctor_list')
                 <li>
-                    <a href="#" key="t-vertical">Doctors List</a>
+                    <a href="{{ route('doctor.index') }}" key="t-vertical">Doctors List</a>
                 </li>
                 @endcan
                 @can('doctor_create')
                 <li>
-                    <a href="#" key="t-vertical">Add Doctors</a>
+                    <a href="{{ route('doctor.create') }}" key="t-vertical">Add Doctors</a>
                 </li>
                 @endcan
             </ul>

@@ -36,5 +36,6 @@ Route::group(['prefix'=>'admin', 'middleware'=>['auth']], function () {
     Route::post('/role/permission/assign', [App\Http\Controllers\admin\AssignPermissionController::class, 'rolepermissionassign'])->name('role.permission.assign');
     //Doctor section
     Route::resource('/category', App\Http\Controllers\admin\CategoryController::class);
+    Route::resource('/doctor', App\Http\Controllers\admin\DoctorController::class);
 
 });
