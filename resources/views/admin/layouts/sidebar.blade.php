@@ -11,11 +11,44 @@
             </a>
         </li>
 
-        <li class="menu-title" key="t-apps">User Management</li>
+        <li class="menu-title" key="t-apps">Doctors Section</li>
 
+        @can('category_list')
+        <li>
+            <a href="{{ route('category.index') }}" class="waves-effect">
+                <i class="fas fa-sitemap"></i>
+                <span key="t-chat">Category</span>
+            </a>
+        </li>
+        @endcan
+        @canany('doctor_list','doctor_create')
         <li>
             <a href="javascript: void(0);">
-                <i class="bx bx-user-circle"></i>
+                <i class="fas fa-plus-square"></i>
+                <span key="t-layouts">Doctors</span>
+                <span class="fas fa-arrow-circle-down"></span>
+            </a>
+            <ul class="sub-menu" aria-expanded="true">
+                @can('doctor_list')
+                <li>
+                    <a href="#" key="t-vertical">Doctors List</a>
+                </li>
+                @endcan
+                @can('doctor_create')
+                <li>
+                    <a href="#" key="t-vertical">Add Doctors</a>
+                </li>
+                @endcan
+            </ul>
+        </li>
+        @endcanany
+
+        <li class="menu-title" key="t-apps">User Management</li>
+
+        @canany('role_list','permission_assign')
+        <li>
+            <a href="javascript: void(0);">
+                <i class="fas fa-user-shield"></i>
                 <span key="t-layouts">Roles & Permissions</span>
                 <span class="fas fa-arrow-circle-down"></span>
             </a>
@@ -32,6 +65,7 @@
                 @endcan
             </ul>
         </li>
+        @endcanany
 
         @can('user_list')
         <li>

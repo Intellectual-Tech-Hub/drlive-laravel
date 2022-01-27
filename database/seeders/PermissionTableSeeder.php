@@ -67,6 +67,42 @@ class PermissionTableSeeder extends Seeder
                 'name' => 'user_delete',
                 'guard_name' => 'web'
             ),
+            array(
+                'name' => 'category_list',
+                'guard_name' => 'web'
+            ),
+            array(
+                'name' => 'category_create',
+                'guard_name' => 'web'
+            ),
+            array(
+                'name' => 'category_update',
+                'guard_name' => 'web'
+            ),
+            array(
+                'name' => 'category_delete',
+                'guard_name' => 'web'
+            ),
+            array(
+                'name' => 'doctor_list',
+                'guard_name' => 'web'
+            ),
+            array(
+                'name' => 'doctor_create',
+                'guard_name' => 'web'
+            ),
+            array(
+                'name' => 'doctor_update',
+                'guard_name' => 'web'
+            ),
+            array(
+                'name' => 'doctor_show',
+                'guard_name' => 'web'
+            ),
+            array(
+                'name' => 'doctor_delete',
+                'guard_name' => 'web'
+            ),
         );
 
         DB::table('permissions')->insert($permissions);
