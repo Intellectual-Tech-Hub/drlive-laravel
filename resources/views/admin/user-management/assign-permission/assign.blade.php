@@ -50,14 +50,8 @@
                     <div class="mb-3">
                         <label class="form-label">Select Permissions</label>
                         <select name="permissions[]" class="select2 form-control select2-multiple" multiple="multiple" data-placeholder="Choose permissions...">
-                            @php
-                                $i = 0;
-                            @endphp
-                            @foreach($permissions as $permission)
-                                <option value="{{ $permission->id }}" {{ old('permissions', (@$role->permissions[$i]['id']==$permission->id?'selected':'')) }}>{{ $permission->name }}</option>
-                            @php
-                                $i++;
-                            @endphp
+                            @foreach ($permissions as $key => $permission)
+                                <option value="{{ $permission->id }}" {{ in_array($permission->name, $rolePermissions) ? 'selected': '' }}>{{ $permission->name }}</option>
                             @endforeach
                         </select>
                         @error('permissions')

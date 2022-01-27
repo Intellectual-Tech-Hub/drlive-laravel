@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Brian2694\Toastr\Facades\Toastr;
+use Illuminate\Support\Facades\DB;
 
 class AssignPermissionController extends Controller
 {
@@ -26,7 +27,8 @@ class AssignPermissionController extends Controller
     {
         $role = Role::findOrFail($id);
         $permissions = Permission::all();
-        return view('admin.user-management.assign-permission.assign',compact('role','permissions'));
+        $rolePermissions = $role->permissions->pluck('name')->toArray();
+        return view('admin.user-management.assign-permission.assign',compact('role','permissions','rolePermissions'));
     }
 
     public function rolepermissionassign(Request $request)
