@@ -25,7 +25,7 @@
             <div class="card-body">
                 <h4 class="card-title mb-4">Edit Doctor</h4>
 
-                <form method="POST" action="{{ route('doctor.update',$doctor->id) }}">
+                <form method="POST" action="{{ route('doctor.update',$doctor->id) }}" enctype="multipart/form-data">
                     @csrf
                     @method('PATCH')
                     <div class="row"> 

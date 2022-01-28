@@ -25,7 +25,7 @@
             <div class="card-body">
                 <h4 class="card-title mb-4">Add User</h4>
 
-                <form method="POST" action="{{ route('users.store') }}">
+                <form method="POST" action="{{ route('users.store') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="row"> 
                         <div class="col-md-6">

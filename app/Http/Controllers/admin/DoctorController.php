@@ -85,8 +85,8 @@ class DoctorController extends Controller
 
             if ($request->image) {
                 $image = $request->image;
-                $imagename = time() . '.' . $request->file('image')->getClientOriginalName();
-                $image->storeAs('user', $imagename);
+                $imagename = time() . '.' . $request->image->getClientOriginalName();
+                $image->storeAs('public/user', $imagename);
                 $user->image = $imagename;
             }
 
@@ -199,10 +199,10 @@ class DoctorController extends Controller
                 $user->password = $user->password;
             }
 
-            if ($request->file('image')) {
-                $image = $request->file('image');
-                $imagename = time() . '.' . $request->file('image')->getClientOriginalName();
-                $image->storeAs('user', $imagename);
+            if ($request->image) {
+                $image = $request->image;
+                $imagename = time() . '.' . $request->image->getClientOriginalName();
+                $image->storeAs('public/user', $imagename);
                 $user->image = $imagename;
             }
 
