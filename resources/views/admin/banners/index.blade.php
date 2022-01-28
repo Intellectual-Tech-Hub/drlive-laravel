@@ -47,9 +47,9 @@
                         <td>{{ $loop->index +1 }}</td>
                         <td>{{ $banner->name }}</td>
                         <td>
-                            <center>
-                            <img src="{{ asset('storage/banner/'.$banner->image) }}" alt="" class="avatar-sm">
-                            </center>
+                            <a class="image-popup-no-margins" href="{{ asset('storage/banner/'.$banner->image) }}">
+                                <img class="img-fluid" alt="" src="{{ asset('storage/banner/'.$banner->image) }}" width="75">
+                            </a>
                         </td>
                         <td>
                             @if ($banner->status == 0)

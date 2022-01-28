@@ -39,5 +39,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>['auth']], function () {
     Route::resource('/doctor', App\Http\Controllers\admin\DoctorController::class);
     //Banners
     Route::resource('/banners', App\Http\Controllers\admin\BannerController::class);
+    //Web Settings
+    Route::get('/settings/index', [App\Http\Controllers\admin\SettingsController::class, 'index'])->name('settings.index');
 
 });

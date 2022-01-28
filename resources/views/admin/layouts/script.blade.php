@@ -7,6 +7,12 @@
 <script src="{{ asset('assets/libs/select2/js/select2.min.js') }}"></script>
 <script src="{{ asset('assets/js/pages/form-advanced.init.js') }}"></script>
 
+<!-- Magnific Popup-->
+<script src="{{ asset('assets/libs/magnific-popup/jquery.magnific-popup.min.js') }}"></script>
+
+<!-- lightbox init js-->
+<script src="{{ asset('assets/js/pages/lightbox.init.js') }}"></script>
+
 <!-- apexcharts -->
 <script src="{{ asset('assets/libs/apexcharts/apexcharts.min.js') }}"></script>
 

@@ -100,6 +100,23 @@
         </li>
         @endcan
 
+        <li class="menu-title" key="t-apps">Settings</li>
+
+        @can('web_settings')
+        <li>
+            <a href="javascript: void(0);">
+                <i class="fas fa-cogs"></i>
+                <span key="t-layouts">Web Settings</span>
+                <span class="fas fa-arrow-circle-down"></span>
+            </a>
+            <ul class="sub-menu" aria-expanded="true">
+                <li>
+                    <a href="{{ route('settings.index') }}" key="t-vertical">General</a>
+                </li>
+            </ul>
+        </li>
+        @endcan
+
     </ul>
 </div>
 <!-- Sidebar -->

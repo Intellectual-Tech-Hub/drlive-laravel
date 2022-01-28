@@ -30,7 +30,9 @@
                 </div>
                 @else
                 <div class="mb-4">
-                    <img class="rounded-circle avatar-sm" src="{{ asset('storage/user/'.$doctor->doctordetails->image) }}" alt="">
+                    <a class="image-popup-no-margins" href="{{ asset('storage/user/'.$doctor->doctordetails->image) }}">
+                        <img class="rounded-circle avatar-sm" alt="" src="{{ asset('storage/user/'.$doctor->doctordetails->image) }}">
+                    </a>
                 </div>
                 @endif
                 <h5 class="font-size-15 mb-1"><a href="#" class="text-dark">{{ $doctor->doctordetails->first_name . ' ' . $doctor->doctordetails->last_name }}</a></h5>

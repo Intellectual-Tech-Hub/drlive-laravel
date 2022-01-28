@@ -55,7 +55,6 @@ class DoctorController extends Controller
      */
     public function store(Request $request)
     {
-        return $request->file('image');
         $this->validate($request, [
             'first_name' => 'required|string',
             'category' => 'required|array',
@@ -83,9 +82,9 @@ class DoctorController extends Controller
             $user->status = $request->status;
             $user->password = Hash::make($request->password);
 
-            if ($request->image) {
-                $image = $request->image;
-                $imagename = time() . '.' . $request->image->getClientOriginalName();
+            if ($request->file('image')) {
+                $image = $request->file('image');
+                $imagename = time() . '.' . $request->file('image')->getClientOriginalName();
                 $image->storeAs('public/user', $imagename);
                 $user->image = $imagename;
             }
@@ -200,9 +199,9 @@ class DoctorController extends Controller
                 $user->password = $user->password;
             }
 
-            if ($request->image) {
-                $image = $request->image;
-                $imagename = time() . '.' . $request->image->getClientOriginalName();
+            if ($request->file('image')) {
+                $image = $request->file('image');
+                $imagename = time() . '.' . $request->file('image')->getClientOriginalName();
                 $image->storeAs('public/user', $imagename);
                 $user->image = $imagename;
             }
