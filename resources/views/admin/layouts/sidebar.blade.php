@@ -43,6 +43,30 @@
         </li>
         @endcanany
 
+        <li class="menu-title" key="t-apps">General Options</li>
+
+        @canany('banner_list','banner_create')
+        <li>
+            <a href="javascript: void(0);">
+                <i class="fas fa-image"></i>
+                <span key="t-layouts">Banners</span>
+                <span class="fas fa-arrow-circle-down"></span>
+            </a>
+            <ul class="sub-menu" aria-expanded="true">
+                @can('banner_list')
+                <li>
+                    <a href="{{ route('banners.index') }}" key="t-vertical">Banner List</a>
+                </li>
+                @endcan
+                @can('banner_create')
+                <li>
+                    <a href="{{ route('banners.create') }}" key="t-vertical">Add Banners</a>
+                </li>
+                @endcan
+            </ul>
+        </li>
+        @endcanany
+
         <li class="menu-title" key="t-apps">User Management</li>
 
         @canany('role_list','permission_assign')

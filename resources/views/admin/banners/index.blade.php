@@ -5,12 +5,12 @@
 <div class="row">
     <div class="col-12">
         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-            <h4 class="mb-sm-0 font-size-18">Users List</h4>
+            <h4 class="mb-sm-0 font-size-18">Banners List</h4>
 
             <div class="page-title-right">
                 <ol class="breadcrumb m-0">
                     <li class="breadcrumb-item"><a href="{{ route('home') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item active">Users List</li>
+                    <li class="breadcrumb-item active">Banners List</li>
                 </ol>
             </div>
 
@@ -19,8 +19,8 @@
 </div>
 <!-- end page title -->
 <div class="card-header py-3">
-    @can('user_create')
-    <a href="{{ route('users.create') }}" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="bottom" title="Add User Role"><i class="fas fa-plus"></i> Add User</a>
+    @can('banner_create')
+    <a href="{{ route('banners.create') }}" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="bottom" title="Add Banners"><i class="fas fa-plus"></i> Add Banners</a>
     @endcan
 </div>
 
@@ -32,11 +32,8 @@
                     <thead>
                     <tr>
                         <th>S.I</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Email</th>
-                        <th>Gender</th>
-                        <th>Role</th>
+                        <th>Name</th>
+                        <th>Banner Image</th>
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
@@ -45,34 +42,31 @@
 
                     <tbody>
 
-                    @foreach ($users as $user)
+                    @foreach ($banners as $banner)
                     <tr>
                         <td>{{ $loop->index +1 }}</td>
-                        <td>{{ $user->first_name }}</td>
-                        <td>{{ $user->last_name }}</td>
-                        <td>{{ $user->email }}</td>
-                        <td>{{ $user->gender }}</td>
+                        <td>{{ $banner->name }}</td>
                         <td>
-                            @foreach ($user->getRoleNames() as $rolename)
-                                <span class="badge rounded-pill bg-success">{{ $rolename }}</span>
-                            @endforeach
+                            <center>
+                            <img src="{{ asset('storage/banner/'.$banner->image) }}" alt="" class="avatar-sm">
+                            </center>
                         </td>
                         <td>
-                            @if ($user->status == 1)
-                            <span class="badge bg-success">Active</span>
-                            @else
+                            @if ($banner->status == 0)
                             <span class="badge bg-danger">Inactive</span>
+                            @else
+                            <span class="badge bg-success">Active</span>
                             @endif
                         </td>
                         <td>
-                            @can('user_update')
-                            <a href="{{route('users.edit',$user->id)}}" class="btn btn-primary btn-sm float-left mr-1" style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" title="edit" data-placement="bottom"><i class="fas fa-edit"></i></a>
+                            @can('banner_update')
+                            <a href="{{route('banners.edit',$banner->id)}}" class="btn btn-primary btn-sm float-left mr-1" style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" title="edit" data-placement="bottom"><i class="fas fa-edit"></i></a>
                             @endcan
-                            @can('user_delete')
-                            <form method="POST" action="{{route('users.destroy',$user->id)}}">
+                            @can('banner_delete')
+                            <form method="POST" action="{{route('banners.destroy',$banner->id)}}">
                             @csrf
                             @method('delete')
-                                <button class="btn btn-danger btn-sm warning" data-id={{$user->id}} style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" data-placement="bottom" title="Delete"><i class="fas fa-trash-alt"></i></button>
+                                <button class="btn btn-danger btn-sm warning" data-id={{$banner->id}} style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" data-placement="bottom" title="Delete"><i class="fas fa-trash-alt"></i></button>
                             </form>
                             @endcan
                         </td>

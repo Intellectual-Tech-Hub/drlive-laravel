@@ -37,5 +37,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>['auth']], function () {
     //Doctor section
     Route::resource('/category', App\Http\Controllers\admin\CategoryController::class);
     Route::resource('/doctor', App\Http\Controllers\admin\DoctorController::class);
+    //Banners
+    Route::resource('/banners', App\Http\Controllers\admin\BannerController::class);
 
 });

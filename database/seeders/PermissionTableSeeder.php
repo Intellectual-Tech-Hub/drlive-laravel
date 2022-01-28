@@ -103,6 +103,94 @@ class PermissionTableSeeder extends Seeder
                 'name' => 'doctor_delete',
                 'guard_name' => 'web'
             ),
+            array(
+                'name' => 'banner_list',
+                'guard_name' => 'web'
+            ),
+            array(
+                'name' => 'banner_create',
+                'guard_name' => 'web'
+            ),
+            array(
+                'name' => 'banner_update',
+                'guard_name' => 'web'
+            ),
+            array(
+                'name' => 'banner_delete',
+                'guard_name' => 'web'
+            ),
+            array(
+                'name' => 'leave_list',
+                'guard_name' => 'web'
+            ),
+            array(
+                'name' => 'leave_create',
+                'guard_name' => 'web'
+            ),
+            array(
+                'name' => 'leave_update',
+                'guard_name' => 'web'
+            ),
+            array(
+                'name' => 'leave_delete',
+                'guard_name' => 'web'
+            ),
+            array(
+                'name' => 'leave_approve',
+                'guard_name' => 'web'
+            ),
+            array(
+                'name' => 'doctor_availability_list',
+                'guard_name' => 'web'
+            ),
+            array(
+                'name' => 'doctor_availability_create',
+                'guard_name' => 'web'
+            ),
+            array(
+                'name' => 'doctor_availability_update',
+                'guard_name' => 'web'
+            ),
+            array(
+                'name' => 'doctor_availability_delete',
+                'guard_name' => 'web'
+            ),
+            array(
+                'name' => 'story_list',
+                'guard_name' => 'web'
+            ),
+            array(
+                'name' => 'story_create',
+                'guard_name' => 'web'
+            ),
+            array(
+                'name' => 'story_update',
+                'guard_name' => 'web'
+            ),
+            array(
+                'name' => 'story_delete',
+                'guard_name' => 'web'
+            ),
+            array(
+                'name' => 'web_settings',
+                'guard_name' => 'web'
+            ),
+            array(
+                'name' => 'coupon_list',
+                'guard_name' => 'web'
+            ),
+            array(
+                'name' => 'coupon_create',
+                'guard_name' => 'web'
+            ),
+            array(
+                'name' => 'coupon_update',
+                'guard_name' => 'web'
+            ),
+            array(
+                'name' => 'coupon_delete',
+                'guard_name' => 'web'
+            ),
         );
 
         DB::table('permissions')->insert($permissions);
