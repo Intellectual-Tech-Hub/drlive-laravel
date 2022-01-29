@@ -192,6 +192,34 @@ class RolePermissionTableSeeder extends Seeder
                 'permission_id' => '44',
                 'role_id' => '1'
             ),
+            array(
+                'permission_id' => '45',
+                'role_id' => '1'
+            ),
+            array(
+                'permission_id' => '46',
+                'role_id' => '1'
+            ),
+            array(
+                'permission_id' => '47',
+                'role_id' => '1'
+            ),
+            array(
+                'permission_id' => '48',
+                'role_id' => '1'
+            ),
+            array(
+                'permission_id' => '49',
+                'role_id' => '1'
+            ),
+            array(
+                'permission_id' => '50',
+                'role_id' => '1'
+            ),
+            array(
+                'permission_id' => '51',
+                'role_id' => '1'
+            ),
             //doctor role permission assign
             
         );

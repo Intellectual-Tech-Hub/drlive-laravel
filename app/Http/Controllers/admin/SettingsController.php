@@ -13,7 +13,7 @@ class SettingsController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('permission:web_settings', ['only' => ['index','store']]);
+        $this->middleware('permission:web_settings', ['only' => ['index','save']]);
     }
 
 

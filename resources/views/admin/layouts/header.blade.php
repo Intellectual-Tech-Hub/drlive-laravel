@@ -5,19 +5,19 @@
             <div class="navbar-brand-box">
                 <a href="{{ route('home') }}" class="logo logo-dark">
                     <span class="logo-sm">
-                        <img src="{{ asset('storage/setting/'.App\Models\Setting::setting()->logo) }}" alt="" height="22">
+                        <img src="{{ asset('storage/setting/'.@App\Models\Setting::setting()->logo) }}" alt="DR.Live" height="22">
                     </span>
                     <span class="logo-lg">
-                        <img src="{{ asset('storage/setting/'.App\Models\Setting::setting()->logo) }}" alt="" height="17">
+                        <img src="{{ asset('storage/setting/'.@App\Models\Setting::setting()->logo) }}" alt="DR.Live" height="17">
                     </span>
                 </a>
 
                 <a href="{{ route('home') }}" class="logo logo-light">
                     <span class="logo-sm">
-                        <img src="{{ asset('storage/setting/'.App\Models\Setting::setting()->logo) }}" alt="" height="22">
+                        <img src="{{ asset('storage/setting/'.@App\Models\Setting::setting()->logo) }}" alt="DR.Live" height="22">
                     </span>
                     <span class="logo-lg">
-                        <img src="{{ asset('storage/setting/'.App\Models\Setting::setting()->logo) }}" alt="" height="19">
+                        <img src="{{ asset('storage/setting/'.@App\Models\Setting::setting()->logo) }}" alt="DR.Live" height="19">
                     </span>
                 </a>
             </div>
