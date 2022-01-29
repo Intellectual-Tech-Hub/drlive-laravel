@@ -45,8 +45,8 @@
                     @foreach ($times as $time)
                     <tr>
                         <td>{{ $loop->index +1 }}</td>
-                        <td>{{ $time->start_time }}</td>
-                        <td>{{ $time->end_time }}</td>
+                        <td>{{ Carbon\carbon::parse($time->start_time)->format('h:i A') }}</td>
+                        <td>{{ Carbon\carbon::parse($time->end_time)->format('h:i A') }}</td>
                         <td>
                             @if ($time->status == 0)
                             <span class="badge bg-danger">Inactive</span>

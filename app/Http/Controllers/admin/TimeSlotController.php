@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\TimeSlot;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 
 class TimeSlotController extends Controller
@@ -26,7 +27,7 @@ class TimeSlotController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.doctor_availability.time_slots.create');
     }
 
     /**
@@ -37,7 +38,26 @@ class TimeSlotController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'start_time' => 'required',
+            'end_time' => 'required',
+            'status' => 'required'
+        ]);
+
+        $time= new TimeSlot();
+        $time->start_time = $request->start_time;
+        $time->end_time = $request->end_time;
+        $time->status = $request->status;
+        $status = $time->save();
+
+        if ($status) {
+            Toastr::success('Time slot added','Success');
+            return redirect()->route('timeslots.index');
+        }
+        else {
+            Toastr::error('Time slot failed to add','Failed');
+            return redirect()->route('timeslots.index');
+        }
     }
 
     /**
@@ -59,7 +79,8 @@ class TimeSlotController extends Controller
      */
     public function edit($id)
     {
-        //
+        $time = TimeSlot::findOrFail($id);
+        return view('admin.doctor_availability.time_slots.edit', compact('time'));
     }
 
     /**
@@ -71,7 +92,26 @@ class TimeSlotController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'start_time' => 'required',
+            'end_time' => 'required',
+            'status' => 'required'
+        ]);
+
+        $time= TimeSlot::findOrFail($id);
+        $time->start_time = $request->start_time;
+        $time->end_time = $request->end_time;
+        $time->status = $request->status;
+        $status = $time->save();
+
+        if ($status) {
+            Toastr::success('Time slot updated','Success');
+            return redirect()->route('timeslots.index');
+        }
+        else {
+            Toastr::error('Time slot failed to update','Failed');
+            return redirect()->route('timeslots.index');
+        }
     }
 
     /**
@@ -82,6 +122,16 @@ class TimeSlotController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $time= TimeSlot::findOrFail($id);
+        $status = $time->delete();
+
+        if ($status) {
+            Toastr::success('Time slot deleted','Success');
+            return redirect()->route('timeslots.index');
+        }
+        else {
+            Toastr::error('Time slot failed to delete','Failed');
+            return redirect()->route('timeslots.index');
+        }
     }
 }
