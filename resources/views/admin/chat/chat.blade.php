@@ -175,12 +175,13 @@
             <div class="p-4 border-bottom ">
                 <div class="row">
                     <div class="col-md-4 col-9">
-                        <h5 class="font-size-15 mb-1">{{ $to->first_name.' '.$to->last_name }}</h5>
-                        <p class="text-muted mb-0"><i class="fas fa-circle text-success align-middle me-1"></i> {{ $to->roles[0]['name'] }}</p>
+                        <h5 class="font-size-15 mb-1">{{ @$to->first_name.' '.@$to->last_name }}</h5>
+                        <p class="text-muted mb-0"><i class="fas fa-circle text-success align-middle me-1"></i> {{ @$to->roles[0]['name'] }}</p>
                     </div>
                 </div>
             </div>
 
+            @if (isset($msgs))
             <div>
                 <div class="chat-conversation p-3">
                     <ul class="list-unstyled mb-0" data-simplebar style="max-height: 486px;">
@@ -214,13 +215,12 @@
                                     <p>
                                         {{ $msg->msg }}
                                     </p>
-                                    <p class="chat-time mb-0"><i class="bx bx-time-five align-middle me-1"></i> {{ Carbon\carbon::parse($msg->created_at)->format('h:i A') }}</p>
+                                    <p class="chat-time mb-0"><i class="bx bx-time-five align-middle me-1"></i> {{ Carbon\carbon::parse($msg->created_at)->setTimezone('Asia/Kolkata')->format('h:i A') }}</p>
                                 </div>
                                 
                             </div>
                         </li>
                         @endforeach
-                        
                     </ul>
                 </div>
                 <div class="p-3 chat-input-section">
@@ -240,6 +240,32 @@
                     </form>
                 </div>
             </div>
+            @else
+            <div>
+                <div class="chat-conversation p-3">
+                    <ul class="list-unstyled mb-0" data-simplebar style="max-height: 486px;">
+                        <li> 
+                            <div class="chat-day-title">
+                                <span class="title">Today</span>
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="conversation-list">
+                                <div class="ctext-wrap">
+                                    <div class="conversation-name"></div>
+                                    <p>
+                                        Please select a contact for chat!!
+                                    </p>
+                                </div>
+                                
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+            @endif
         </div>
     </div>
 
