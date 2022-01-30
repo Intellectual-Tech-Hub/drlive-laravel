@@ -94,7 +94,8 @@ class DoctorAvailabilityController extends Controller
      */
     public function show($id)
     {
-        //
+        $available = DoctorAvailability::findOrFail($id);
+        return view('admin.doctor_availability.availability.show',compact('available'));
     }
 
     /**
@@ -169,6 +170,17 @@ class DoctorAvailabilityController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $availability = DoctorAvailability::findOrFail($id);
+        $status = $availability->delete();
+
+        if ($status) {
+            Toastr::success('Doctor availability deleted','Success');
+            return redirect()->route('availability.index');
+        }
+        else {
+            Toastr::erroe('Doctor availability failed to delete','Failed');
+            return redirect()->route('availability.index');
+        }
+
     }
 }
