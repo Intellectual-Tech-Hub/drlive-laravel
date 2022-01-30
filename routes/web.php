@@ -42,6 +42,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>['auth']], function () {
     //General Options
     Route::resource('/banners', App\Http\Controllers\admin\BannerController::class);
     Route::resource('/story', App\Http\Controllers\admin\StoriesController::class);
+    Route::get('/chat', [App\Http\Controllers\admin\ChatController::class, 'index'])->name('chat.index');
     //Web Settings
     Route::get('/settings/index', [App\Http\Controllers\admin\SettingsController::class, 'index'])->name('settings.index');
     Route::any('/settings/save', [App\Http\Controllers\admin\SettingsController::class, 'save'])->name('settings.save');
