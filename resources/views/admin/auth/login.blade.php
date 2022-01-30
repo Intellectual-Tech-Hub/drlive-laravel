@@ -33,7 +33,7 @@
                                     <div class="col-7">
                                         <div class="text-primary p-4">
                                             <h5 class="text-primary">Welcome Back !</h5>
-                                            <p>Sign in to continue to {{ App\Models\Setting::setting()->name }}.</p>
+                                            <p>Sign in to continue to {{ @App\Models\Setting::setting()->name }}.</p>
                                         </div>
                                     </div>
                                     <div class="col-5 align-self-end">
@@ -46,7 +46,7 @@
                                     <a href="#" class="auth-logo-light">
                                         <div class="avatar-md profile-user-wid mb-4">
                                             <span class="avatar-title rounded-circle bg-light">
-                                                <img src="{{ asset('storage/setting/'.App\Models\Setting::setting()->logo) }}" alt="" class="rounded-circle" height="34">
+                                                <img src="{{ asset('storage/setting/'.@App\Models\Setting::setting()->logo) }}" alt="" class="rounded-circle" height="34">
                                             </span>
                                         </div>
                                     </a>
@@ -54,7 +54,7 @@
                                     <a href="#" class="auth-logo-dark">
                                         <div class="avatar-md profile-user-wid mb-4">
                                             <span class="avatar-title rounded-circle bg-light">
-                                                <img src="{{ asset('storage/setting/'.App\Models\Setting::setting()->logo) }}" alt="" class="rounded-circle" height="34">
+                                                <img src="{{ asset('storage/setting/'.@App\Models\Setting::setting()->logo) }}" alt="" class="rounded-circle" height="34">
                                             </span>
                                         </div>
                                     </a>
@@ -104,7 +104,7 @@
                             
                             <div>
                                {{--  <p>Don't have an account ? <a href="{{ route('register') }}" class="fw-medium text-primary"> Signup now </a> </p> --}}
-                                <p>{{ App\Models\Setting::setting()->copyright }}</p>
+                                <p>{{ @App\Models\Setting::setting()->copyright }}</p>
                             </div>
                         </div>
 

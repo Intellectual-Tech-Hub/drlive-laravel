@@ -16,9 +16,13 @@ class CreateDoctorAvailabilitiesTable extends Migration
         Schema::create('doctor_availabilities', function (Blueprint $table) {
             $table->id();
             $table->integer('doctor_id');
-            $table->integer('time_slot_id');
-            $table->string('day');
-            $table->string('holiday')->default(0);
+            $table->string('mon')->nullable();
+            $table->string('tue')->nullable();
+            $table->string('wed')->nullable();
+            $table->string('thu')->nullable();
+            $table->string('fri')->nullable();
+            $table->string('sat')->nullable();
+            $table->string('sun')->nullable();
             $table->timestamps();
         });
     }

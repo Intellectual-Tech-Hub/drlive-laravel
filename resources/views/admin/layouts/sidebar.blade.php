@@ -73,12 +73,12 @@
             <ul class="sub-menu" aria-expanded="true">
                 @can('doctor_availability_list')
                 <li>
-                    <a href="{{ route('doctor.index') }}" key="t-vertical">Doctors Availability List</a>
+                    <a href="{{ route('availability.index') }}" key="t-vertical">Doctors Availability List</a>
                 </li>
                 @endcan
                 @can('doctor_availability_create')
                 <li>
-                    <a href="{{ route('doctor.create') }}" key="t-vertical">Add Doctors Availability</a>
+                    <a href="{{ route('availability.create') }}" key="t-vertical">Add Doctors Availability</a>
                 </li>
                 @endcan
             </ul>
