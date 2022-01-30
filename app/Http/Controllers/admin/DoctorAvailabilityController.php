@@ -105,7 +105,21 @@ class DoctorAvailabilityController extends Controller
      */
     public function edit($id)
     {
-        //
+        $available = DoctorAvailability::findOrFail($id);
+        $timeslots = TimeSlot::all();
+
+        $select_mon = $available->pluck('mon')->first();
+        $select_tue = $available->pluck('tue')->first();
+        $select_wed = $available->pluck('wed')->first();
+        $select_thu = $available->pluck('thu')->first();
+        $select_fri = $available->pluck('fri')->first();
+        $select_sat = $available->pluck('sat')->first();
+        $select_sun = $available->pluck('sun')->first();
+
+        return view('admin.doctor_availability.availability.edit', compact(
+            'available','timeslots','select_mon','select_tue','select_wed','select_thu',
+            'select_fri','select_sat','select_sun'
+        ));
     }
 
     /**
@@ -117,7 +131,34 @@ class DoctorAvailabilityController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $mon = implode(',',$request->slot1);
+        $tue = implode(',',$request->slot2);
+        $wed = implode(',',$request->slot3);
+        $thu = implode(',',$request->slot4);
+        $fri = implode(',',$request->slot5);
+        $sat = implode(',',$request->slot6);
+        $sun = implode(',',$request->slot7);
+        
+        $availability = DoctorAvailability::findOrFail($id);
+        $availability->doctor_id = $request->doctor_id;
+        $availability->mon = $mon;
+        $availability->tue = $tue;
+        $availability->wed = $wed;
+        $availability->thu = $thu;
+        $availability->fri = $fri;
+        $availability->sat = $sat;
+        $availability->sun = $sun;
+        $status = $availability->save();
+
+        if ($status) {
+            Toastr::success('Doctor availability updated','Success');
+            return redirect()->route('availability.index');
+        }
+        else {
+            Toastr::erroe('Doctor availability failed to update','Failed');
+            return redirect()->route('availability.index');
+        }
+
     }
 
     /**
