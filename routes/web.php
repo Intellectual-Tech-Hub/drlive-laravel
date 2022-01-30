@@ -43,6 +43,8 @@ Route::group(['prefix'=>'admin', 'middleware'=>['auth']], function () {
     Route::resource('/banners', App\Http\Controllers\admin\BannerController::class);
     Route::resource('/story', App\Http\Controllers\admin\StoriesController::class);
     Route::get('/chat', [App\Http\Controllers\admin\ChatController::class, 'index'])->name('chat.index');
+    Route::get('/chat/start/{id}', [App\Http\Controllers\admin\ChatController::class, 'startchat'])->name('chat.start');
+    Route::post('/chat/send', [App\Http\Controllers\admin\ChatController::class, 'send'])->name('chat.send');
     //Web Settings
     Route::get('/settings/index', [App\Http\Controllers\admin\SettingsController::class, 'index'])->name('settings.index');
     Route::any('/settings/save', [App\Http\Controllers\admin\SettingsController::class, 'save'])->name('settings.save');
