@@ -23,10 +23,18 @@ class HomeController extends Controller
         ]);
 
         if (Auth::attempt(['email'=>$request->email, 'password'=>$request->password, 'status'=>1])) {
-            Toastr::success('Login success', 'Success');
-            return redirect()->route('home');
+            if (Auth::user()->roles[0]['name'] == 'admin' || Auth::user()->roles[0]['name'] == 'doctor') {
+                Toastr::success('Login success', 'Success');
+                return redirect()->route('home');
+            }
+            else {
+                Auth::logout();
+                Toastr::error('You dont have login access', 'Failed');
+                return redirect()->route('login.form');
+            }
         }
         elseif (Auth::attempt(['email'=>$request->email, 'password'=>$request->password, 'status'=>0])) {
+            Auth::logout();
             Toastr::error('User is not active', 'Failed');
             return redirect()->route('login.form');
         }

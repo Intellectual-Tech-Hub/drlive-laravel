@@ -18,7 +18,7 @@
         <!-- App Css-->
         <link href="{{ asset('assets/css/app.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
 
-        <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/libs/toastr/build/toastr.min.css') }}">
 
     </head>
 
@@ -124,7 +124,8 @@
         <!-- App js -->
         <script src="{{ asset('assets/js/app.js') }}"></script>
 
-        <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+        <script src="{{ asset('assets/libs/toastr/build/toastr.min.js') }}"></script>
+        <script src="{{ asset('assets/js/pages/toastr.init.js') }}"></script>
         {!! Toastr::message() !!}
     </body>
 </html>
