@@ -3,23 +3,20 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Banner;
-use Illuminate\Http\Request;
-use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
+use App\Models\Story;
 use Brian2694\Toastr\Facades\Toastr;
+use Illuminate\Http\Request;
 
-class BannerController extends Controller
+class StoriesController extends Controller
 {
 
     public function __construct()
     {
-        $this->middleware('permission:banner_list');
-        $this->middleware('permission:banner_create', ['only' => ['create','store']]);
-        $this->middleware('permission:banner_update', ['only' => ['edit','update']]);
-        $this->middleware('permission:banner_delete', ['only' => ['destroy']]);
+        $this->middleware('permission:story_list');
+        $this->middleware('permission:story_create', ['only' => ['create','store']]);
+        $this->middleware('permission:story_update', ['only' => ['edit','update']]);
+        $this->middleware('permission:story_delete', ['only' => ['destroy']]);
     }
-
 
     /**
      * Display a listing of the resource.
@@ -28,8 +25,8 @@ class BannerController extends Controller
      */
     public function index()
     {
-        $banners = Banner::get();
-        return view('admin.banners.index', compact('banners'));
+        $stories = Story::get();
+        return view('admin.stories.index', compact('stories'));
     }
 
     /**
@@ -39,7 +36,7 @@ class BannerController extends Controller
      */
     public function create()
     {
-        return view('admin.banners.create');
+        return view('admin.stories.create');
     }
 
     /**
@@ -56,26 +53,25 @@ class BannerController extends Controller
             'status' => 'required',
         ]);
 
-        $banner = new Banner();
-        $banner->name = $request->name;
+        $story = new Story();
+        $story->name = $request->name;
 
         $image = $request->file('image');
         $imagename = time() . '.' . $request->file('image')->getClientOriginalName();
-        $image->storeAs('public/banner', $imagename);
-        $banner->image = $imagename;
+        $image->storeAs('public/story', $imagename);
+        $story->image = $imagename;
 
-        $banner->status = $request->status;
-        $status = $banner->save();
+        $story->status = $request->status;
+        $status = $story->save();
 
         if ($status) {
-            Toastr::success('Banner added','Success');
-            return redirect()->route('banners.index');
+            Toastr::success('Story added','Success');
+            return redirect()->route('story.index');
         }
         else {
-            Toastr::error('Banner failed to add','Failed');
-            return redirect()->route('banners.index');
+            Toastr::error('Story failed to add','Failed');
+            return redirect()->route('story.index');
         }
-
     }
 
     /**
@@ -97,8 +93,8 @@ class BannerController extends Controller
      */
     public function edit($id)
     {
-        $banner = Banner::findOrFail($id);
-        return view('admin.banners.edit', compact('banner'));
+        $story = Story::findOrFail($id);
+        return view('admin.stories.edit', compact('story'));
     }
 
     /**
@@ -115,26 +111,26 @@ class BannerController extends Controller
             'status' => 'required',
         ]);
 
-        $banner = Banner::findOrFail($id);
-        $banner->name = $request->name;
+        $story = Story::findOrFail($id);
+        $story->name = $request->name;
 
         if ($request->file('image')) {
             $image = $request->file('image');
             $imagename = time() . '.' . $request->file('image')->getClientOriginalName();
-            $image->storeAs('public/banner', $imagename);
-            $banner->image = $imagename;
+            $image->storeAs('public/story', $imagename);
+            $story->image = $imagename;
         }
 
-        $banner->status = $request->status;
-        $status = $banner->save();
+        $story->status = $request->status;
+        $status = $story->save();
 
         if ($status) {
-            Toastr::success('Banner updated','Success');
-            return redirect()->route('banners.index');
+            Toastr::success('Story updated','Success');
+            return redirect()->route('story.index');
         }
         else {
-            Toastr::error('Banner failed to update','Failed');
-            return redirect()->route('banners.index');
+            Toastr::error('Story failed to update','Failed');
+            return redirect()->route('story.index');
         }
     }
 
@@ -146,16 +142,16 @@ class BannerController extends Controller
      */
     public function destroy($id)
     {
-        $banner = Banner::findOrFail($id);
-        $status = $banner->delete();
+        $story = Story::findOrFail($id);
+        $status = $story->delete();
 
         if ($status) {
-            Toastr::success('Banner deleted','Success');
-            return redirect()->route('banners.index');
+            Toastr::success('Story deleted','Success');
+            return redirect()->route('story.index');
         }
         else {
-            Toastr::error('Banner failed to delete','Failed');
-            return redirect()->route('banners.index');
+            Toastr::error('Story failed to delete','Failed');
+            return redirect()->route('story.index');
         }
     }
 }

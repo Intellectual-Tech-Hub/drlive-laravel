@@ -39,8 +39,9 @@ Route::group(['prefix'=>'admin', 'middleware'=>['auth']], function () {
     Route::resource('/doctor', App\Http\Controllers\admin\DoctorController::class);
     Route::resource('/timeslots', App\Http\Controllers\admin\TimeSlotController::class);
     Route::resource('/availability', App\Http\Controllers\admin\DoctorAvailabilityController::class);
-    //Banners
+    //General Options
     Route::resource('/banners', App\Http\Controllers\admin\BannerController::class);
+    Route::resource('/story', App\Http\Controllers\admin\StoriesController::class);
     //Web Settings
     Route::get('/settings/index', [App\Http\Controllers\admin\SettingsController::class, 'index'])->name('settings.index');
     Route::any('/settings/save', [App\Http\Controllers\admin\SettingsController::class, 'save'])->name('settings.save');

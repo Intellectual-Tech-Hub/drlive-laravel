@@ -108,6 +108,27 @@
             </ul>
         </li>
         @endcanany
+        @canany('story_list','story_create')
+        <li>
+            <a href="javascript: void(0);">
+                <i class="fas fa-icons"></i>
+                <span key="t-layouts">Stories</span>
+                <span class="fas fa-arrow-circle-down"></span>
+            </a>
+            <ul class="sub-menu" aria-expanded="true">
+                @can('story_list')
+                <li>
+                    <a href="{{ route('story.index') }}" key="t-vertical">Stories List</a>
+                </li>
+                @endcan
+                @can('story_create')
+                <li>
+                    <a href="{{ route('story.create') }}" key="t-vertical">Add Stories</a>
+                </li>
+                @endcan
+            </ul>
+        </li>
+        @endcanany
 
         <li class="menu-title" key="t-apps">User Management</li>
 
