@@ -15,6 +15,17 @@ use Illuminate\Support\Facades\Request as FacadesRequest;
 use Illuminate\Support\Str;
 class MessagesController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('permission:chat', ['only' => [
+            'pusherAuth','index','idFetchData','download','send','fetch','seen','getContacts',
+            'updateContactItem','getFavorites','favorite','search','sharedPhotos','deleteConversation',
+            'updateSettings','setActiveStatus'
+            ]]);
+    }
+
+
     protected $perPage = 30;
     protected $messengerFallbackColor = '#2180f3';
 
@@ -30,7 +41,7 @@ class MessagesController extends Controller
         $authData = json_encode([
             'user_id' => Auth::user()->id,
             'user_info' => [
-                'name' => Auth::user()->name
+                'name' => Auth::user()->first_name
             ]
         ]);
         // check if user authorized
@@ -368,7 +379,8 @@ class MessagesController extends Controller
         $getRecords = null;
         $input = trim(filter_var($request['input'], FILTER_SANITIZE_STRING));
         $records = User::where('id','!=',Auth::user()->id)
-                    ->where('name', 'LIKE', "%{$input}%")
+                    ->where('first_name', 'LIKE', "%{$input}%")
+                    ->orwhere('last_name', 'LIKE', "%{$input}%")
                     ->paginate($request->per_page ?? $this->perPage);
         foreach ($records->items() as $record) {
             $getRecords .= view('Chatify::layouts.listItem', [

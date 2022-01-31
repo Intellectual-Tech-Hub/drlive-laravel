@@ -129,27 +129,15 @@
             </ul>
         </li>
         @endcanany
-        @canany('chat','chat_settings')
+        
+        @can('chat')
         <li>
-            <a href="javascript: void(0);">
+            <a href="{{ route('chatify') }}">
                 <i class="fab fa-rocketchat"></i>
                 <span key="t-layouts">Chat</span>
-                <span class="fas fa-arrow-circle-down"></span>
             </a>
-            <ul class="sub-menu" aria-expanded="true">
-                @can('chat')
-                <li>
-                    <a href="{{ route('chat.index') }}" key="t-vertical">Chat</a>
-                </li>
-                @endcan
-                @can('chat_settings')
-                <li>
-                    <a href="#" key="t-vertical">Chat Settings</a>
-                </li>
-                @endcan
-            </ul>
         </li>
-        @endcanany
+        @endcan
 
         <li class="menu-title" key="t-apps">User Management</li>
 
