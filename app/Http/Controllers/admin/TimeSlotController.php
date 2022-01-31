@@ -132,15 +132,15 @@ class TimeSlotController extends Controller
     public function destroy($id)
     {
         $time= TimeSlot::findOrFail($id);
-        $status = $time->delete();
+        /* $status = $time->delete();
 
         if ($status) {
             Toastr::success('Time slot deleted','Success');
             return redirect()->route('timeslots.index');
         }
-        else {
+        else { */
             Toastr::error('Time slot failed to delete','Failed');
             return redirect()->route('timeslots.index');
-        }
+        /* } */
     }
 }

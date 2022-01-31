@@ -4,6 +4,8 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Doctor;
+use App\Models\DoctorCategory;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
@@ -125,7 +127,15 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         $category = Category::findOrFail($id);
-        $status = $category->delete();
+        $doctors = DoctorCategory::where('category_id',$id)->first();
+
+        if ($doctors) {
+            Toastr::error('Doctors exist in this category.','Failed');
+            return redirect()->route('category.index');
+        }
+        else {
+            $status = $category->delete();
+        }
 
         if ($status) {
             Toastr::success('Category deleted','Success');

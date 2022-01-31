@@ -41,7 +41,7 @@ class DoctorAvailabilityController extends Controller
     public function create()
     {
         $doctors = Doctor::all();
-        $timeslots = TimeSlot::all();
+        $timeslots = TimeSlot::where('status',1)->get();
         return view('admin.doctor_availability.availability.create', compact('doctors','timeslots'));
     }
 
@@ -107,7 +107,7 @@ class DoctorAvailabilityController extends Controller
     public function edit($id)
     {
         $available = DoctorAvailability::findOrFail($id);
-        $timeslots = TimeSlot::all();
+        $timeslots = TimeSlot::where('status',1)->get();
 
         $select_mon = $available->pluck('mon')->first();
         $select_tue = $available->pluck('tue')->first();
