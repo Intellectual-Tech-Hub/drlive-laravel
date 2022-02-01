@@ -15,7 +15,8 @@ class CreateDoctorFeesTable extends Migration
     {
         Schema::create('doctor_fees', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
+            $table->integer('doctor_id');
+            $table->string('fees');
             $table->timestamps();
         });
     }

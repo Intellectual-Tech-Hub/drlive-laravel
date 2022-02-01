@@ -87,7 +87,7 @@
         @canany('doctor_fees_list','doctor_fees_create')
         <li>
             <a href="javascript: void(0);">
-                <i class="fas fa-clipboard-list"></i>
+                <i class="fas fa-dollar-sign"></i>
                 <span key="t-layouts">Doctor Consulting Fee</span>
                 <span class="fas fa-arrow-circle-down"></span>
             </a>

@@ -3,10 +3,23 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Doctor;
+use App\Models\DoctorFee;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 
 class DoctorFeesController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('permission:doctor_fees_list');
+        $this->middleware('permission:doctor_fees_create', ['only' => ['create','store']]);
+        $this->middleware('permission:doctor_fees_update', ['only' => ['edit','update']]);
+        $this->middleware('permission:doctor_fees_delete', ['only' => ['destroy']]);
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +27,8 @@ class DoctorFeesController extends Controller
      */
     public function index()
     {
-        //
+        $fees = DoctorFee::get();
+        return view('admin.doctor_fees.index', compact('fees'));
     }
 
     /**
@@ -24,7 +38,8 @@ class DoctorFeesController extends Controller
      */
     public function create()
     {
-        //
+        $doctors = Doctor::get();
+        return view('admin.doctor_fees.create', compact('doctors'));
     }
 
     /**
@@ -35,7 +50,25 @@ class DoctorFeesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'doctor' => 'required|unique:doctor_fees,doctor_id',
+            'fees' => 'required',
+        ]);
+
+        $fee = new DoctorFee();
+        $fee->doctor_id = $request->doctor;
+        $fee->fees = $request->fees;
+        $status = $fee->save();
+
+        if ($status) {
+            Toastr::success('Doctor fee added', 'Success');
+            return redirect()->route('fees.index');
+        }
+        else {
+            Toastr::error('Doctor fee failed to add', 'Failed');
+            return redirect()->route('fees.index');
+        }
+
     }
 
     /**
@@ -69,7 +102,22 @@ class DoctorFeesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'fees' => 'required',
+        ]);
+
+        $fee = DoctorFee::findOrfail($id);
+        $fee->fees = $request->fees;
+        $status = $fee->save();
+
+        if ($status) {
+            Toastr::success('Doctor fee updated', 'Success');
+            return redirect()->route('fees.index');
+        }
+        else {
+            Toastr::error('Doctor fee failed to update', 'Failed');
+            return redirect()->route('fees.index');
+        }
     }
 
     /**
@@ -80,6 +128,16 @@ class DoctorFeesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $fee = DoctorFee::findOrfail($id);
+        $status = $fee->delete();
+
+        if ($status) {
+            Toastr::success('Doctor fee deleted', 'Success');
+            return redirect()->route('fees.index');
+        }
+        else {
+            Toastr::error('Doctor fee failed to delete', 'Failed');
+            return redirect()->route('fees.index');
+        }
     }
 }
