@@ -219,6 +219,22 @@ class PermissionTableSeeder extends Seeder
                 'name' => 'chat',
                 'guard_name' => 'web'
             ),
+            array(
+                'name' => 'doctor_fees_list',
+                'guard_name' => 'web'
+            ),
+            array(
+                'name' => 'doctor_fees_create',
+                'guard_name' => 'web'
+            ),
+            array(
+                'name' => 'doctor_fees_update',
+                'guard_name' => 'web'
+            ),
+            array(
+                'name' => 'doctor_fees_delete',
+                'guard_name' => 'web'
+            ),
         );
 
         DB::table('permissions')->insert($permissions);

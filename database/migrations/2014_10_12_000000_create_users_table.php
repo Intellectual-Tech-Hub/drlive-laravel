@@ -27,6 +27,10 @@ class CreateUsersTable extends Migration
             $table->string('status')->default(1);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->boolean('active_status')->default(0);
+            $table->string('avatar')->default(config('chatify.user_avatar.default'));
+            $table->boolean('dark_mode')->default(0);
+            $table->string('messenger_color')->default('#2180f3');
             $table->rememberToken();
             $table->timestamps();
         });
