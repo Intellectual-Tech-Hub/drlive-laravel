@@ -19,6 +19,10 @@
 
 {{-- -------------------- All users/group list -------------------- --}}
 @if($get == 'users')
+@php
+    $role = DB::table('model_has_roles')->where('model_id',$user->id)->first();
+    $role_name = DB::table('roles')->where('id',$role->role_id)->first();
+@endphp
 <table class="messenger-list-item" data-contact="{{ $user->id }}">
     <tr data-action="0">
         {{-- Avatar side --}}
@@ -33,7 +37,7 @@
         {{-- center side --}}
         <td>
         <p data-id="{{ $user->id }}" data-type="user">
-            {{ strlen($user->first_name) > 12 ? trim(substr($user->first_name,0,12)).'..' : $user->first_name }}
+            {{ strlen($user->first_name) > 12 ? trim(substr($user->first_name,0,12)).'..' : $user->first_name }} <small>({{ $role_name->name }})</small>
             <span>{{ $lastMessage->created_at->diffForHumans() }}</span></p>
         <span>
             {{-- Last Message user indicator --}}
@@ -63,6 +67,10 @@
 
 {{-- -------------------- Search Item -------------------- --}}
 @if($get == 'search_item')
+@php
+    $role = DB::table('model_has_roles')->where('model_id',$user->id)->first();
+    $role_name = DB::table('roles')->where('id',$role->role_id)->first();
+@endphp
 <table class="messenger-list-item" data-contact="{{ $user->id }}">
     <tr data-action="0">
         {{-- Avatar side --}}
@@ -74,7 +82,7 @@
         {{-- center side --}}
         <td>
             <p data-id="{{ $user->id }}" data-type="user">
-            {{ strlen($user->first_name) > 12 ? trim(substr($user->first_name,0,12)).'..' : $user->first_name }}
+            {{ strlen($user->first_name) > 12 ? trim(substr($user->first_name,0,12)).'..' : $user->first_name }} <small>({{ $role_name->name }})</small>
         </td>
 
     </tr>
