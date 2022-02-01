@@ -49,5 +49,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>['auth']], function () {
     //Web Settings
     Route::get('/settings/index', [App\Http\Controllers\admin\SettingsController::class, 'index'])->name('settings.index');
     Route::any('/settings/save', [App\Http\Controllers\admin\SettingsController::class, 'save'])->name('settings.save');
+    Route::get('/profile/{id}', [App\Http\Controllers\admin\SettingsController::class, 'profile'])->name('profile');
+    Route::any('/profile/save/{id}', [App\Http\Controllers\admin\SettingsController::class, 'profilesave'])->name('profile.save');
 
 });

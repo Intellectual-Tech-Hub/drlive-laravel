@@ -4,10 +4,12 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Setting;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Brian2694\Toastr\Facades\Toastr;
+use Illuminate\Support\Facades\Hash;
 
 class SettingsController extends Controller
 {
@@ -80,6 +82,57 @@ class SettingsController extends Controller
         else {
             Toastr::error('setting failed to save','Failed');
             return redirect()->route('settings.index');
+        }
+    }
+
+    public function profile($id)
+    {
+        $user = User::findOrFail($id);
+        return view('admin.settings.profile', compact('user'));
+    }
+
+    public function profilesave(Request $request, $id)
+    {
+        $this->validate($request, [
+            'first_name' => 'required|string',
+            'email' => 'required|email',
+            'phone' => 'required',
+            'gender' => 'required',
+        ]);
+
+        $user = User::findOrfail($id);
+        $user->first_name = $request->first_name;
+        $user->last_name = $request->last_name;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+        $user->address = $request->address;
+        $user->pin = $request->pin;
+        $user->place = $request->place;
+        $user->gender = $request->gender;
+
+        if ($request->password) {
+            $user->password = Hash::make($request->password);
+        }
+        else {
+            $user->password = $user->password;
+        }
+
+        if ($request->file('image')) {
+            $image = $request->file('image');
+            $imagename = time() . '.' . $request->file('image')->getClientOriginalName();
+            $image->storeAs('public/user', $imagename);
+            $user->image = $imagename;
+        }
+        
+        $status = $user->save();
+
+        if ($status) {
+            Toastr::success('Profile updated successfully','Success');
+            return redirect()->route('profile',$id);
+        }
+        else {
+            Toastr::error('Profile updation failed','Failed');
+            return redirect()->route('profile',$id);
         }
     }
 
