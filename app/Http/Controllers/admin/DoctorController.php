@@ -59,7 +59,7 @@ class DoctorController extends Controller
             'first_name' => 'required|string',
             'category' => 'required|array',
             'email' => 'required|email|unique:users,email',
-            'phone' => 'required',
+            'phone' => 'required|unique:users,phone',
             'about' => 'required',
             'start_date' => 'required|date',
             'qualification' => 'required',
