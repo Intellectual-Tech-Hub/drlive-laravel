@@ -42,7 +42,7 @@ class AuthController extends Controller
                     'result' => false,
                     'message' => 'user not fount',
 
-                ],401);
+                ],404);
             }
         }
         elseif ($request->type == 'mobile') {
@@ -73,7 +73,7 @@ class AuthController extends Controller
                     'result' => false,
                     'message' => 'user not fount',
 
-                ],401);
+                ],404);
             }
         }
         else {
