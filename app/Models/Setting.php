@@ -9,7 +9,7 @@ class Setting extends Model
 {
     use HasFactory;
 
-    public function setting()
+    public static function setting()
     {
         return Setting::orderBy('id','ASC')->first();
     }

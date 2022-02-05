@@ -22,3 +22,4 @@ Route::get('/category', [App\Http\Controllers\api\DoctorSectionController::class
 Route::post('/findcategory', [App\Http\Controllers\api\DoctorSectionController::class, 'findcategory']);
 Route::get('/doctors', [App\Http\Controllers\api\DoctorSectionController::class, 'doctors']);
 Route::post('/finddoctor', [App\Http\Controllers\api\DoctorSectionController::class, 'finddoctor']);
+
