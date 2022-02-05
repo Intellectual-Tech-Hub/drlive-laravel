@@ -32,7 +32,8 @@
                     <thead>
                     <tr>
                         <th>S.I</th>
-                        <th>Name</th>
+                        <th>User Name</th>
+                        <th>Story Name</th>
                         <th>Story Image</th>
                         <th>Status</th>
                         <th>Action</th>
@@ -45,6 +46,7 @@
                     @foreach ($stories as $story)
                     <tr>
                         <td>{{ $loop->index +1 }}</td>
+                        <td>{{ $story->user->first_name.' '.$story->user->last_name }}</td>
                         <td>{{ $story->name }}</td>
                         <td>
                             <a class="image-popup-no-margins" href="{{ asset('storage/story/'.$story->image) }}">

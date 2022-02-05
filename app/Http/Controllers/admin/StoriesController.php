@@ -4,8 +4,11 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Story;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class StoriesController extends Controller
 {
@@ -25,7 +28,12 @@ class StoriesController extends Controller
      */
     public function index()
     {
-        $stories = Story::get();
+        if (Auth::user()->roles[0]['name'] == 'admin') {
+            $stories = Story::get();
+        }
+        else {
+            $stories = Story::where('user_id',Auth::user()->id)->get();
+        }
         return view('admin.stories.index', compact('stories'));
     }
 
@@ -54,6 +62,7 @@ class StoriesController extends Controller
         ]);
 
         $story = new Story();
+        $story->user_id = Auth::user()->id;
         $story->name = $request->name;
 
         $image = $request->file('image');
