@@ -46,6 +46,13 @@ Route::group(['prefix'=>'admin', 'middleware'=>['auth']], function () {
     Route::get('/chat', [App\Http\Controllers\admin\ChatController::class, 'index'])->name('chat.index');
     Route::get('/chat/start/{id}', [App\Http\Controllers\admin\ChatController::class, 'startchat'])->name('chat.start');
     Route::post('/chat/send', [App\Http\Controllers\admin\ChatController::class, 'send'])->name('chat.send');
+    //leave management
+    Route::resource('/leave', App\Http\Controllers\admin\LeaveController::class);
+    Route::resource('/leavedefine', App\Http\Controllers\admin\LeavedefineController::class);
+    Route::resource('/leaveapprove', App\Http\Controllers\admin\Approve_leave::class);
+    Route::get('/storestatus/{status}',[Approve_leave::class,'status'])->name('store.status');
+    Route::get('/storestatuspending/{status}',[PendingLeave::class,'pendingstatus'])->name('store.pendingstatus');
+    Route::resource('/pendingleaves',App\Http\Controllers\admin\PendingLeave::class);
     //Web Settings
     Route::get('/settings/index', [App\Http\Controllers\admin\SettingsController::class, 'index'])->name('settings.index');
     Route::any('/settings/save', [App\Http\Controllers\admin\SettingsController::class, 'save'])->name('settings.save');

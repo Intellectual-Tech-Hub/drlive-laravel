@@ -108,6 +108,32 @@
 
         <li class="menu-title" key="t-apps">General Options</li>
 
+        <li>
+            <a href="javascript: void(0);">
+                <i class="fas fa-bed"></i>
+                <span key="t-layouts">Leave Manage</span>
+                <span class="fas fa-arrow-circle-down"></span>
+            </a>
+                
+            <ul class="sub-menu" aria-expanded="true">
+                <li>
+                    <a href="{{ route('leave.index') }}" key="t-vertical"> Leave Type</a>
+                </li>
+                                                                               
+                <li>
+                    <a href="{{ route('leavedefine.index') }}" key="t-vertical"> Leave Define</a>
+                </li>
+                                                                               
+                <li>
+                    <a href="{{ route('leaveapprove.index') }}" key="t-vertical">Approve Leave Request</a>
+                </li>
+                                                                               
+                <li>
+                    <a href="{{ route('pendingleaves.index') }}" key="t-vertical">Pending Leave</a>
+                </li>                                                          
+            </ul>
+        </li>
+
         @canany('banner_list','banner_create')
         <li>
             <a href="javascript: void(0);">

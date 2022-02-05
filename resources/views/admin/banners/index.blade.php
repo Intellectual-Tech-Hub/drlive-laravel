@@ -38,8 +38,7 @@
                         <th>Action</th>
                     </tr>
                     </thead>
-
-
+                    
                     <tbody>
 
                     @foreach ($banners as $banner)
