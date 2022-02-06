@@ -22,4 +22,6 @@ Route::get('/category', [App\Http\Controllers\api\DoctorSectionController::class
 Route::post('/findcategory', [App\Http\Controllers\api\DoctorSectionController::class, 'findcategory']);
 Route::get('/doctors', [App\Http\Controllers\api\DoctorSectionController::class, 'doctors']);
 Route::post('/finddoctor', [App\Http\Controllers\api\DoctorSectionController::class, 'finddoctor']);
-
+Route::get('/stories', [App\Http\Controllers\api\StoryController::class, 'stories']);
+Route::get('/stories/active', [App\Http\Controllers\api\StoryController::class, 'activestories']);
+Route::post('/stories/user', [App\Http\Controllers\api\StoryController::class, 'userstories']);

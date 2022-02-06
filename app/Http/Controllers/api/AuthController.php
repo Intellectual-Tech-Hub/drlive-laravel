@@ -102,6 +102,7 @@ class AuthController extends Controller
             $new_user->email = $request->email_or_phone;
             $new_user->password = Hash::make($request->password);
             $new_user->gender = $request->gender;
+            $new_user->dob = $request->dob;
             $new_user->save();
             $role = $new_user->assignRole('patient');
             $tokenResult = $new_user->createToken('token')->accessToken;
@@ -110,7 +111,6 @@ class AuthController extends Controller
                 'result' => true,
                 'message' => 'registration success',
                 'user' => $new_user,
-                'role' => $role,
                 'token' => $tokenResult,
             ],200);
         } 
@@ -120,6 +120,7 @@ class AuthController extends Controller
             $new_user->phone = $request->email_or_phone;
             $new_user->password = Hash::make($request->password);
             $new_user->gender = $request->gender;
+            $new_user->dob = $request->dob;
             $new_user->save();
             $role = $new_user->assignRole('patient');
             $tokenResult = $new_user->createToken('token')->accessToken;
@@ -128,7 +129,6 @@ class AuthController extends Controller
                 'result' => true,
                 'message' => 'registration success',
                 'user' => $new_user,
-                'role' => $role,
                 'token' => $tokenResult,
             ],200);
         }
