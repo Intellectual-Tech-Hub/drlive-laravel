@@ -9,6 +9,7 @@ use Spatie\Permission\Models\Permission;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class StoriesController extends Controller
 {
@@ -124,6 +125,7 @@ class StoriesController extends Controller
         $story->name = $request->name;
 
         if ($request->file('image')) {
+            Storage::delete('public/story/'.$story->image);
             $image = $request->file('image');
             $imagename = time() . '.' . $request->file('image')->getClientOriginalName();
             $image->storeAs('public/story', $imagename);
@@ -152,6 +154,7 @@ class StoriesController extends Controller
     public function destroy($id)
     {
         $story = Story::findOrFail($id);
+        Storage::delete('public/story/'.$story->image);
         $status = $story->delete();
 
         if ($status) {

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Brian2694\Toastr\Facades\Toastr;
+use Illuminate\Support\Facades\Storage;
 
 class BannerController extends Controller
 {
@@ -119,6 +120,7 @@ class BannerController extends Controller
         $banner->name = $request->name;
 
         if ($request->file('image')) {
+            Storage::delete('public/banner/'.$banner->image);
             $image = $request->file('image');
             $imagename = time() . '.' . $request->file('image')->getClientOriginalName();
             $image->storeAs('public/banner', $imagename);
@@ -147,6 +149,7 @@ class BannerController extends Controller
     public function destroy($id)
     {
         $banner = Banner::findOrFail($id);
+        Storage::delete('public/banner/'.$banner->image);
         $status = $banner->delete();
 
         if ($status) {

@@ -10,6 +10,7 @@ use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class SettingsController extends Controller
 {
@@ -37,6 +38,7 @@ class SettingsController extends Controller
             $setting->name = $request->name;
 
             if ($request->file('logo')) {
+                Storage::delete('public/setting/'.$setting->logo);
                 $image = $request->file('logo');
                 $imagename = time() . '.' . $request->file('logo')->getClientOriginalName();
                 $image->storeAs('public/setting', $imagename);
@@ -44,6 +46,7 @@ class SettingsController extends Controller
             }
 
             if ($request->file('fav_icon')) {
+                Storage::delete('public/setting/'.$setting->fav_icon);
                 $image = $request->file('fav_icon');
                 $imagename = time() . '.' . $request->file('fav_icon')->getClientOriginalName();
                 $image->storeAs('public/setting', $imagename);
@@ -118,6 +121,7 @@ class SettingsController extends Controller
         }
 
         if ($request->file('image')) {
+            Storage::delete('public/user/'.$user->image);
             $image = $request->file('image');
             $imagename = time() . '.' . $request->file('image')->getClientOriginalName();
             $image->storeAs('public/user', $imagename);

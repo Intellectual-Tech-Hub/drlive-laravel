@@ -13,6 +13,7 @@ use Spatie\Permission\Models\Permission;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class DoctorController extends Controller
 {
@@ -200,6 +201,7 @@ class DoctorController extends Controller
             }
 
             if ($request->file('image')) {
+                Storage::delete('public/user/'.$user->image);
                 $image = $request->file('image');
                 $imagename = time() . '.' . $request->file('image')->getClientOriginalName();
                 $image->storeAs('public/user', $imagename);

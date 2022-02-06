@@ -10,6 +10,7 @@ use Spatie\Permission\Models\Permission;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -158,6 +159,7 @@ class UserController extends Controller
         }
 
         if ($request->file('image')) {
+            Storage::delete('public/user/'.$user->image);
             $image = $request->file('image');
             $imagename = time() . '.' . $request->file('image')->getClientOriginalName();
             $image->storeAs('public/user', $imagename);
@@ -188,6 +190,7 @@ class UserController extends Controller
     public function destroy($id)
     {
         $user = User::findOrfail($id);
+        Storage::delete('public/user/'.$user->image);
         $status = $user->delete();
 
         if ($status) {
