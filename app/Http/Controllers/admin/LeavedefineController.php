@@ -46,7 +46,7 @@ class LeavedefineController extends Controller
         $this->validate($request, [
             'leavetype' => 'required|integer',
             'fromdate' => 'required|date',
-            'todate' => 'required|date|after_or_equal:Fromdate',
+            'todate' => 'required|date|after_or_equal:fromdate',
             'reason' => 'required'
         ]);
 
@@ -106,7 +106,13 @@ class LeavedefineController extends Controller
      */
     public function update(Request $request, $id)
     {
-          
+        $this->validate($request, [
+            'leavetype' => 'required|integer',
+            'fromdate' => 'required|date',
+            'todate' => 'required|date|after_or_equal:fromdate',
+            'reason' => 'required'
+        ]);
+        
         $leavedefine = Leavedefine::find($id);
         // return $leavedefine;
 
@@ -114,8 +120,16 @@ class LeavedefineController extends Controller
         $leavedefine->Fromdate = $request->fromdate;
         $leavedefine->Todate = $request->todate;
         $leavedefine->Reason =$request->reason;
-        $leavedefine->update();
-        return redirect()->route('leavedefine.index');
+        $status = $leavedefine->update();
+
+        if ($status) {
+            Toastr::success('Leaveapplication updated','success');
+             return redirect()->route('leavedefine.index');
+        }
+        else {
+            Toastr::error('Leaveapplication updation failed','failed');
+            return redirect()->route('leavedefine.index');
+        }
     }
 
     /**
@@ -130,11 +144,11 @@ class LeavedefineController extends Controller
 
         $status = $delete->delete();
          if ($status) {
-            Toastr::success('Category deleted','Success');
+            Toastr::success('Leave Application deleted','Success');
             return redirect()->route('leavedefine.index');
         }
         else {
-            Toastr::error('Category failed to delete','Failed');
+            Toastr::error('Leave Application failed to delete','Failed');
             return redirect()->route('leavedefine.index');
         }
     }

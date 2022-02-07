@@ -50,8 +50,10 @@ Route::group(['prefix'=>'admin', 'middleware'=>['auth']], function () {
     Route::resource('/leave', App\Http\Controllers\admin\LeaveController::class);
     Route::resource('/leavedefine', App\Http\Controllers\admin\LeavedefineController::class);
     Route::resource('/leaveapprove', App\Http\Controllers\admin\Approve_leave::class);
-    Route::get('/storestatus/{status}',[Approve_leave::class,'status'])->name('store.status');
-    Route::get('/storestatuspending/{status}',[PendingLeave::class,'pendingstatus'])->name('store.pendingstatus');
+    Route::get('/storeapprovestatus/{status}',[Approve_leave::class,'approvestatus'])->name('store.approvestatus');
+    Route::get('/storedeclinestatus/{status}',[Approve_leave::class,'declinestatus'])->name('store.declinestatus');
+    Route::get('/storeapprovestatuspending/{status}',[PendingLeave::class,'approvependingstatus'])->name('store.approvependingstatus');
+    Route::get('/storedeclinestatuspending/{status}',[PendingLeave::class,'declinependingstatus'])->name('store.declinependingstatus');
     Route::resource('/pendingleaves',App\Http\Controllers\admin\PendingLeave::class);
     //Web Settings
     Route::get('/settings/index', [App\Http\Controllers\admin\SettingsController::class, 'index'])->name('settings.index');

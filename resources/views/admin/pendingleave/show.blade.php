@@ -29,23 +29,11 @@
                                     aria-describedby="datatable_info">
                                     <thead>
                                         <tr role="row">
-                                            <th class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1"
-                                                colspan="1" aria-sort="ascending"
-                                                aria-label="S.I: activate to sort column descending"
-                                                style="width: 38.25px;">S.I</th>
-                                            <th class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1"
-                                                colspan="1" aria-sort="ascending"
-                                                aria-label="S.I: activate to sort column descending"
-                                                style="width: 38.25px;">Name</th>
-                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1"
-                                                colspan="1" aria-label="First Name: activate to sort column ascending"
-                                                style="width: 129.663px;">Leave Type</th>
-                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1"
-                                                colspan="1" aria-label="Last Name: activate to sort column ascending"
-                                                style="width: 128.075px;">From Date</th>
-                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1"
-                                                colspan="1" aria-label="Email: activate to sort column ascending"
-                                                style="width: 194.4px;">TO Date</th>
+                                            <th>S.I</th>
+                                            <th>Name</th>
+                                            <th>Leave Type</th>
+                                            <th>From Date</th>
+                                            <th>TO Date</th>
 
 
 
@@ -68,8 +56,8 @@
 
                                     </tbody>
                                 </table> 
-                                <a class="btn btn-success" href="{{ route('store.pendingstatus', $define->id) }}">Approve Leave</a>
-                                <a class="btn btn-danger" href="{{ route('store.pendingstatus', $define->id) }}">Decline Leave</a>
+                                <a class="btn btn-success" href="{{ route('store.approvependingstatus', $define->id) }}">Approve Leave</a>
+                                <a class="btn btn-danger" href="{{ route('store.declinependingstatus', $define->id) }}">Decline Leave</a>
                             </div>
                         </div>
                         <div class="row">

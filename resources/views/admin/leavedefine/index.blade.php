@@ -32,19 +32,10 @@
                         <div id="datatable_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
                             <div class="row">
                                 <div class="col-sm-12 col-md-6">
-                                    <div class="dataTables_length" id="datatable_length"><label>Show <select
-                                                name="datatable_length" aria-controls="datatable"
-                                                class="custom-select custom-select-sm form-control form-control-sm">
-                                                <option value="10">10</option>
-                                                <option value="25">25</option>
-                                                <option value="50">50</option>
-                                                <option value="100">100</option>
-                                            </select> entries</label></div>
+                                    
                                 </div>
                                 <div class="col-sm-12 col-md-6">
-                                    <div id="datatable_filter" class="dataTables_filter"><label>Search:<input type="search"
-                                                class="form-control form-control-sm" placeholder=""
-                                                aria-controls="datatable"></label></div>
+                                  
                                 </div>
                             </div>
                             <div class="row">
@@ -54,31 +45,12 @@
                                         role="grid" aria-describedby="datatable_info">
                                         <thead>
                                             <tr role="row">
-                                                <th class="sorting_asc" tabindex="0" aria-controls="datatable"
-                                                    rowspan="1" colspan="1" aria-sort="ascending"
-                                                    aria-label="S.I: activate to sort column descending"
-                                                    style="width: 38.25px;">S.I</th><th class="sorting_asc" tabindex="0" aria-controls="datatable"
-                                                    rowspan="1" colspan="1" aria-sort="ascending"
-                                                    aria-label="S.I: activate to sort column descending"
-                                                    style="width: 38.25px;">Name</th>
-                                                <th class="sorting" tabindex="0" aria-controls="datatable"
-                                                    rowspan="1" colspan="1"
-                                                    aria-label="First Name: activate to sort column ascending"
-                                                    style="width: 129.663px;">Leave Type</th>
-                                                <th class="sorting" tabindex="0" aria-controls="datatable"
-                                                    rowspan="1" colspan="1"
-                                                    aria-label="Last Name: activate to sort column ascending"
-                                                    style="width: 128.075px;">From Date</th>
-                                                <th class="sorting" tabindex="0" aria-controls="datatable"
-                                                    rowspan="1" colspan="1"
-                                                    aria-label="Email: activate to sort column ascending"
-                                                    style="width: 194.4px;">TO Date</th>
-                                                
-                                               
-                                                <th class="sorting" tabindex="0" aria-controls="datatable"
-                                                    rowspan="1" colspan="1"
-                                                    aria-label="Action: activate to sort column ascending"
-                                                    style="width: 83.5625px;">Action</th>
+                                                <th>S.I</th>
+                                                <th>Name</th>
+                                                <th>Leave Type</th>
+                                                <th>From Date</th>
+                                                <th>TO Date</th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
 
@@ -86,7 +58,7 @@
                                         <tbody>
                                             @foreach ($leaves as $items)
                                             <tr>
-                                                <td class="sorting_1">{{ $items->id }}</td>
+                                                <td>{{ $loop->index + 1 }}</td>
                                                 <td>{{ $items->user->first_name.' '.$items->user->last_name }}</td>
                                                 <td>{{ $items->type->Leavetype }}</td>
                                                 <td>{{ $items->Fromdate }}</td>

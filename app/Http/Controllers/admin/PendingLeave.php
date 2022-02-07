@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Leavedefine;
 use Illuminate\Http\Request;
 use Brian2694\Toastr\Facades\Toastr;
-
+use GrahamCampbell\ResultType\Success;
 
 class PendingLeave extends Controller
 {
@@ -17,7 +17,8 @@ class PendingLeave extends Controller
      */
     public function index()
     {
-        return view('admin.pendingleave.index');
+        $user['users'] = Leavedefine::all();
+        return view('admin.pendingleave.index',$user);
     }
 
     /**
@@ -40,18 +41,45 @@ class PendingLeave extends Controller
     {
         //
     }
- public function pendingstatus(Request $request,$id)
+ public function approvependingstatus(Request $request,$id)
     {
          // return $id;
          $data = Leavedefine::find($id);
-         if ($data->status == 2) {
+         if ($data->status ==NULL) {
+             $data->status =1;
+             $status = $data->save();
+             if($status){
+                 Toastr::success('Leaveapproved','success');
+                 return redirect()->route('pendingleaves.index');
+             }else{
+                 Toastr::error('Leave Failed To approve','Failed');
+                 return redirect()->route('pendingleaves.index');
+
+             }
+        }else {
+            Toastr::error('Leave already approved','Failed');
+            return redirect()->route('pendingleaves.index');
+        }
+}
+public function declinependingstatus(Request $request,$id)
+    {
+         // return $id;
+         $data = Leavedefine::find($id);
+         if ($data->status ==NULL) {
              $data->status = 0;
-             $data->save();
-         } else {
-             $data->status = 1;
-             $data->save();
-         }    
-            return view('admin.pendingleave.index');
+                $status = $data->save();
+                if($status){
+                    Toastr::success('Leave Declined','success');
+                    return redirect()->route('pendingleaves.index');
+                }else{
+                    Toastr::error('Leave Declining Failed','Failed');
+                    return redirect()->route('pendingleaves.index');
+
+                }
+
+         }else{
+             Toastr::error('Leave already declined','Failed');
+         }
     }
 
     /**
@@ -72,11 +100,7 @@ class PendingLeave extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        $leavedefine['edit'] = Leavedefine::find($id);
-        return view('admin.pendingleave.edit',$leavedefine);
-    }
+   
 
     /**
      * Update the specified resource in storage.
@@ -85,19 +109,7 @@ class PendingLeave extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        $leavedefine = Leavedefine::find($id);
-        // return $leavedefine;
-
-        $leavedefine->Leavetype = $request->leavetype;
-        $leavedefine->Fromdate = $request->fromdate;
-        $leavedefine->Todate = $request->todate;
-        $leavedefine->Reason =$request->reason;
-        $leavedefine->update();
-         return view('admin.pendingleave.index');
-    }
-
+    
     /**
      * Remove the specified resource from storage.
      *
@@ -110,11 +122,11 @@ class PendingLeave extends Controller
 
         $status = $delete->delete();
          if ($status) {
-            Toastr::success('Category deleted','Success');
+            Toastr::success(' deleted','Success');
             return redirect()->route('pendingleaves.index');
         }
         else {
-            Toastr::error('Category failed to delete','Failed');
+            Toastr::error('failed to delete','Failed');
             return redirect()->route('pendingleaves.index');
         }
     }

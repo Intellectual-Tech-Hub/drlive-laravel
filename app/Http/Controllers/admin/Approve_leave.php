@@ -18,7 +18,8 @@ class Approve_leave extends Controller
      */
     public function index()
     {
-        return view('admin.leaveapproval.index');
+        $user['users'] = Leavedefine::all();
+        return view('admin.leaveapproval.index',$user);
     }
 
     /**
@@ -41,7 +42,8 @@ class Approve_leave extends Controller
     {
 
     }
-public function status(Request $request,$id)
+
+    public function approvestatus(Request $request,$id)
     {
         // return $id;
         $data = Leavedefine::find($id);
@@ -54,6 +56,27 @@ public function status(Request $request,$id)
             }
             else {
                 Toastr::error('Leave failed to approve','Failed');
+                return redirect()->route('leaveapprove.index');
+            }
+        } else {
+            Toastr::error('Leave already approved','Failed');
+            return redirect()->route('leaveapprove.index');
+        }
+    }
+
+    public function declinestatus(Request $request,$id)
+    {
+        // return $id;
+        $data = Leavedefine::find($id);
+        if ($data->status == NULL) {
+            $data->status = 0;
+            $status = $data->save();
+            if ($status) {
+                Toastr::success('Leave declined','Success');
+                return redirect()->route('leaveapprove.index');
+            }
+            else {
+                Toastr::error('Leave failed to decline','Failed');  
                 return redirect()->route('leaveapprove.index');
             }
         } else {
@@ -82,7 +105,8 @@ public function status(Request $request,$id)
     public function edit($id)
     {
         $leavedefine['edit'] = Leavedefine::find($id);
-        return view('admin.leaveapproval.edit',$leavedefine);
+        $user['users'] = Leave::all();
+        return view('admin.leaveapproval.edit',$leavedefine,$user);
     }
 
     /**
@@ -129,7 +153,7 @@ public function status(Request $request,$id)
             return redirect()->route('leaveapprove.index');
         }
         else {
-            Toastr::error('updated','Failed');
+            Toastr::error('failed to delete','Failed');
             return redirect()->route('leaveapprove.index');
         }
     }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Leave;
+use App\Models\Leavedefine;
 use Illuminate\Http\Request;
 use Brian2694\Toastr\Facades\Toastr;
 
@@ -47,11 +48,11 @@ class LeaveController extends Controller
         $status = $leavetype->save();
 
         if ($status) {
-            Toastr::success('Category added','Success');
+            Toastr::success('Leavetype Added Succesfully','Success');
             return redirect()->route('leave.index');
         }
         else {
-            Toastr::error('Category failed to add','Failed');
+            Toastr::error('Failed to add Leavetype','Failed');
             return redirect()->route('leave.index');
         }
         
@@ -96,11 +97,11 @@ class LeaveController extends Controller
         $Leave->Leavetype = $request->name;
         $status = $Leave->save();
         if ($status) {
-            Toastr::success('Category updated','Success');
+            Toastr::success('Leavetype updated','Success');
             return redirect()->route('leave.index');
         }
         else {
-            Toastr::error('Category failed to update','Failed');
+            Toastr::error('failed to update Leavetype','Failed');
             return redirect()->route('leave.index');
         }
     }
@@ -114,14 +115,22 @@ class LeaveController extends Controller
     public function destroy($id)
     {
         $leave = Leave::findOrFail($id);
-        $status = $leave->delete();
+        $leavedefine = Leavedefine::where('Leavetype',$id)->first();
+        if ($leavedefine) {
+            Toastr::error('Leave is existed in this type','Failed');
+            return redirect()->route('leave.index');
+
+        } 
+        else {
+            $status = $leave->delete();
+        }
 
         if ($status) {
-            Toastr::success('Category deleted','Success');
+            Toastr::success('Leavetype deleted','Success');
             return redirect()->route('leave.index');
         }
         else {
-            Toastr::error('Category failed to delete','Failed');
+            Toastr::error(  'failed to delete Leavetype','Failed');
             return redirect()->route('leave.index');
         }
     }

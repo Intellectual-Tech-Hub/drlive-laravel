@@ -36,10 +36,7 @@
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="formrow-email-input" class="form-label">Leave Type</label>
-                                        @php
-                      $users = DB::table('leaves')->select('id','Leavetype')->get();
-                                            
-                                        @endphp
+                              
                                         <select id="cars" class="form-control" name="leavetype">
                                             @foreach ( $users as $items )
                                             <option value="{{ $items->id }}">{{ $items->Leavetype }}</option>
