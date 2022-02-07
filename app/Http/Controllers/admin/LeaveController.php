@@ -11,6 +11,16 @@ use Brian2694\Toastr\Facades\Toastr;
 
 class LeaveController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('permission:leave_type_list');
+        $this->middleware('permission:leave_type_create', ['only' => ['create','store']]);
+        $this->middleware('permission:leave_type_update', ['only' => ['edit','update']]);
+        $this->middleware('permission:leave_type_delete', ['only' => ['destroy']]);
+    }
+
+
     /**
      * Display a listing of the resource.
      *

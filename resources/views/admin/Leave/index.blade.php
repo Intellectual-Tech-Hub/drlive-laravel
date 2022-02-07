@@ -19,7 +19,7 @@
     </div>
     <!-- end page title -->
     <div class="card-header py-3">
-        @can('category_create')
+        @can('leave_type_create')
             <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#myModal">
                 <i class="fas fa-plus"> </i> Add Leave Type</button>
         @endcan
@@ -45,12 +45,13 @@
                                     <td>{{ $items->id }}</td>
                                     <td>{{ $items->Leavetype }}</td>
                                     <td>
-
+                                        @can('leave_type_update')
                                         <a href="#" class="btn btn-primary btn-sm float-left mr-1"
                                             style="height:30px; width:30px;border-radius:50%" data-bs-toggle="modal"
                                             data-bs-target="#myModal{{ $items->id }}"><i class="fas fa-edit"></i></a>
+                                        @endcan
 
-
+                                        @can('leave_type_delete')
                                         <form method="POST" action="{{ route('leave.destroy', $items->id) }}">
                                             @csrf
                                             @method('delete')
@@ -59,6 +60,7 @@
                                                 data-placement="bottom" title="Delete"><i
                                                     class="fas fa-trash-alt"></i></button>
                                         </form>
+                                        @endcan
                                     </td>
                                 </tr>
 

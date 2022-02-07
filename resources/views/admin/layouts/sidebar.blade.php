@@ -108,6 +108,7 @@
 
         <li class="menu-title" key="t-apps">General Options</li>
 
+        @canany('leave_type_list','leave_define_list','leave_approve','leave_pending')
         <li>
             <a href="javascript: void(0);">
                 <i class="fas fa-bed"></i>
@@ -116,23 +117,29 @@
             </a>
                 
             <ul class="sub-menu" aria-expanded="true">
+                @can('leave_type_list')
                 <li>
                     <a href="{{ route('leave.index') }}" key="t-vertical"> Leave Type</a>
                 </li>
-                                                                               
+                @endcan
+                @can('leave_define_list')
                 <li>
                     <a href="{{ route('leavedefine.index') }}" key="t-vertical"> Leave Define</a>
                 </li>
-                                                                               
+                @endcan
+                @can('leave_approve')
                 <li>
                     <a href="{{ route('leaveapprove.index') }}" key="t-vertical">Approve Leave Request</a>
                 </li>
-                                                                               
+                @endcan
+                @can('leave_pending')
                 <li>
                     <a href="{{ route('pendingleaves.index') }}" key="t-vertical">Pending Leave</a>
-                </li>                                                          
+                </li>
+                @endcan
             </ul>
         </li>
+        @endcanany
 
         @canany('banner_list','banner_create')
         <li>

@@ -11,6 +11,16 @@ use Illuminate\Support\Facades\Auth;
 
 class LeavedefineController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('permission:leave_define_list');
+        $this->middleware('permission:leave_define_create', ['only' => ['create','store']]);
+        $this->middleware('permission:leave_define_update', ['only' => ['edit','update']]);
+        $this->middleware('permission:leave_define_delete', ['only' => ['destroy']]);
+    }
+
+
     /**
      * Display a listing of the resource.
      *

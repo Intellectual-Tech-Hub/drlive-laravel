@@ -16,8 +16,10 @@
 </div>
 
 <div class="card-header py-3">
+    @can('leave_define_create')
     <a href="{{ route('leavedefine.create') }}" class="btn btn-primary btn-sm" data-toggle="tooltip"
         data-placement="bottom" title="Add User Role"><i class="fas fa-plus"></i> Define Your Leave</a>
+    @endcan
 </div>
 
 <div class="row">
@@ -44,11 +46,16 @@
                             <td>{{ $items->Fromdate }}</td>
                             <td>{{ $items->Todate }}</td>
                             <td>
+                                @can('leave_define_update')
                                 <a href="{{ route('leavedefine.edit',$items->id) }}"
                                     class="btn btn-primary btn-sm float-left mr-1"
                                     style="height:30px; width:30px;border-radius:50%"
                                     data-toggle="tooltip" title="edit" data-placement="bottom"><i
-                                        class="fas fa-edit"></i></a>
+                                        class="fas fa-edit"></i>
+                                </a>
+                                @endcan
+
+                                @can('leave_define_delete')
                                 <form method="POST" action="{{ route('leavedefine.destroy',$items->id) }}">
                                     @csrf
                                     @method('delete')
@@ -58,8 +65,8 @@
                                         data-toggle="tooltip" data-placement="bottom" title="Delete"><i
                                         class="fas fa-trash-alt"></i>
                                     </button>
-                            
                                 </form>
+                                @endcan
                             </td>
                         </tr>
                         @endforeach

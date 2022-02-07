@@ -120,26 +120,6 @@ class PermissionTableSeeder extends Seeder
                 'guard_name' => 'web'
             ),
             array(
-                'name' => 'leave_list',
-                'guard_name' => 'web'
-            ),
-            array(
-                'name' => 'leave_create',
-                'guard_name' => 'web'
-            ),
-            array(
-                'name' => 'leave_update',
-                'guard_name' => 'web'
-            ),
-            array(
-                'name' => 'leave_delete',
-                'guard_name' => 'web'
-            ),
-            array(
-                'name' => 'leave_approve',
-                'guard_name' => 'web'
-            ),
-            array(
                 'name' => 'time_slot_list',
                 'guard_name' => 'web'
             ),
@@ -233,6 +213,46 @@ class PermissionTableSeeder extends Seeder
             ),
             array(
                 'name' => 'doctor_fees_delete',
+                'guard_name' => 'web'
+            ),
+            array(
+                'name' => 'leave_type_list',
+                'guard_name' => 'web'
+            ),
+            array(
+                'name' => 'leave_type_create',
+                'guard_name' => 'web'
+            ),
+            array(
+                'name' => 'leave_type_update',
+                'guard_name' => 'web'
+            ),
+            array(
+                'name' => 'leave_type_delete',
+                'guard_name' => 'web'
+            ),
+            array(
+                'name' => 'leave_define_list',
+                'guard_name' => 'web'
+            ),
+            array(
+                'name' => 'leave_define_create',
+                'guard_name' => 'web'
+            ),
+            array(
+                'name' => 'leave_define_update',
+                'guard_name' => 'web'
+            ),
+            array(
+                'name' => 'leave_define_delete',
+                'guard_name' => 'web'
+            ),
+            array(
+                'name' => 'leave_approve',
+                'guard_name' => 'web'
+            ),
+            array(
+                'name' => 'leave_pending',
                 'guard_name' => 'web'
             ),
         );

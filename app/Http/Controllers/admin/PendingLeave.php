@@ -10,6 +10,15 @@ use GrahamCampbell\ResultType\Success;
 
 class PendingLeave extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('permission:leave_pending', ['only' => [
+            'index', 'approvependingstatus', 'declinependingstatus', 'show', 'destroy'
+            ]]);
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -41,7 +50,7 @@ class PendingLeave extends Controller
     {
         //
     }
- public function approvependingstatus(Request $request,$id)
+    public function approvependingstatus(Request $request,$id)
     {
          // return $id;
          $data = Leavedefine::find($id);
@@ -60,8 +69,8 @@ class PendingLeave extends Controller
             Toastr::error('Leave already approved','Failed');
             return redirect()->route('pendingleaves.index');
         }
-}
-public function declinependingstatus(Request $request,$id)
+    }
+    public function declinependingstatus(Request $request,$id)
     {
          // return $id;
          $data = Leavedefine::find($id);

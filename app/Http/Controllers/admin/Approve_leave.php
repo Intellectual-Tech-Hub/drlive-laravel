@@ -11,6 +11,15 @@ use Brian2694\Toastr\Facades\Toastr;
 
 class Approve_leave extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('permission:leave_approve', ['only' => [
+            'index', 'approvestatus', 'declinestatus', 'show', 'destroy'
+            ]]);
+    }
+
+
     /**
      * Display a listing of the resource.
      *
