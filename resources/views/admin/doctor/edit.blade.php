@@ -85,29 +85,9 @@
                         </div>
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <label for="formrow-password-input" class="form-label">Phone</label>
-                                <input type="text" name="phone" value="{{ $doctor->doctordetails->phone }}" class="form-control" id="formrow-password-input">
-                                @error('phone')
-                                    <span class="badge badge-soft-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row"> 
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label for="formrow-email-input" class="form-label">Address</label>
-                                <textarea name="address" class="form-control" id="formrow-email-input">{{ $doctor->doctordetails->address }}</textarea>
-                                @error('address')
-                                    <span class="badge badge-soft-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label for="formrow-email-input" class="form-label">About</label>
-                                <textarea name="about" class="form-control" id="formrow-email-input">{{ $doctor->details }}</textarea>
-                                @error('about')
+                                <label for="formrow-password-input" class="form-label">Password</label>
+                                <input type="password" name="password" value="{{ old('password') }}" class="form-control" id="formrow-password-input">
+                                @error('password')
                                     <span class="badge badge-soft-danger">{{ $message }}</span>
                                 @enderror
                             </div>
@@ -153,12 +133,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row"> 
+                    <div class="row">
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <label for="formrow-password-input" class="form-label">Password</label>
-                                <input type="password" name="password" value="{{ old('password') }}" class="form-control" id="formrow-password-input">
-                                @error('password')
+                                <label for="formrow-password-input" class="form-label">Phone</label>
+                                <input type="text" name="phone" value="{{ $doctor->doctordetails->phone }}" class="form-control" id="formrow-password-input">
+                                @error('phone')
                                     <span class="badge badge-soft-danger">{{ $message }}</span>
                                 @enderror
                             </div>
@@ -172,6 +152,61 @@
                                     <option value="female" {{ old('gender',$doctor->doctordetails->gender=='female'?'selected':'') }}>Female</option>
                                 </select>
                                 @error('gender')
+                                    <span class="badge badge-soft-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row"> 
+                        <div class="col-md-12">
+                            <div class="mb-3">
+                                <label for="formrow-email-input" class="form-label">Address</label>
+                                <textarea name="address" class="form-control" id="formrow-email-input">{{ $doctor->doctordetails->address }}</textarea>
+                                @error('address')
+                                    <span class="badge badge-soft-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="formrow-email-input" class="form-label">About</label>
+                                <textarea name="about" class="form-control" id="formrow-email-input">{{ $doctor->details }}</textarea>
+                                @error('about')
+                                    <span class="badge badge-soft-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row"> 
+                        <div class="col-md-12">
+                            <div class="mb-3">
+                                <label for="formrow-email-input" class="form-label">Qualification</label>
+                                <textarea name="qualification" class="form-control" id="formrow-email-input">{{ $doctor->qualification }}</textarea>
+                                @error('qualification')
+                                    <span class="badge badge-soft-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row"> 
+                        <div class="col-md-12">
+                            <div class="mb-3">
+                                <label for="formrow-email-input" class="form-label">Education</label>
+                                <textarea name="education" class="form-control" id="formrow-email-input">{{ $doctor->education }}</textarea>
+                                @error('education')
+                                    <span class="badge badge-soft-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row"> 
+                        <div class="col-md-12">
+                            <div class="mb-3">
+                                <label for="formrow-email-input" class="form-label">Experiance</label>
+                                <textarea name="experiance" class="form-control" id="formrow-email-input">{{ $doctor->experiance }}</textarea>
+                                @error('experiance')
                                     <span class="badge badge-soft-danger">{{ $message }}</span>
                                 @enderror
                             </div>
@@ -205,3 +240,24 @@
 <!-- end row -->
 
 @endsection
+
+@push('script')
+<script src="https://cdn.tiny.cloud/1/odznz7ajohaam8oa0hn79g5yty47asxu4lg8qb3y24i94499/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script type="text/javascript">
+    tinymce.init({
+        selector: 'textarea',
+        height: 200,
+        menubar: false,
+        plugins: [
+            'advlist autolink lists link image charmap print preview anchor',
+            'searchreplace visualblocks code fullscreen',
+            'insertdatetime media table paste code help wordcount'
+        ],
+        toolbar: 'undo redo | formatselect | ' +
+            'bold italic backcolor | alignleft aligncenter ' +
+            'alignright alignjustify | bullist numlist outdent indent | ' +
+            'removeformat | help',
+        content_css: '//www.tiny.cloud/css/codepen.min.css'
+    });
+</script>
+@endpush

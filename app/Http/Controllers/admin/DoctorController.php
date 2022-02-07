@@ -63,7 +63,10 @@ class DoctorController extends Controller
             'phone' => 'required|unique:users,phone',
             'about' => 'required',
             'start_date' => 'required|date',
+            'fees' => 'required|numeric',
             'qualification' => 'required',
+            'education' => 'required',
+            'experiance' => 'required',
             'password' => 'required',
             'gender' => 'required',
             'status' => 'required',
@@ -97,8 +100,11 @@ class DoctorController extends Controller
 
             $doctor = new Doctor();
             $doctor->user_id = $lastuser->id;
+            $doctor->fees = $request->fees;
             $doctor->start_date = $request->start_date;
             $doctor->qualification = $request->qualification;
+            $doctor->education = $request->education;
+            $doctor->experiance = $request->experiance;
             $doctor->details = $request->about;
             $status = $doctor->save();
 
@@ -169,7 +175,10 @@ class DoctorController extends Controller
             'phone' => 'required',
             'about' => 'required',
             'start_date' => 'required|date',
+            'fees' => 'required|numeric',
             'qualification' => 'required',
+            'education' => 'required',
+            'experiance' => 'required',
             'gender' => 'required',
             'status' => 'required',
         ]);
@@ -212,7 +221,10 @@ class DoctorController extends Controller
 
             $doctor->user_id = $user->id;
             $doctor->start_date = $request->start_date;
+            $doctor->fees = $request->fees;
             $doctor->qualification = $request->qualification;
+            $doctor->education = $request->education;
+            $doctor->experiance = $request->experiance;
             $doctor->details = $request->about;
             $status = $doctor->save();
 

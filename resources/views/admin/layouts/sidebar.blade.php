@@ -84,27 +84,6 @@
             </ul>
         </li>
         @endcanany
-        @canany('doctor_fees_list','doctor_fees_create')
-        <li>
-            <a href="javascript: void(0);">
-                <i class="fas fa-dollar-sign"></i>
-                <span key="t-layouts">Doctor Consulting Fee</span>
-                <span class="fas fa-arrow-circle-down"></span>
-            </a>
-            <ul class="sub-menu" aria-expanded="true">
-                @can('doctor_fees_list')
-                <li>
-                    <a href="{{ route('fees.index') }}" key="t-vertical">Doctors Fees List</a>
-                </li>
-                @endcan
-                @can('doctor_fees_create')
-                <li>
-                    <a href="{{ route('fees.create') }}" key="t-vertical">Add Doctors Fees</a>
-                </li>
-                @endcan
-            </ul>
-        </li>
-        @endcanany
 
         <li class="menu-title" key="t-apps">General Options</li>
 
