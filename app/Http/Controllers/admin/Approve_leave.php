@@ -104,9 +104,7 @@ class Approve_leave extends Controller
      */
     public function edit($id)
     {
-        $leavedefine['edit'] = Leavedefine::find($id);
-        $user['users'] = Leave::all();
-        return view('admin.leaveapproval.edit',$leavedefine,$user);
+        //
     }
 
     /**
@@ -118,23 +116,7 @@ class Approve_leave extends Controller
      */
     public function update(Request $request, $id)
     {
-        $leavedefine = Leavedefine::find($id);
-        // return $leavedefine;
-
-        $leavedefine->Leavetype = $request->leavetype;
-        $leavedefine->Fromdate = $request->fromdate;
-        $leavedefine->Todate = $request->todate;
-        $leavedefine->Reason =$request->reason;
-        $leavedefine->update();
-        $status = $leavedefine->update();
-        if ($status) {
-           Toastr::success('deleted','Success');
-           return redirect()->route('leaveapprove.index');
-       }
-       else {
-           Toastr::error('updated','Failed');
-           return redirect()->route('leaveapprove.index');
-       }
+        //
     }
 
     /**
