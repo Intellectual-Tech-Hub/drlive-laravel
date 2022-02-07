@@ -59,29 +59,20 @@
                         </div>
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <label for="formrow-password-input" class="form-label">Phone</label>
-                                <input type="text" name="phone" value="{{ old('phone') }}" class="form-control" id="formrow-password-input">
-                                @error('phone')
+                                <label for="formrow-password-input" class="form-label">Password</label>
+                                <input type="password" name="password" value="{{ old('password') }}" class="form-control" id="formrow-password-input">
+                                @error('password')
                                     <span class="badge badge-soft-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                         </div>
                     </div>
                     <div class="row"> 
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="mb-3">
                                 <label for="formrow-email-input" class="form-label">Address</label>
                                 <textarea name="address" class="form-control" id="formrow-email-input">{{ old('address') }}</textarea>
                                 @error('address')
-                                    <span class="badge badge-soft-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label for="formrow-password-input" class="form-label">Pin</label>
-                                <input type="text" name="pin" value="{{ old('pin') }}" class="form-control" id="formrow-password-input">
-                                @error('pin')
                                     <span class="badge badge-soft-danger">{{ $message }}</span>
                                 @enderror
                             </div>
@@ -123,15 +114,24 @@
                         </div>
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <label for="formrow-password-input" class="form-label">Password</label>
-                                <input type="password" name="password" value="{{ old('password') }}" class="form-control" id="formrow-password-input">
-                                @error('password')
+                                <label for="formrow-password-input" class="form-label">Phone</label>
+                                <input type="text" name="phone" value="{{ old('phone') }}" class="form-control" id="formrow-password-input">
+                                @error('phone')
                                     <span class="badge badge-soft-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                         </div>
                     </div>
-                    <div class="row"> 
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="formrow-password-input" class="form-label">Pin</label>
+                                <input type="text" name="pin" value="{{ old('pin') }}" class="form-control" id="formrow-password-input">
+                                @error('pin')
+                                    <span class="badge badge-soft-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label for="formrow-email-input" class="form-label">Role</label>
@@ -146,6 +146,8 @@
                                 @enderror
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label class="form-label">Status</label>
@@ -173,3 +175,24 @@
 <!-- end row -->
 
 @endsection
+
+@push('script')
+<script src="https://cdn.tiny.cloud/1/odznz7ajohaam8oa0hn79g5yty47asxu4lg8qb3y24i94499/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script type="text/javascript">
+    tinymce.init({
+        selector: 'textarea',
+        height: 200,
+        menubar: false,
+        plugins: [
+            'advlist autolink lists link image charmap print preview anchor',
+            'searchreplace visualblocks code fullscreen',
+            'insertdatetime media table paste code help wordcount'
+        ],
+        toolbar: 'undo redo | formatselect | ' +
+            'bold italic backcolor | alignleft aligncenter ' +
+            'alignright alignjustify | bullist numlist outdent indent | ' +
+            'removeformat | help',
+        content_css: '//www.tiny.cloud/css/codepen.min.css'
+    });
+</script>
+@endpush

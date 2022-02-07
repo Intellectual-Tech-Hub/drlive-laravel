@@ -200,22 +200,6 @@ class PermissionTableSeeder extends Seeder
                 'guard_name' => 'web'
             ),
             array(
-                'name' => 'doctor_fees_list',
-                'guard_name' => 'web'
-            ),
-            array(
-                'name' => 'doctor_fees_create',
-                'guard_name' => 'web'
-            ),
-            array(
-                'name' => 'doctor_fees_update',
-                'guard_name' => 'web'
-            ),
-            array(
-                'name' => 'doctor_fees_delete',
-                'guard_name' => 'web'
-            ),
-            array(
                 'name' => 'leave_type_list',
                 'guard_name' => 'web'
             ),

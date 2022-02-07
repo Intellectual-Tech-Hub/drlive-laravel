@@ -240,22 +240,6 @@ class RolePermissionTableSeeder extends Seeder
                 'permission_id' => '56',
                 'role_id' => '1'
             ),
-            array(
-                'permission_id' => '57',
-                'role_id' => '1'
-            ),
-            array(
-                'permission_id' => '58',
-                'role_id' => '1'
-            ),
-            array(
-                'permission_id' => '59',
-                'role_id' => '1'
-            ),
-            array(
-                'permission_id' => '60',
-                'role_id' => '1'
-            ),
             //doctor role permission assign
             
         );

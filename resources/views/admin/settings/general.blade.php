@@ -83,7 +83,7 @@
                         <div class="col-md-12">
                             <div class="mb-3">
                                 <label for="formrow-email-input" class="form-label">Copyright Text</label>
-                                <textarea name="copyright"class="form-control">{{ @$setting->copyright }}</textarea>
+                                <textarea name="copyright"class="form-control">{!! @$setting->copyright !!}</textarea>
                                 @error('copyright')
                                     <span class="badge badge-soft-danger">{{ $message }}</span>
                                 @enderror
@@ -103,3 +103,24 @@
 <!-- end row -->
 
 @endsection
+
+@push('script')
+<script src="https://cdn.tiny.cloud/1/odznz7ajohaam8oa0hn79g5yty47asxu4lg8qb3y24i94499/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script type="text/javascript">
+    tinymce.init({
+        selector: 'textarea',
+        height: 200,
+        menubar: false,
+        plugins: [
+            'advlist autolink lists link image charmap print preview anchor',
+            'searchreplace visualblocks code fullscreen',
+            'insertdatetime media table paste code help wordcount'
+        ],
+        toolbar: 'undo redo | formatselect | ' +
+            'bold italic backcolor | alignleft aligncenter ' +
+            'alignright alignjustify | bullist numlist outdent indent | ' +
+            'removeformat | help',
+        content_css: '//www.tiny.cloud/css/codepen.min.css'
+    });
+</script>
+@endpush

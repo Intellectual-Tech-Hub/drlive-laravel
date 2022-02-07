@@ -16,8 +16,8 @@ class CreateSettingsTable extends Migration
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('logo');
-            $table->string('fav_icon');
+            $table->string('logo')->nullable();
+            $table->string('fav_icon')->nullable();
             $table->string('copyright');
             $table->timestamps();
         });
