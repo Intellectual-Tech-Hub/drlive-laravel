@@ -120,22 +120,6 @@ class PermissionTableSeeder extends Seeder
                 'guard_name' => 'web'
             ),
             array(
-                'name' => 'time_slot_list',
-                'guard_name' => 'web'
-            ),
-            array(
-                'name' => 'time_slot_create',
-                'guard_name' => 'web'
-            ),
-            array(
-                'name' => 'time_slot_update',
-                'guard_name' => 'web'
-            ),
-            array(
-                'name' => 'time_slot_delete',
-                'guard_name' => 'web'
-            ),
-            array(
                 'name' => 'doctor_availability_list',
                 'guard_name' => 'web'
             ),
@@ -149,10 +133,6 @@ class PermissionTableSeeder extends Seeder
             ),
             array(
                 'name' => 'doctor_availability_delete',
-                'guard_name' => 'web'
-            ),
-            array(
-                'name' => 'doctor_availability_show',
                 'guard_name' => 'web'
             ),
             array(

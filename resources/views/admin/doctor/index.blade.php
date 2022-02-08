@@ -36,7 +36,7 @@
                 </div>
                 @endif
                 <h5 class="font-size-15 mb-1"><a href="#" class="text-dark">{{ $doctor->doctordetails->first_name . ' ' . $doctor->doctordetails->last_name }}</a></h5>
-                <p class="text-muted">{{ $doctor->qualification }}</p>
+                <p class="text-muted">{{ $doctor->designation }}</p>
 
                 <div>
                     @foreach ($doctor->doctorcategory as $category)

@@ -64,6 +64,7 @@ class DoctorController extends Controller
             'about' => 'required',
             'start_date' => 'required|date',
             'fees' => 'required|numeric',
+            'designation' => 'required',
             'qualification' => 'required',
             'education' => 'required',
             'experiance' => 'required',
@@ -102,6 +103,7 @@ class DoctorController extends Controller
             $doctor->user_id = $lastuser->id;
             $doctor->fees = $request->fees;
             $doctor->start_date = $request->start_date;
+            $doctor->designation = $request->designation;
             $doctor->qualification = $request->qualification;
             $doctor->education = $request->education;
             $doctor->experiance = $request->experiance;
@@ -173,6 +175,7 @@ class DoctorController extends Controller
             'category' => 'required|array',
             'email' => 'required|email',
             'phone' => 'required',
+            'designation' => 'required',
             'about' => 'required',
             'start_date' => 'required|date',
             'fees' => 'required|numeric',
@@ -222,6 +225,7 @@ class DoctorController extends Controller
             $doctor->user_id = $user->id;
             $doctor->start_date = $request->start_date;
             $doctor->fees = $request->fees;
+            $doctor->designation = $request->designation;
             $doctor->qualification = $request->qualification;
             $doctor->education = $request->education;
             $doctor->experiance = $request->experiance;

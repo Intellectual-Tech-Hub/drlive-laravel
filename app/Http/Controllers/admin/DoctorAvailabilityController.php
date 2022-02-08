@@ -17,7 +17,6 @@ class DoctorAvailabilityController extends Controller
         $this->middleware('permission:doctor_availability_list');
         $this->middleware('permission:doctor_availability_create', ['only' => ['create','store']]);
         $this->middleware('permission:doctor_availability_update', ['only' => ['edit','update']]);
-        $this->middleware('permission:doctor_availability_show', ['only' => ['show']]);
         $this->middleware('permission:doctor_availability_delete', ['only' => ['destroy']]);
     }
 
@@ -30,7 +29,7 @@ class DoctorAvailabilityController extends Controller
     public function index()
     {
         $availables = DoctorAvailability::get();
-        return view('admin.doctor_availability.availability.index', compact('availables'));
+        return view('admin.doctor_availability.index', compact('availables'));
     }
 
     /**
@@ -41,8 +40,7 @@ class DoctorAvailabilityController extends Controller
     public function create()
     {
         $doctors = Doctor::all();
-        $timeslots = TimeSlot::where('status',1)->get();
-        return view('admin.doctor_availability.availability.create', compact('doctors','timeslots'));
+        return view('admin.doctor_availability.create', compact('doctors'));
     }
 
     /**
@@ -54,26 +52,21 @@ class DoctorAvailabilityController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'doctor_id' => 'required'
+            'doctor_id' => 'required',
+            'day' => 'required',
+            'start_time' => 'required',
+            'end_time' => 'required',
+            'sit_quantity' => 'required',
+            'status' => 'required'
         ]);
-
-        $mon = implode(',',$request->slot1);
-        $tue = implode(',',$request->slot2);
-        $wed = implode(',',$request->slot3);
-        $thu = implode(',',$request->slot4);
-        $fri = implode(',',$request->slot5);
-        $sat = implode(',',$request->slot6);
-        $sun = implode(',',$request->slot7);
         
         $availability = new DoctorAvailability();
         $availability->doctor_id = $request->doctor_id;
-        $availability->mon = $mon;
-        $availability->tue = $tue;
-        $availability->wed = $wed;
-        $availability->thu = $thu;
-        $availability->fri = $fri;
-        $availability->sat = $sat;
-        $availability->sun = $sun;
+        $availability->day = $request->day;
+        $availability->start_time = $request->start_time;
+        $availability->end_time = $request->end_time;
+        $availability->sit_quantity = $request->sit_quantity;
+        $availability->status = $request->status;
         $status = $availability->save();
 
         if ($status) {
@@ -94,8 +87,7 @@ class DoctorAvailabilityController extends Controller
      */
     public function show($id)
     {
-        $available = DoctorAvailability::findOrFail($id);
-        return view('admin.doctor_availability.availability.show',compact('available'));
+        //
     }
 
     /**
@@ -107,20 +99,7 @@ class DoctorAvailabilityController extends Controller
     public function edit($id)
     {
         $available = DoctorAvailability::findOrFail($id);
-        $timeslots = TimeSlot::where('status',1)->get();
-
-        $select_mon = $available->pluck('mon')->first();
-        $select_tue = $available->pluck('tue')->first();
-        $select_wed = $available->pluck('wed')->first();
-        $select_thu = $available->pluck('thu')->first();
-        $select_fri = $available->pluck('fri')->first();
-        $select_sat = $available->pluck('sat')->first();
-        $select_sun = $available->pluck('sun')->first();
-
-        return view('admin.doctor_availability.availability.edit', compact(
-            'available','timeslots','select_mon','select_tue','select_wed','select_thu',
-            'select_fri','select_sat','select_sun'
-        ));
+        return view('admin.doctor_availability.availability.edit', compact('available',));
     }
 
     /**
@@ -132,23 +111,22 @@ class DoctorAvailabilityController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $mon = implode(',',$request->slot1);
-        $tue = implode(',',$request->slot2);
-        $wed = implode(',',$request->slot3);
-        $thu = implode(',',$request->slot4);
-        $fri = implode(',',$request->slot5);
-        $sat = implode(',',$request->slot6);
-        $sun = implode(',',$request->slot7);
+        $this->validate($request, [
+            'doctor_id' => 'required',
+            'day' => 'required',
+            'start_time' => 'required',
+            'end_time' => 'required',
+            'sit_quantity' => 'required',
+            'status' => 'required'
+        ]);
         
         $availability = DoctorAvailability::findOrFail($id);
         $availability->doctor_id = $request->doctor_id;
-        $availability->mon = $mon;
-        $availability->tue = $tue;
-        $availability->wed = $wed;
-        $availability->thu = $thu;
-        $availability->fri = $fri;
-        $availability->sat = $sat;
-        $availability->sun = $sun;
+        $availability->day = $request->day;
+        $availability->start_time = $request->start_time;
+        $availability->end_time = $request->end_time;
+        $availability->sit_quantity = $request->sit_quantity;
+        $availability->status = $request->status;
         $status = $availability->save();
 
         if ($status) {

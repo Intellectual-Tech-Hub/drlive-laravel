@@ -105,9 +105,9 @@
                         </div>
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <label for="formrow-password-input" class="form-label">Qualification</label>
-                                <input type="text" name="qualification" value="{{ $doctor->qualification }}" class="form-control" id="formrow-password-input">
-                                @error('qualification')
+                                <label for="formrow-password-input" class="form-label">Fees</label>
+                                <input type="text" name="fees" value="{{ $doctor->fees }}" class="form-control" id="formrow-password-input">
+                                @error('fees')
                                     <span class="badge badge-soft-danger">{{ $message }}</span>
                                 @enderror
                             </div>
@@ -157,6 +157,30 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="formrow-password-input" class="form-label">Designation</label>
+                                <input type="text" name="designation" value="{{ $doctor->designation }}" class="form-control" id="formrow-password-input">
+                                @error('designation')
+                                    <span class="badge badge-soft-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">Status</label>
+                                <select class="form-control select2" name="status">
+                                    <option value="">Select</option>
+                                    <option value="1" {{ old('status',$doctor->doctordetails->status=='1'?'selected':'') }}>Active</option>
+                                    <option value="0" {{ old('status',$doctor->doctordetails->gender=='0'?'selected':'') }}>Inactive</option>
+                                </select>
+                                @error('status')
+                                    <span class="badge badge-soft-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
                     <div class="row"> 
                         <div class="col-md-12">
                             <div class="mb-3">
@@ -169,7 +193,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="mb-3">
                                 <label for="formrow-email-input" class="form-label">About</label>
                                 <textarea name="about" class="form-control" id="formrow-email-input">{{ $doctor->details }}</textarea>
@@ -207,21 +231,6 @@
                                 <label for="formrow-email-input" class="form-label">Experiance</label>
                                 <textarea name="experiance" class="form-control" id="formrow-email-input">{{ $doctor->experiance }}</textarea>
                                 @error('experiance')
-                                    <span class="badge badge-soft-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row"> 
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label class="form-label">Status</label>
-                                <select class="form-control select2" name="status">
-                                    <option value="">Select</option>
-                                    <option value="1" {{ old('status',$doctor->doctordetails->status=='1'?'selected':'') }}>Active</option>
-                                    <option value="0" {{ old('status',$doctor->doctordetails->gender=='0'?'selected':'') }}>Inactive</option>
-                                </select>
-                                @error('status')
                                     <span class="badge badge-soft-danger">{{ $message }}</span>
                                 @enderror
                             </div>

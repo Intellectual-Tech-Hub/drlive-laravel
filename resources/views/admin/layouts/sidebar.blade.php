@@ -42,27 +42,7 @@
             </ul>
         </li>
         @endcanany
-        @canany('time_slot_list','time_slot_create')
-        <li>
-            <a href="javascript: void(0);">
-                <i class="fas fa-clock "></i>
-                <span key="t-layouts">Time Slots</span>
-                <span class="fas fa-arrow-circle-down"></span>
-            </a>
-            <ul class="sub-menu" aria-expanded="true">
-                @can('time_slot_list')
-                <li>
-                    <a href="{{ route('timeslots.index') }}" key="t-vertical">Time Slots List</a>
-                </li>
-                @endcan
-                @can('time_slot_create')
-                <li>
-                    <a href="{{ route('timeslots.create') }}" key="t-vertical">Add Time Slots</a>
-                </li>
-                @endcan
-            </ul>
-        </li>
-        @endcanany
+        
         @canany('doctor_availability_list','doctor_availability_create')
         <li>
             <a href="javascript: void(0);">

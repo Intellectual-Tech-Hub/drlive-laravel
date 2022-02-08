@@ -18,8 +18,9 @@ class CreateDoctorsTable extends Migration
             $table->integer('user_id');
             $table->float('fees');
             $table->date('start_date');
+            $table->string('designation');
             $table->text('education');
-            $table->text('experiancee');
+            $table->text('experiance');
             $table->text('qualification');
             $table->text('details');
             $table->timestamps();

@@ -33,9 +33,10 @@
                     <tr>
                         <th>S.I</th>
                         <th>Doctor Name</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th>Photo</th>
+                        <th>Day</th>
+                        <th>Time</th>
+                        <th>Sit Quantity</th>
+                        <th>Status</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -47,12 +48,31 @@
                     <tr>
                         <td>{{ $loop->index +1 }}</td>
                         <td>{{ $available->doctor->doctordetails->first_name.' '.$available->doctor->doctordetails->last_name }}</td>
-                        <td>{{ $available->doctor->doctordetails->email }}</td>
-                        <td>{{ $available->doctor->doctordetails->phone }}</td>
                         <td>
-                            <a class="image-popup-no-margins" href="{{ asset('storage/user/'.$available->doctor->doctordetails->image) }}">
-                                <img class="rounded-circle avatar-sm" alt="" src="{{ asset('storage/user/'.$available->doctor->doctordetails->image) }}">
-                            </a>
+                            @if ($available->day == 'mon')
+                                Monday
+                            @elseif ($available->day == 'tue')
+                                Tuesday
+                            @elseif ($available->day == 'wed')
+                                Wednesday
+                            @elseif ($available->day == 'thu')
+                                Thursday
+                            @elseif ($available->day == 'fri')
+                                Friday
+                            @elseif ($available->day == 'sat')
+                                Saturday
+                            @elseif ($available->day == 'sun')
+                                Sunday
+                            @endif
+                        </td>
+                        <td>{{ $available->start_time . '-' . $available->end_time }}</td>
+                        <td>{{ $available->sit_quantity }}</td>
+                        <td>
+                            @if ($available->status == 0)
+                            <span class="badge bg-danger">Inactive</span>
+                            @else
+                            <span class="badge bg-success">Active</span>
+                            @endif
                         </td>
                         <td>
                             @can('doctor_availability_show')

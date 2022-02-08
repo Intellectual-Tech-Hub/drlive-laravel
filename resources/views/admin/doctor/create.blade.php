@@ -157,6 +157,30 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="formrow-password-input" class="form-label">Designation</label>
+                                <input type="text" name="designation" value="{{ old('designation') }}" class="form-control" id="formrow-password-input">
+                                @error('designation')
+                                    <span class="badge badge-soft-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">Status</label>
+                                <select class="form-control select2" name="status">
+                                    <option value="">Select</option>
+                                    <option value="1">Active</option>
+                                    <option value="0">Inactive</option>
+                                </select>
+                                @error('status')
+                                    <span class="badge badge-soft-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
                     <div class="row"> 
                         <div class="col-md-12">
                             <div class="mb-3">
@@ -207,21 +231,6 @@
                                 <label for="formrow-email-input" class="form-label">Experiance</label>
                                 <textarea name="experiance" class="form-control" id="formrow-email-input">{{ old('experiance') }}</textarea>
                                 @error('experiance')
-                                    <span class="badge badge-soft-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row"> 
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label class="form-label">Status</label>
-                                <select class="form-control select2" name="status">
-                                    <option value="">Select</option>
-                                    <option value="1">Active</option>
-                                    <option value="0">Inactive</option>
-                                </select>
-                                @error('status')
                                     <span class="badge badge-soft-danger">{{ $message }}</span>
                                 @enderror
                             </div>
