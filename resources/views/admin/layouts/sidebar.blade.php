@@ -67,7 +67,7 @@
 
         <li class="menu-title" key="t-apps">Medicine Section</li>
 
-        @can('medicine_type_index')
+        @can('medicine_type_list')
         <li>
             <a href="{{ route('medicinetype.index') }}" class="waves-effect">
                 <i class="fas fa-sitemap"></i>
@@ -75,7 +75,7 @@
             </a>
         </li>
         @endcan
-        @canany('medicine_index','medicine_create')
+        @canany('medicine_list','medicine_create')
         <li>
             <a href="javascript: void(0);">
                 <i class="fas fa-tablets"></i>
@@ -83,7 +83,7 @@
                 <span class="fas fa-arrow-circle-down"></span>
             </a>
             <ul class="sub-menu" aria-expanded="true">
-                @can('medicine_index')
+                @can('medicine_list')
                 <li>
                     <a href="{{ route('medicine.index') }}" key="t-vertical">Medicines List</a>
                 </li>

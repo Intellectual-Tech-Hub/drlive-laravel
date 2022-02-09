@@ -3,12 +3,23 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Medicine;
 use App\Models\MedicineType;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 
 class MedicineTypeController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('permission:medicine_type_list');
+        $this->middleware('permission:medicine_type_create', ['only' => ['create','store']]);
+        $this->middleware('permission:medicine_type_update', ['only' => ['edit','update']]);
+        $this->middleware('permission:medicine_type_delete', ['only' => ['destroy']]);
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -114,15 +125,22 @@ class MedicineTypeController extends Controller
     public function destroy($id)
     {
         $type = MedicineType::findOrFail($id);
-        $status = $type->delete();
-
-        if ($status) {
-            Toastr::success('Medicine type deleted', 'Success');
+        $medicine = Medicine::where('medicine_type_id',$id)->first();
+        if ($medicine) {
+            Toastr::error('Medicine exist in this type', 'Failed');
             return redirect()->route('medicinetype.index');
         }
         else {
-            Toastr::error('Medicine type failed to delete', 'Failed');
-            return redirect()->route('medicinetype.index');
+            $status = $type->delete();
+
+            if ($status) {
+                Toastr::success('Medicine type deleted', 'Success');
+                return redirect()->route('medicinetype.index');
+            }
+            else {
+                Toastr::error('Medicine type failed to delete', 'Failed');
+                return redirect()->route('medicinetype.index');
+            }
         }
     }
 }

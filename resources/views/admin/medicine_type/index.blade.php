@@ -19,7 +19,7 @@
 </div>
 <!-- end page title -->
 <div class="card-header py-3">
-    @can('category_create')
+    @can('medicine_type_create')
     <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#myModal"> <i class="fas fa-plus"> </i> Add Medicine Type</button>
     @endcan
 </div>

@@ -220,7 +220,7 @@ class PermissionTableSeeder extends Seeder
                 'guard_name' => 'web'
             ),
             array(
-                'name' => 'medicine_type_index',
+                'name' => 'medicine_type_list',
                 'guard_name' => 'web'
             ),
             array(
@@ -236,7 +236,7 @@ class PermissionTableSeeder extends Seeder
                 'guard_name' => 'web'
             ),
             array(
-                'name' => 'medicine_index',
+                'name' => 'medicine_list',
                 'guard_name' => 'web'
             ),
             array(
