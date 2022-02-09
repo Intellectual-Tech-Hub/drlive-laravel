@@ -40,6 +40,9 @@ Route::group(['prefix'=>'admin', 'middleware'=>['auth']], function () {
     Route::resource('/timeslots', App\Http\Controllers\admin\TimeSlotController::class);
     Route::resource('/availability', App\Http\Controllers\admin\DoctorAvailabilityController::class);
     Route::resource('/fees', App\Http\Controllers\admin\DoctorFeesController::class);
+    //Medicines Section
+    Route::resource('/medicinetype', App\Http\Controllers\admin\MedicineTypeController::class);
+    Route::resource('/medicine', App\Http\Controllers\admin\MedicineController::class);
     //General Options
     Route::resource('/banners', App\Http\Controllers\admin\BannerController::class);
     Route::resource('/story', App\Http\Controllers\admin\StoriesController::class);

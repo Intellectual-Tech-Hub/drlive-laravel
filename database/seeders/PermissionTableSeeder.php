@@ -219,6 +219,38 @@ class PermissionTableSeeder extends Seeder
                 'name' => 'leave_pending',
                 'guard_name' => 'web'
             ),
+            array(
+                'name' => 'medicine_type_index',
+                'guard_name' => 'web'
+            ),
+            array(
+                'name' => 'medicine_type_create',
+                'guard_name' => 'web'
+            ),
+            array(
+                'name' => 'medicine_type_update',
+                'guard_name' => 'web'
+            ),
+            array(
+                'name' => 'medicine_type_delete',
+                'guard_name' => 'web'
+            ),
+            array(
+                'name' => 'medicine_index',
+                'guard_name' => 'web'
+            ),
+            array(
+                'name' => 'medicine_create',
+                'guard_name' => 'web'
+            ),
+            array(
+                'name' => 'medicine_update',
+                'guard_name' => 'web'
+            ),
+            array(
+                'name' => 'medicine_delete',
+                'guard_name' => 'web'
+            ),
         );
 
         DB::table('permissions')->insert($permissions);
