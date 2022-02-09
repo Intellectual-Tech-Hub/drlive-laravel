@@ -15,11 +15,4 @@ class DoctorAvailability extends Model
         return $this->hasOne(Doctor::class, 'id', 'doctor_id');
     }
 
-    public static function timeslot($id)
-    {
-        $slot = TimeSlot::where('id',$id)->first();
-        return Carbon::parse($slot->start_time)->format('h:i A') . ' to ' . Carbon::parse($slot->end_time)->format('h:i A');
-
-    }
-
 }

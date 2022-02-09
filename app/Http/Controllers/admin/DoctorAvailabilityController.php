@@ -59,6 +59,12 @@ class DoctorAvailabilityController extends Controller
             'sit_quantity' => 'required',
             'status' => 'required'
         ]);
+
+        $exist = DoctorAvailability::where('doctor_id',$request->doctor_id)->where('day',$request->day)->first();
+        if ($exist) {
+            Toastr::error('Doctor availability already added for the selected day','Failed');
+            return redirect()->route('availability.index');
+        }
         
         $availability = new DoctorAvailability();
         $availability->doctor_id = $request->doctor_id;
@@ -99,7 +105,8 @@ class DoctorAvailabilityController extends Controller
     public function edit($id)
     {
         $available = DoctorAvailability::findOrFail($id);
-        return view('admin.doctor_availability.availability.edit', compact('available',));
+        $doctors = Doctor::all();
+        return view('admin.doctor_availability.edit', compact('available','doctors'));
     }
 
     /**

@@ -65,7 +65,7 @@
                                 Sunday
                             @endif
                         </td>
-                        <td>{{ $available->start_time . '-' . $available->end_time }}</td>
+                        <td>{{ Carbon\carbon::parse($available->start_time)->format('h:i A') . '-' . Carbon\carbon::parse($available->end_time)->format('h:i A') }}</td>
                         <td>{{ $available->sit_quantity }}</td>
                         <td>
                             @if ($available->status == 0)

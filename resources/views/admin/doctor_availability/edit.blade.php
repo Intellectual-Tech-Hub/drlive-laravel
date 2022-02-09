@@ -33,10 +33,7 @@
                             <div class="mb-3">
                                 <label for="formrow-email-input" class="form-label">Select Doctor</label>
                                 <select name="doctor_id" class="form-control select2" id="formrow-email-input">
-                                    <option value="">select doctor</option>
-                                    @foreach ($doctors as $doctor)
-                                        <option value="{{ $doctor->id }}" {{ old('doctor_id',$available->doctor_id==$doctor->id ? 'selected' : '') }}>{{ $doctor->doctordetails->first_name. ' ' . $doctor->doctordetails->last_name }}</option>
-                                    @endforeach
+                                    <option value="{{ $available->doctor_id }}">{{ $available->doctor->doctordetails->first_name. ' '.  $available->doctor->doctordetails->last_name}}</option>
                                 </select>
                                 @error('doctor_id')
                                     <span class="badge badge-soft-danger">{{ $message }}</span>
@@ -47,14 +44,23 @@
                             <div class="mb-3">
                                 <label for="formrow-email-input" class="form-label">Select Day</label>
                                 <select name="day" class="form-control select2" id="formrow-email-input">
-                                    <option value="">select day</option>
-                                    <option value="mon" {{ old('day',$vailable->day=='mon' ? 'selected' : '') }}>Monday</option>
-                                    <option value="tue" {{ old('day',$vailable->day=='tue' ? 'selected' : '') }}>Tuesday</option>
-                                    <option value="wed" {{ old('day',$vailable->day=='wed' ? 'selected' : '') }}>Wednesday</option>
-                                    <option value="thu" {{ old('day',$vailable->day=='thu' ? 'selected' : '') }}>Thursday</option>
-                                    <option value="fri" {{ old('day',$vailable->day=='fri' ? 'selected' : '') }}>Friday</option>
-                                    <option value="sat" {{ old('day',$vailable->day=='sat' ? 'selected' : '') }}>Saturday</option>
-                                    <option value="sun" {{ old('day',$vailable->day=='sun' ? 'selected' : '') }}>Sunday</option>
+                                    <option value="{{ $available->day }}">
+                                        @if ($available->day == 'mon')
+                                            Monday
+                                        @elseif ($available->day == 'tue')
+                                            Tuesday
+                                        @elseif ($available->day == 'wed')
+                                            Wednesday
+                                        @elseif ($available->day == 'thu')
+                                            Thursday
+                                        @elseif ($available->day == 'fri')
+                                            Friday
+                                        @elseif ($available->day == 'sat')
+                                            Saturday
+                                        @elseif ($available->day == 'sun')
+                                            Sunday
+                                        @endif
+                                    </option>
                                 </select>
                                 @error('day')
                                     <span class="badge badge-soft-danger">{{ $message }}</span>
