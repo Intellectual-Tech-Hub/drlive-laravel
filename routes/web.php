@@ -28,6 +28,9 @@ Route::group(['prefix'=>'admin', 'middleware'=>['auth']], function () {
 
     //dashboard
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    //Appointments Section
+    Route::resource('/appointment', App\Http\Controllers\admin\AppointmentsController::class);
+    Route::get('/appointments/history', [App\Http\Controllers\admin\AppointmentsController::class, 'history'])->name('appointments.history');
     //user management
     Route::resource('/roles', App\Http\Controllers\admin\RoleController::class);
     Route::resource('/users', App\Http\Controllers\admin\UserController::class);
@@ -65,3 +68,6 @@ Route::group(['prefix'=>'admin', 'middleware'=>['auth']], function () {
     Route::any('/profile/save/{id}', [App\Http\Controllers\admin\SettingsController::class, 'profilesave'])->name('profile.save');
 
 });
+
+//Ajax Routes
+Route::get('/getdoctors', [App\Http\Controllers\admin\AjaxController::class, 'getdoctors']);

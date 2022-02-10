@@ -11,6 +11,29 @@
             </a>
         </li>
 
+        <li class="menu-title" key="t-apps">Appointments Section</li>
+
+        {{-- @can('web_settings') --}}
+        <li>
+            <a href="javascript: void(0);">
+                <i class="fas fa-address-book"></i>
+                <span key="t-layouts">Appointments</span>
+                <span class="fas fa-arrow-circle-down"></span>
+            </a>
+            <ul class="sub-menu" aria-expanded="true">
+                <li>
+                    <a href="{{ route('appointment.index') }}" key="t-vertical">New Appointments</a>
+                </li>
+                <li>
+                    <a href="{{ route('appointments.history') }}" key="t-vertical">Appointments History</a>
+                </li>
+                <li>
+                    <a href="{{ route('appointment.create') }}" key="t-vertical">Add Appointment</a>
+                </li>
+            </ul>
+        </li>
+        {{-- @endcan --}}
+
         <li class="menu-title" key="t-apps">Doctors Section</li>
 
         @can('category_list')
