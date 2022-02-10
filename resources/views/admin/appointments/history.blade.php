@@ -31,7 +31,8 @@
                         <th>Email</th>
                         <th>Phone</th>
                         <th>Date</th>
-                        <th>Token</th>
+                        <th>Token No</th>
+                        <th>Payment Status</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -41,17 +42,29 @@
                     @foreach ($appoitments as $appoitment)
                     <tr>
                         <td>{{ $loop->index +1 }}</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>{{ $appoitment->patient->first_name.' '.$appoitment->patient->last_name }}</td>
+                        <td>{{ $appoitment->patient->email }}</td>
+                        <td>{{ $appoitment->patient->phone }}</td>
+                        <td>
+                            {{ Carbon\carbon::parse($appoitment->date)->format('d-m-Y') }}
+                            <span class="badge bg-primary">
+                                {{ Carbon\carbon::parse($appoitment->date)->format('D') }}
+                            </span>
+                        </td>
+                        <td>{{ $appoitment->token_no }}</td>
+                        <td>
+                            @if ($appoitment->payment_status == 'unpaid')
+                            <span class="badge bg-danger">Unpaid</span>
+                            @elseif ($appoitment->payment_status == 'paid')
+                            <span class="badge bg-success">Paid</span>
+                            @endif
+                        </td>
                         <td>
                             {{-- @can('banner_update') --}}
                             <a href="" class="btn btn-primary btn-sm float-left mr-1" style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" title="edit" data-placement="bottom"><i class="fas fa-edit"></i></a>
                             {{-- @endcan
                             @can('banner_delete') --}}
-                            <form method="POST" action="">
+                            <form method="POST" action="{{ route('appointment.destroy',$appoitment->id) }}">
                             @csrf
                             @method('delete')
                                 <button class="btn btn-danger btn-sm warning" data-id={{$appoitment->id}} style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" data-placement="bottom" title="Delete"><i class="fas fa-trash-alt"></i></button>

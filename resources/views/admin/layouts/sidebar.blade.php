@@ -22,6 +22,9 @@
             </a>
             <ul class="sub-menu" aria-expanded="true">
                 <li>
+                    <a href="{{ route('appointments.today') }}" key="t-vertical">Today's Appointments</a>
+                </li>
+                <li>
                     <a href="{{ route('appointment.index') }}" key="t-vertical">New Appointments</a>
                 </li>
                 <li>

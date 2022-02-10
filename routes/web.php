@@ -31,6 +31,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>['auth']], function () {
     //Appointments Section
     Route::resource('/appointment', App\Http\Controllers\admin\AppointmentsController::class);
     Route::get('/appointments/history', [App\Http\Controllers\admin\AppointmentsController::class, 'history'])->name('appointments.history');
+    Route::get('/appointments/today', [App\Http\Controllers\admin\AppointmentsController::class, 'today'])->name('appointments.today');
     //user management
     Route::resource('/roles', App\Http\Controllers\admin\RoleController::class);
     Route::resource('/users', App\Http\Controllers\admin\UserController::class);
