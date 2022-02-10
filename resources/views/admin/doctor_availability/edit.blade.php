@@ -45,19 +45,19 @@
                                 <label for="formrow-email-input" class="form-label">Select Day</label>
                                 <select name="day" class="form-control select2" id="formrow-email-input">
                                     <option value="{{ $available->day }}">
-                                        @if ($available->day == 'mon')
+                                        @if ($available->day == 'Mon')
                                             Monday
-                                        @elseif ($available->day == 'tue')
+                                        @elseif ($available->day == 'Tue')
                                             Tuesday
-                                        @elseif ($available->day == 'wed')
+                                        @elseif ($available->day == 'Wed')
                                             Wednesday
-                                        @elseif ($available->day == 'thu')
+                                        @elseif ($available->day == 'Thu')
                                             Thursday
-                                        @elseif ($available->day == 'fri')
+                                        @elseif ($available->day == 'Fri')
                                             Friday
-                                        @elseif ($available->day == 'sat')
+                                        @elseif ($available->day == 'Sat')
                                             Saturday
-                                        @elseif ($available->day == 'sun')
+                                        @elseif ($available->day == 'Sun')
                                             Sunday
                                         @endif
                                     </option>

@@ -49,19 +49,19 @@
                         <td>{{ $loop->index +1 }}</td>
                         <td>{{ $available->doctor->doctordetails->first_name.' '.$available->doctor->doctordetails->last_name }}</td>
                         <td>
-                            @if ($available->day == 'mon')
+                            @if ($available->day == 'Mon')
                                 Monday
-                            @elseif ($available->day == 'tue')
+                            @elseif ($available->day == 'Tue')
                                 Tuesday
-                            @elseif ($available->day == 'wed')
+                            @elseif ($available->day == 'Wed')
                                 Wednesday
-                            @elseif ($available->day == 'thu')
+                            @elseif ($available->day == 'Thu')
                                 Thursday
-                            @elseif ($available->day == 'fri')
+                            @elseif ($available->day == 'Fri')
                                 Friday
-                            @elseif ($available->day == 'sat')
+                            @elseif ($available->day == 'Sat')
                                 Saturday
-                            @elseif ($available->day == 'sun')
+                            @elseif ($available->day == 'Sun')
                                 Sunday
                             @endif
                         </td>

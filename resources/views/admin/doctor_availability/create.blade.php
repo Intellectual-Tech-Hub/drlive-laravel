@@ -47,13 +47,13 @@
                                 <label for="formrow-email-input" class="form-label">Select Day</label>
                                 <select name="day" class="form-control select2" id="formrow-email-input">
                                     <option value="">select day</option>
-                                    <option value="mon">Monday</option>
-                                    <option value="tue">Tuesday</option>
-                                    <option value="wed">Wednesday</option>
-                                    <option value="thu">Thursday</option>
-                                    <option value="fri">Friday</option>
-                                    <option value="sat">Saturday</option>
-                                    <option value="sun">Sunday</option>
+                                    <option value="Mon">Monday</option>
+                                    <option value="Tue">Tuesday</option>
+                                    <option value="Wed">Wednesday</option>
+                                    <option value="Thu">Thursday</option>
+                                    <option value="Fri">Friday</option>
+                                    <option value="Sat">Saturday</option>
+                                    <option value="Sun">Sunday</option>
                                 </select>
                                 @error('day')
                                     <span class="badge badge-soft-danger">{{ $message }}</span>
