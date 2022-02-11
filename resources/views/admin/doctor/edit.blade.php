@@ -169,6 +169,17 @@
                         </div>
                         <div class="col-md-6">
                             <div class="mb-3">
+                                <label for="formrow-password-input" class="form-label">DOB</label>
+                                <input type="date" name="dob" value="{{ $doctor->doctordetails->dob }}" class="form-control" id="formrow-password-input">
+                                @error('dob')
+                                    <span class="badge badge-soft-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
                                 <label class="form-label">Status</label>
                                 <select class="form-control select2" name="status">
                                     <option value="">Select</option>

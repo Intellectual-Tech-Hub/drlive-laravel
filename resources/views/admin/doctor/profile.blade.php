@@ -39,7 +39,7 @@
                             <img src="{{ asset('storage/user/'.$doctor->doctordetails->image) }}" alt="" class="img-thumbnail rounded-circle">
                         </div>
                         <h5 class="font-size-15 text-truncate">{{ $doctor->doctordetails->first_name . ' ' . $doctor->doctordetails->last_name }}</h5>
-                        <p class="text-muted mb-0 text-truncate">{{ $doctor->qualification }}</p>
+                        <p class="text-muted mb-0 text-truncate">{{ $doctor->designation }}</p>
                     </div>
 
                     <div class="col-sm-8">
@@ -65,7 +65,7 @@
             <div class="card-body">
                 <h4 class="card-title mb-4">Personal Information</h4>
 
-                <p class="text-muted mb-4">{{ $doctor->details }}</p>
+                <p class="text-muted mb-4">{!! $doctor->details !!}</p>
                 <div class="table-responsive">
                     <table class="table table-nowrap mb-0">
                         <tbody>
@@ -93,6 +93,10 @@
                             <tr>
                                 <th scope="row">E-mail :</th>
                                 <td>{{ $doctor->doctordetails->email }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">DOB :</th>
+                                <td>{{ Carbon\carbon::parse($doctor->doctordetails->dob)->format('d-m-Y') }}</td>
                             </tr>
                             <tr>
                                 <th scope="row">Location :</th>

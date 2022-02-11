@@ -64,6 +64,7 @@ class DoctorController extends Controller
             'about' => 'required',
             'start_date' => 'required|date',
             'fees' => 'required|numeric',
+            'dob' => 'required|date',
             'designation' => 'required',
             'qualification' => 'required',
             'education' => 'required',
@@ -83,6 +84,7 @@ class DoctorController extends Controller
             $user->address = $request->address;
             $user->pin = $request->pin;
             $user->place = $request->place;
+            $user->dob = $request->dob;
             $user->gender = $request->gender;
             $user->status = $request->status;
             $user->password = Hash::make($request->password);
@@ -179,6 +181,7 @@ class DoctorController extends Controller
             'about' => 'required',
             'start_date' => 'required|date',
             'fees' => 'required|numeric',
+            'dob' => 'required|date',
             'qualification' => 'required',
             'education' => 'required',
             'experiance' => 'required',
@@ -202,6 +205,7 @@ class DoctorController extends Controller
             $user->address = $request->address;
             $user->pin = $request->pin;
             $user->place = $request->place;
+            $user->dob = $request->dob;
             $user->gender = $request->gender;
             $user->status = $request->status;
 
