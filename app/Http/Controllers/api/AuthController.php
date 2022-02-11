@@ -25,7 +25,6 @@ class AuthController extends Controller
                         'result' => true,
                         'message' => 'login success',
                         'user' => $user,
-                        'role' => $role,
                         'token' => $tokenResult,
                     ],200);
                 }
@@ -56,7 +55,6 @@ class AuthController extends Controller
                         'result' => true,
                         'message' => 'login success',
                         'user' => $user,
-                        'role' => $role,
                         'token' => $tokenResult,
                     ],200);
                 }

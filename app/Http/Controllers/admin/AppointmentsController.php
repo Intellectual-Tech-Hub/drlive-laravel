@@ -108,7 +108,8 @@ class AppointmentsController extends Controller
      */
     public function show($id)
     {
-        //
+        $appointment = Appointment::findOrfail($id);
+        return view('admin.appointments.show', compact('appointment'));
     }
 
     /**
