@@ -42,7 +42,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        $roles = Role::all();
+        $roles = Role::whereIn('name',['admin','patient'])->get();
         return view('admin.user-management.users.create',compact('roles'));
     }
 
@@ -60,6 +60,7 @@ class UserController extends Controller
             'phone' => 'required|unique:users,phone',
             'password' => 'required',
             'gender' => 'required',
+            'dob' => 'required|date',
             'role' => 'required',
             'status' => 'required',
         ]);
@@ -73,6 +74,7 @@ class UserController extends Controller
         $user->pin = $request->pin;
         $user->place = $request->place;
         $user->gender = $request->gender;
+        $user->dob = $request->dob;
         $user->status = $request->status;
         $user->password = Hash::make($request->password);
 
@@ -118,7 +120,7 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::findOrfail($id);
-        $roles = Role::all();
+        $roles = Role::whereIn('name',['admin','patient'])->get();
         return view('admin.user-management.users.edit',compact('user','roles'));
     }
 
@@ -136,6 +138,7 @@ class UserController extends Controller
             'email' => 'required|email',
             'phone' => 'required',
             'gender' => 'required',
+            'dob' => 'required|date',
             'role' => 'required',
             'status' => 'required',
         ]);
@@ -149,6 +152,7 @@ class UserController extends Controller
         $user->pin = $request->pin;
         $user->place = $request->place;
         $user->gender = $request->gender;
+        $user->dob = $request->dob;
         $user->status = $request->status;
 
         if ($request->password) {
