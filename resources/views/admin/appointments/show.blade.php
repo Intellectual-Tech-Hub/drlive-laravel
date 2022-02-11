@@ -59,23 +59,31 @@
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Appointment Information</h4>
+                <p class="card-title-desc"></p>
                 <table class="table mb-0">
-                    <thead>
-                    <tr>
-                        <th>S.I</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th>Date</th>
-                    </tr>
-                    </thead>
-                    
                     <tbody>
                     <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <th>Doctor Name</th>
+                        <td>
+                            DR. {{ $appointment->doctor->doctordetails->first_name.' '.$appointment->doctor->doctordetails->last_name }}
+                            ({{ $appointment->doctor->designation }})
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Date</th>
+                        <td>
+                            {{ Carbon\carbon::parse($appointment->date)->format('d-m-Y') }}
+                            <span class="badge bg-primary">
+                            {{ Carbon\carbon::parse($appointment->date)->format('D') }}
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Token No</th>
+                        <td>{{ $appointment->token_no }}</td>
+                    </tr>
+                    <tr>
+                        <th>Expected Time</th>
                         <td></td>
                     </tr>
                     </tbody>

@@ -52,6 +52,7 @@ class DoctorSectionController extends Controller
         $doctors = Doctor::with('doctordetails','doctorcategory')->get();
         return response()->json([
             'result' => true,
+            'image path' =>'/storage/user/',
             'doctors' => $doctors,
         ],200);
     }
@@ -64,7 +65,9 @@ class DoctorSectionController extends Controller
             if ($doctor != NULL) {
                 return response()->json([
                     'result' => true,
+                    'image path' =>'/storage/user/',
                     'doctor' => $doctor,
+                    'about' => strip_tags($doctor->details),
                 ],200);
             }
             else {
