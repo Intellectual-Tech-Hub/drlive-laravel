@@ -27,5 +27,8 @@ Route::group(['middleware'=>'auth:api'], function () {
     Route::get('/stories', [App\Http\Controllers\api\StoryController::class, 'stories']);
     Route::get('/stories/active', [App\Http\Controllers\api\StoryController::class, 'activestories']);
     Route::post('/stories/user', [App\Http\Controllers\api\StoryController::class, 'userstories']);
+    //User Section
+    Route::post('/user/profile', [App\Http\Controllers\api\UserController::class, 'profiledetail']);
+    Route::post('/user/update', [App\Http\Controllers\api\UserController::class, 'profileupdate']);
 
 });

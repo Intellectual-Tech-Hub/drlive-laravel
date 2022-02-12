@@ -23,6 +23,10 @@ class CreateUsersTable extends Migration
             $table->text('address')->nullable();
             $table->string('pin')->nullable();
             $table->string('place')->nullable();
+            $table->string('city')->nullable();
+            $table->string('state')->nullable();
+            $table->string('country')->nullable();
+            $table->string('blood_group')->nullable();
             $table->string('gender');
             $table->string('image')->nullable();
             $table->string('status')->default(1);
