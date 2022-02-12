@@ -18,7 +18,9 @@
     </div>
 </div>
 <!-- end page title -->
-
+@php
+    $day = Carbon\carbon::parse($appointment->date)->format('D');
+@endphp
 <div class="row">
     <div class="col-6">
         <div class="card">
@@ -73,9 +75,7 @@
                         <th>Date</th>
                         <td>
                             {{ Carbon\carbon::parse($appointment->date)->format('d-m-Y') }}
-                            <span class="badge bg-primary">
-                            {{ Carbon\carbon::parse($appointment->date)->format('D') }}
-                            </span>
+                            <span class="badge bg-primary">{{ $day }}</span>
                         </td>
                     </tr>
                     <tr>
@@ -84,7 +84,19 @@
                     </tr>
                     <tr>
                         <th>Expected Time</th>
-                        <td></td>
+                        <td>
+                            {{ App\Models\Appointment::expectedtime($appointment->doctor_id, $day, $appointment->date) }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Already Treated</th>
+                        <td>
+                            @if ($appointment->status == 'new')
+                                <span class="badge bg-danger">No</span>
+                            @elseif ($appointment->status == 'completed')
+                                <span class="badge bg-success">Yes</span>
+                            @endif
+                        </td>
                     </tr>
                     </tbody>
                 </table>

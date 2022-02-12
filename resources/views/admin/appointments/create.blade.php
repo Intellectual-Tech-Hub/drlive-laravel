@@ -85,8 +85,8 @@
                                 <label class="form-label">Status</label>
                                 <select class="form-control select2" name="status">
                                     <option value="">Select</option>
-                                    <option value="1">Active</option>
-                                    <option value="0">Inactive</option>
+                                    <option value="new">New</option>
+                                    <option value="completed">Treated</option>
                                 </select>
                                 @error('status')
                                     <span class="badge badge-soft-danger">{{ $message }}</span>
