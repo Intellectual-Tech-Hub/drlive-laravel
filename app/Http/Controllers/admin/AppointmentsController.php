@@ -113,7 +113,8 @@ class AppointmentsController extends Controller
     public function show($id)
     {
         $appointment = Appointment::findOrfail($id);
-        return view('admin.appointments.show', compact('appointment'));
+        $prescriptions = Prescription::where('appointment_id',$id)->get();
+        return view('admin.appointments.show', compact('appointment','prescriptions'));
     }
 
     /**
@@ -194,6 +195,10 @@ class AppointmentsController extends Controller
     public function destroy($id)
     {
         $appointment = Appointment::findOrfail($id);
+        $prescription = Prescription::where('appointment_id',$id)->get();
+        foreach ($prescription as $pre) {
+            $pre->delete();
+        }
         $status = $appointment->delete();
 
         if ($status) {

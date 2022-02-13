@@ -21,7 +21,7 @@
 @php
     $day = Carbon\carbon::parse($appointment->date)->format('D');
 @endphp
-<div class="row">
+{{-- <div class="row">
     <div class="col-6">
         <div class="card">
             <div class="card-body">
@@ -100,6 +100,105 @@
                     </tr>
                     </tbody>
                 </table>
+            </div>
+        </div>
+    </div>
+</div> --}}
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="invoice-title">
+                    <div class="float-end font-size-16">
+                        <h4>DR. {{ $appointment->doctor->doctordetails->first_name.' '.$appointment->doctor->doctordetails->last_name }}</h4>
+                        <p>{{ $appointment->doctor->designation }}</p>
+                    </div>
+                    <div class="mb-4">
+                        <img src="{{ asset('storage/setting/'.@App\Models\Setting::setting()->logo) }}" alt="DR.Live" height="20"/>
+                        <address>
+                            95 South Park Avenue, New York, USA<br>
+                            123-233-3455<br>
+                            prescription_contact@gmail.com
+                        </address>
+                    </div>
+                </div>
+
+                <hr style="height:2px;border-width:0;color:grey;background-color:grey;opacity:unset">
+
+                <div class="row">
+                    <div class="col-sm-4">
+                        <address>
+                            <strong>Patient Name : </strong>
+                            {{ $appointment->patient->first_name.' '.$appointment->patient->last_name }}
+                        </address>
+                    </div>
+                    <div class="col-sm-4">
+                        <address>
+                            <strong>Age : </strong>
+                            {{ Carbon\carbon::parse($appointment->patient->dob)->diff(Carbon\carbon::now())->format('%y years') }}
+                        </address>
+                    </div>
+                    <div class="col-sm-4">
+                        <address>
+                            <strong>Date : </strong>
+                            {{ Carbon\carbon::parse($appointment->date)->format('d-m-Y') }}
+                        </address>
+                    </div>
+                </div>
+
+                <hr style="height:2px;border-width:0;color:grey;background-color:grey;opacity:unset">
+
+                <div class="table-responsive">
+                    <span style="font-size: 3em;">R<sub>x</sub></span>
+                    <table class="table table-nowrap">
+                        <thead>
+                            <tr>
+                                <th style="width: 70px;">No.</th>
+                                <th>Medicine</th>
+                                <th>Dosage</th>
+                                <th>Time</th>
+                                <th class="text-end">Days</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($prescriptions as $prescription)
+                            <tr>
+                                <td>{{ $loop->index +1 }}</td>
+                                <td>{{ $prescription->medicine->name }}</td>
+                                <td>{{ $prescription->dosage }}</td>
+                                <td>
+                                    @if ($prescription->time == 'after')
+                                    After Food
+                                    @elseif ($prescription->time == 'before')
+                                    Before Food
+                                    @endif
+                                </td>
+                                <td class="text-end">{{ $prescription->days }}</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+
+                <hr style="height:2px;border-width:0;color:grey;background-color:grey;opacity:unset">
+
+                <div class="row">
+                    <div class="col-sm-4">
+                        <address>
+                            <strong>Signature</strong><br>
+                            DR. {{ $appointment->doctor->doctordetails->first_name.' '.$appointment->doctor->doctordetails->last_name }}<br>
+                            {{ $appointment->doctor->designation }}
+                        </address>
+                    </div>
+                </div>
+
+                <div class="d-print-none">
+                    <div class="float-end">
+                        <a href="javascript:window.print()" class="btn btn-success waves-effect waves-light me-1"><i class="fa fa-print"></i></a>
+                        <a href="" class="btn btn-primary w-md waves-effect waves-light"><i class="fa fa-envelope"></i> Send Mail</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
