@@ -60,17 +60,19 @@
                             @endif
                         </td>
                         <td>
-                            {{-- @can('banner_update') --}}
+                            @can('appointment_view')
                             <a href="{{ route('appointment.show',$appoitment->id) }}" class="btn btn-warning btn-sm float-left mr-1" style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" title="edit" data-placement="bottom"><i class="fas fa-eye"></i></a>
+                            @endcan
+                            @can('appointment_edit')
                             <a href="{{ route('appointment.edit',$appoitment->id) }}" class="btn btn-primary btn-sm float-left mr-1" style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" title="edit" data-placement="bottom"><i class="fas fa-edit"></i></a>
-                            {{-- @endcan
-                            @can('banner_delete') --}}
+                            @endcan
+                            @can('appointment_delete')
                             <form method="POST" action="{{ route('appointment.destroy',$appoitment->id) }}">
                             @csrf
                             @method('delete')
                                 <button class="btn btn-danger btn-sm warning" data-id={{$appoitment->id}} style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" data-placement="bottom" title="Delete"><i class="fas fa-trash-alt"></i></button>
                             </form>
-                           {{--  @endcan --}}
+                            @endcan
                         </td>
                     </tr>
                     @endforeach

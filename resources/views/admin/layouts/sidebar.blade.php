@@ -13,7 +13,7 @@
 
         <li class="menu-title" key="t-apps">Appointments Section</li>
 
-        {{-- @can('web_settings') --}}
+        @canany('appointment_today','appointment_new','appointment_history','appointment_create')
         <li>
             <a href="javascript: void(0);">
                 <i class="fas fa-address-book"></i>
@@ -21,21 +21,29 @@
                 <span class="fas fa-arrow-circle-down"></span>
             </a>
             <ul class="sub-menu" aria-expanded="true">
+                @can('appointment_today')
                 <li>
                     <a href="{{ route('appointments.today') }}" key="t-vertical">Today's Appointments</a>
                 </li>
+                @endcan
+                @can('appointment_new')
                 <li>
                     <a href="{{ route('appointment.index') }}" key="t-vertical">New Appointments</a>
                 </li>
+                @endcan
+                @can('appointment_history')
                 <li>
                     <a href="{{ route('appointments.history') }}" key="t-vertical">Appointments History</a>
                 </li>
+                @endcan
+                @can('appointment_create')
                 <li>
                     <a href="{{ route('appointment.create') }}" key="t-vertical">Add Appointment</a>
                 </li>
+                @endcan
             </ul>
         </li>
-        {{-- @endcan --}}
+        @endcanany
 
         <li class="menu-title" key="t-apps">Doctors Section</li>
 

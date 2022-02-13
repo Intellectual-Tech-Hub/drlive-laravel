@@ -18,6 +18,19 @@ use Illuminate\Support\Facades\DB;
 
 class AppointmentsController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('permission:appointment_today', ['only' => ['today']]);
+        $this->middleware('permission:appointment_new', ['only' => ['index']]);
+        $this->middleware('permission:appointment_history', ['only' => ['history']]);
+        $this->middleware('permission:appointment_create', ['only' => ['create','store']]);
+        $this->middleware('permission:appointment_edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:appointment_view', ['only' => ['show']]);
+        $this->middleware('permission:appointment_delete', ['only' => ['destroy']]);
+    }
+
+
     /**
      * Display a listing of the resource.
      *

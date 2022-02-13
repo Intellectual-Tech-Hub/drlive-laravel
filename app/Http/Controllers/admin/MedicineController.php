@@ -10,6 +10,16 @@ use Illuminate\Http\Request;
 
 class MedicineController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('permission:medicine_list');
+        $this->middleware('permission:medicine_create', ['only' => ['create','store']]);
+        $this->middleware('permission:medicine_update', ['only' => ['edit','update']]);
+        $this->middleware('permission:medicine_delete', ['only' => ['destroy']]);
+    }
+
+
     /**
      * Display a listing of the resource.
      *
