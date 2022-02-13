@@ -70,5 +70,8 @@ Route::group(['prefix'=>'admin', 'middleware'=>['auth']], function () {
 
 });
 
+
 //Ajax Routes
 Route::get('/getdoctors', [App\Http\Controllers\admin\AjaxController::class, 'getdoctors']);
+Route::get('/getmedicinetypes', [App\Http\Controllers\admin\AjaxController::class, 'medicinetypes']);
+Route::get('/getmedicines', [App\Http\Controllers\admin\AjaxController::class, 'medicines']);

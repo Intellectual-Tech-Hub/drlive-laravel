@@ -79,21 +79,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row"> 
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label class="form-label">Status</label>
-                                <select class="form-control select2" name="status">
-                                    <option value="">Select</option>
-                                    <option value="new">New</option>
-                                    <option value="completed">Treated</option>
-                                </select>
-                                @error('status')
-                                    <span class="badge badge-soft-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
                     <div>
                         <button type="submit" class="btn btn-primary w-md">Submit</button>
                     </div>

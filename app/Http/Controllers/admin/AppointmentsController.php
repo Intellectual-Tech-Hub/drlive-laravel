@@ -6,10 +6,15 @@ use App\Http\Controllers\Controller;
 use App\Models\Appointment;
 use App\Models\Category;
 use App\Models\DoctorAvailability;
+use App\Models\Medicine;
+use App\Models\MedicineType;
+use App\Models\Prescription;
 use App\Models\User;
 use Brian2694\Toastr\Facades\Toastr;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AppointmentsController extends Controller
 {
@@ -49,8 +54,7 @@ class AppointmentsController extends Controller
             'patient' => 'required|integer',
             'date' => 'required|date',
             'category_id' => 'required|integer',
-            'doctor_id' => 'required|integer',
-            'status' => 'required'
+            'doctor_id' => 'required|integer'
         ]);
 
         $day = Carbon::parse($request->date)->format('D');
@@ -86,7 +90,7 @@ class AppointmentsController extends Controller
         $appointment->doctor_id = $request->doctor_id;
         $appointment->date = $request->date;
         $appointment->payment_status = 'unpaid';
-        $appointment->status = $request->status;
+        $appointment->status = 'new';
         $appointment->token_no = $token;
         $status = $appointment->save();
 
@@ -120,7 +124,10 @@ class AppointmentsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $appointment = Appointment::findOrFail($id);
+        $medicine_types = MedicineType::get();
+        $medicines = Medicine::where('status',1)->get();
+        return view('admin.appointments.edit', compact('appointment','medicine_types','medicines'));
     }
 
     /**
@@ -132,7 +139,50 @@ class AppointmentsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'weight' => 'required|numeric',
+            'blood_pressure' => 'required|numeric',
+            'pulse' => 'required|numeric',
+            'temperature' => 'required|numeric',
+            'medicine_type' => 'required|array',
+            'medicine' => 'required|array',
+            'dosage' => 'required|array',
+            'days' => 'required|array',
+            'time' => 'required|array'
+        ]);
+
+        try {
+            DB::beginTransaction();
+            $appointment = Appointment::findOrFail($id);
+            $appointment->weight = $request->weight;
+            $appointment->blood_pressure = $request->blood_pressure;
+            $appointment->pulse = $request->pulse;
+            $appointment->temperature = $request->temperature;
+            $appointment->problem = $request->problem_description;
+            $appointment->payment_status = 'paid';
+            $appointment->status = 'completed';
+            $status = $appointment->save();
+
+            for ($i=0; $i<count($request->medicine); $i++) {
+                $prescription = new Prescription();
+                $prescription->appointment_id = $id;
+                $prescription->medicine_type_id = $request->medicine_type[$i];
+                $prescription->medicine_id = $request->medicine[$i];
+                $prescription->dosage = $request->dosage[$i];
+                $prescription->days = $request->days[$i];
+                $prescription->time = $request->time[$i];
+                $prescription->save();
+            }
+            DB::commit();
+            Toastr::success('Prescription added', 'Success');
+            return redirect()->route('appointments.today');
+        }
+        catch (Exception $e) {
+            DB::rollBack();
+            Toastr::error('Prescription failed to add', 'Failed');
+            return redirect()->route('appointments.today');
+        }
+
     }
 
     /**
