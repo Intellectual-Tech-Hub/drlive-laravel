@@ -55,6 +55,7 @@ return array(
     'App\\Models\\ChFavorite' => $baseDir . '/app/Models/ChFavorite.php',
     'App\\Models\\ChMessage' => $baseDir . '/app/Models/ChMessage.php',
     'App\\Models\\Chat' => $baseDir . '/app/Models/Chat.php',
+    'App\\Models\\Complaint' => $baseDir . '/app/Models/Complaint.php',
     'App\\Models\\Doctor' => $baseDir . '/app/Models/Doctor.php',
     'App\\Models\\DoctorAvailability' => $baseDir . '/app/Models/DoctorAvailability.php',
     'App\\Models\\DoctorCategory' => $baseDir . '/app/Models/DoctorCategory.php',

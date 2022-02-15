@@ -50,6 +50,10 @@ Route::group(['prefix'=>'admin', 'middleware'=>['auth']], function () {
     //General Options
     Route::resource('/banners', App\Http\Controllers\admin\BannerController::class);
     Route::resource('/story', App\Http\Controllers\admin\StoriesController::class);
+    Route::resource('/complaint', App\Http\Controllers\admin\ComplaintController::class);
+    Route::post('/attach/download/{id}', [App\Http\Controllers\admin\ComplaintController::class, 'attachdownload'])->name('attach.download');
+    Route::post('/reply/attach/download/{id}', [App\Http\Controllers\admin\ComplaintController::class, 'replyattachdownload'])->name('reply_attach.download');
+    Route::post('/reply/{id}', [App\Http\Controllers\admin\ComplaintController::class, 'reply'])->name('complaint.reply');
     Route::get('/chat', [App\Http\Controllers\admin\ChatController::class, 'index'])->name('chat.index');
     Route::get('/chat/start/{id}', [App\Http\Controllers\admin\ChatController::class, 'startchat'])->name('chat.start');
     Route::post('/chat/send', [App\Http\Controllers\admin\ChatController::class, 'send'])->name('chat.send');

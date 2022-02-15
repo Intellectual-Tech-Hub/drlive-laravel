@@ -667,6 +667,7 @@ class ComposerStaticInitc53f1506fc090fade9d4b4335b53b555
         'App\\Models\\ChFavorite' => __DIR__ . '/../..' . '/app/Models/ChFavorite.php',
         'App\\Models\\ChMessage' => __DIR__ . '/../..' . '/app/Models/ChMessage.php',
         'App\\Models\\Chat' => __DIR__ . '/../..' . '/app/Models/Chat.php',
+        'App\\Models\\Complaint' => __DIR__ . '/../..' . '/app/Models/Complaint.php',
         'App\\Models\\Doctor' => __DIR__ . '/../..' . '/app/Models/Doctor.php',
         'App\\Models\\DoctorAvailability' => __DIR__ . '/../..' . '/app/Models/DoctorAvailability.php',
         'App\\Models\\DoctorCategory' => __DIR__ . '/../..' . '/app/Models/DoctorCategory.php',

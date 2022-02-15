@@ -218,6 +218,15 @@
         </li>
         @endcan
 
+        @can('chat')
+        <li>
+            <a href="{{ route('complaint.index') }}">
+                <i class="fas fa-headset"></i>
+                <span key="t-layouts">Tickets</span>
+            </a>
+        </li>
+        @endcan
+
         <li class="menu-title" key="t-apps">User Management</li>
 
         @canany('role_list','permission_assign')
