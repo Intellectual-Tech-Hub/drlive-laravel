@@ -279,6 +279,30 @@ class PermissionTableSeeder extends Seeder
                 'name' => 'appointment_delete',
                 'guard_name' => 'web'
             ),
+            array(
+                'name' => 'ticket_list',
+                'guard_name' => 'web'
+            ),
+            array(
+                'name' => 'ticket_create',
+                'guard_name' => 'web'
+            ),
+            array(
+                'name' => 'ticket_update',
+                'guard_name' => 'web'
+            ),
+            array(
+                'name' => 'ticket_show',
+                'guard_name' => 'web'
+            ),
+            array(
+                'name' => 'ticket_reply',
+                'guard_name' => 'web'
+            ),
+            array(
+                'name' => 'ticket_delete',
+                'guard_name' => 'web'
+            ),
         );
 
         DB::table('permissions')->insert($permissions);

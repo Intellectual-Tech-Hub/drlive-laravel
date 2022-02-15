@@ -19,7 +19,7 @@
 </div>
 <!-- end page title -->
 <div class="card-header py-3">
-    @can('banner_create')
+    @can('ticket_create')
     <a href="{{ route('complaint.create') }}" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="bottom" title="Add Banners"><i class="fas fa-plus"></i> Rise a new ticket</a>
     @endcan
 </div>
@@ -54,11 +54,13 @@
                             @endif
                         </td>
                         <td>
-                            @can('banner_update')
+                            @can('ticket_show')
                             <a href="{{route('complaint.show',$complaint->id)}}" class="btn btn-warning btn-sm float-left mr-1" style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" title="edit" data-placement="bottom"><i class="fas fa-eye"></i></a>
+                            @endcan
+                            @can('ticket_update')
                             <a href="{{route('complaint.edit',$complaint->id)}}" class="btn btn-primary btn-sm float-left mr-1" style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" title="edit" data-placement="bottom"><i class="fas fa-edit"></i></a>
                             @endcan
-                            @can('banner_delete')
+                            @can('ticket_delete')
                             <form method="POST" action="{{route('complaint.destroy',$complaint->id)}}">
                             @csrf
                             @method('delete')

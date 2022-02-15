@@ -218,7 +218,7 @@
         </li>
         @endcan
 
-        @can('chat')
+        @can('ticket_list')
         <li>
             <a href="{{ route('complaint.index') }}">
                 <i class="fas fa-headset"></i>

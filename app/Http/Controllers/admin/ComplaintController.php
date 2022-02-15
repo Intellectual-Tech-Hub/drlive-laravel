@@ -11,6 +11,18 @@ use Illuminate\Support\Facades\Storage;
 
 class ComplaintController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('permission:ticket_list');
+        $this->middleware('permission:ticket_create', ['only' => ['create','store']]);
+        $this->middleware('permission:ticket_update', ['only' => ['edit','update']]);
+        $this->middleware('permission:ticket_delete', ['only' => ['destroy']]);
+        $this->middleware('permission:ticket_show', ['only' => ['show']]);
+        $this->middleware('permission:ticket_reply', ['only' => ['reply']]);
+    }
+
+
     /**
      * Display a listing of the resource.
      *

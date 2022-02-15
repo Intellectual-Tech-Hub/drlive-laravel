@@ -18,8 +18,8 @@
     </div>
 </div>
 <!-- end page title -->
+@can('ticket_show')
 <div class="row">
-
     <div class="col-12">
         <div class="card">
             <div class="card-body">
@@ -83,7 +83,9 @@
         </div>
     </div>
 </div>
+@endcan
 
+@can('ticket_reply')
 <div class="row">
     <div class="col-xl-12">
         <div class="card">
@@ -126,6 +128,7 @@
         <!-- end card -->
     </div>
 </div>
+@endcan
 
 @endsection
 
