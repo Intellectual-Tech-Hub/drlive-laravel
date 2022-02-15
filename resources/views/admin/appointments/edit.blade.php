@@ -179,7 +179,7 @@
                                 <table class="table mb-0">
                                     <tbody>
                                     <tr>
-                                        <th>Medicine Type</th>
+                                        {{-- <th>Medicine Type</th> --}}
                                         <th>Medicine</th>
                                         <th>Dosage</th>
                                         <th>Days</th>
@@ -187,7 +187,7 @@
                                         <th></th>
                                     </tr>
                                     <tr id="row1">
-                                        <td>
+                                        {{-- <td>
                                             <select class="form-control" name="medicine_type[]" id="medicine_type" required>
                                                 <option value="">select type</option>
                                                 @foreach ($medicine_types as $type)
@@ -205,6 +205,12 @@
                                                     <option value="{{ $medicine->id }}">{{ $medicine->name }}</option>
                                                 @endforeach
                                             </select>
+                                            @error('medicine')
+                                                <span class="badge badge-soft-danger">{{ $message }}</span>
+                                            @enderror
+                                        </td> --}}
+                                        <td>
+                                            <input type="text" name="medicine[]" id="medicine" required class="form-control">
                                             @error('medicine')
                                                 <span class="badge badge-soft-danger">{{ $message }}</span>
                                             @enderror
@@ -277,13 +283,16 @@
         $('#add').on('click', function(){
             i++;
             $('#row1').after('<tr id="row'+i+'">' +
-                '<td>' + 
+                /* '<td>' + 
                     '<select class="form-control" name="medicine_type[]" id="medicine_type'+i+'">' +
                     '</select>' +
                 '</td>' +
                 '<td>' +
                     '<select class="form-control" name="medicine[]" id="medicine'+i+'">' +
                     '</select>' +
+                '</td>' + */
+                '<td>' +
+                    '<input type="text" name="medicine[]" id="medicine'+i+'" required class="form-control">' +
                 '</td>' +
                 '<td>' +
                     '<select class="form-control" name="dosage[]" id="dosage'+i+'">' +
@@ -322,7 +331,7 @@
         });
 
         //get medicine type
-        $('#add').on('click', function () {
+        /* $('#add').on('click', function () {
             $('#medicine_type'+i+'').html('');
             $.ajax({
                 url: "{{url('getmedicinetypes')}}",
@@ -340,10 +349,10 @@
                     });
                 }
             });
-        });
+        }); */
 
         //get medicines
-        $('#add').on('click', function () {
+        /* $('#add').on('click', function () {
             $('#medicine'+i+'').html('');
             $.ajax({
                 url: "{{url('getmedicines')}}",
@@ -361,7 +370,7 @@
                     });
                 }
             });
-        });
+        }); */
 
         //delete row
         $(document).on('click', '.remove' , function(){

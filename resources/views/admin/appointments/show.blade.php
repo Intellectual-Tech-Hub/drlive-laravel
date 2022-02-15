@@ -165,7 +165,7 @@
                             @foreach ($prescriptions as $prescription)
                             <tr>
                                 <td>{{ $loop->index +1 }}</td>
-                                <td>{{ $prescription->medicine->name }}</td>
+                                <td>{{ $prescription->medicine }}</td>
                                 <td>{{ $prescription->dosage }}</td>
                                 <td>
                                     @if ($prescription->time == 'after')

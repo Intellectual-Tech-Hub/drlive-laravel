@@ -158,7 +158,7 @@ class AppointmentsController extends Controller
             'blood_pressure' => 'required|numeric',
             'pulse' => 'required|numeric',
             'temperature' => 'required|numeric',
-            'medicine_type' => 'required|array',
+            //'medicine_type' => 'required|array',
             'medicine' => 'required|array',
             'dosage' => 'required|array',
             'days' => 'required|array',
@@ -180,8 +180,8 @@ class AppointmentsController extends Controller
             for ($i=0; $i<count($request->medicine); $i++) {
                 $prescription = new Prescription();
                 $prescription->appointment_id = $id;
-                $prescription->medicine_type_id = $request->medicine_type[$i];
-                $prescription->medicine_id = $request->medicine[$i];
+                //$prescription->medicine_type_id = $request->medicine_type[$i];
+                $prescription->medicine = $request->medicine[$i];
                 $prescription->dosage = $request->dosage[$i];
                 $prescription->days = $request->days[$i];
                 $prescription->time = $request->time[$i];
