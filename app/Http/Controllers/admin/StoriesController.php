@@ -65,6 +65,7 @@ class StoriesController extends Controller
         $story = new Story();
         $story->user_id = Auth::user()->id;
         $story->name = $request->name;
+        $story->link = $request->link;
 
         $image = $request->file('image');
         $imagename = time() . '.' . $request->file('image')->getClientOriginalName();
@@ -123,6 +124,7 @@ class StoriesController extends Controller
 
         $story = Story::findOrFail($id);
         $story->name = $request->name;
+        $story->link = $request->link;
 
         if ($request->file('image')) {
             Storage::delete('public/story/'.$story->image);

@@ -34,6 +34,7 @@
                         <th>S.I</th>
                         <th>Name</th>
                         <th>Banner Image</th>
+                        <th>Url</th>
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
@@ -50,6 +51,7 @@
                                 <img class="img-fluid" alt="" src="{{ asset('storage/banner/'.$banner->image) }}" width="75">
                             </a>
                         </td>
+                        <td>{{ $banner->link }}</td>
                         <td>
                             @if ($banner->status == 0)
                             <span class="badge bg-danger">Inactive</span>

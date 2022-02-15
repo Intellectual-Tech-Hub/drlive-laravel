@@ -35,6 +35,7 @@
                         <th>User Name</th>
                         <th>Story Name</th>
                         <th>Story Image</th>
+                        <th>Story Url</th>
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
@@ -53,6 +54,7 @@
                                 <img class="img-fluid" alt="" src="{{ asset('storage/story/'.$story->image) }}" width="75">
                             </a>
                         </td>
+                        <td>{{ $story->link }}</td>
                         <td>
                             @if ($story->status == 0)
                             <span class="badge bg-danger">Inactive</span>

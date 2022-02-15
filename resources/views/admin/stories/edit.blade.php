@@ -48,7 +48,16 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row"> 
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="formrow-email-input" class="form-label">Story Url</label>
+                                <input type="text" name="link" value="{{ $story->link }}" class="form-control" id="formrow-email-input">
+                                @error('link')
+                                    <span class="badge badge-soft-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label class="form-label">Status</label>

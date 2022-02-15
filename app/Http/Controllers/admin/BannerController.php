@@ -59,6 +59,7 @@ class BannerController extends Controller
 
         $banner = new Banner();
         $banner->name = $request->name;
+        $banner->link = $request->link;
 
         $image = $request->file('image');
         $imagename = time() . '.' . $request->file('image')->getClientOriginalName();
@@ -118,6 +119,7 @@ class BannerController extends Controller
 
         $banner = Banner::findOrFail($id);
         $banner->name = $request->name;
+        $banner->link = $request->link;
 
         if ($request->file('image')) {
             Storage::delete('public/banner/'.$banner->image);
