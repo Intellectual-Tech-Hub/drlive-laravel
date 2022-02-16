@@ -37,4 +37,15 @@ class Appointment extends Model
         return $start_time->addMinutes($time)->format('h:i A');
     }
 
+    public static function totalappointments($doctor_id)
+    {
+        return Appointment::where('doctor_id',$doctor_id)->count();
+    }
+
+    public static function todayappointments($doctor_id)
+    {
+        $today = Carbon::now()->format('Y-m-d');
+        return Appointment::where('doctor_id',$doctor_id)->where('date',$today)->count();
+    }
+
 }

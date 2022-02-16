@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Appointment;
 use App\Models\Category;
 use App\Models\Doctor;
 use App\Models\DoctorCategory;
@@ -146,7 +147,8 @@ class DoctorController extends Controller
     public function show($id)
     {
         $doctor = Doctor::findOrFail($id);
-        return view('admin.doctor.profile', compact('doctor'));
+        $appointments = Appointment::where('doctor_id',$doctor->id)->orderBy('date','asc')->get();
+        return view('admin.doctor.profile', compact('doctor','appointments'));
     }
 
     /**

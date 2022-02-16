@@ -47,11 +47,11 @@
                            
                             <div class="row">
                                 <div class="col-6">
-                                    <h5 class="font-size-15">125</h5>
+                                    <h5 class="font-size-15">{{ @App\Models\Appointment::todayappointments($doctor->id) }}</h5>
                                     <p class="text-muted mb-0">Appointments Today</p>
                                 </div>
                                 <div class="col-6">
-                                    <h5 class="font-size-15">$1245</h5>
+                                    <h5 class="font-size-15">$ {{ number_format(@App\Models\Appointment::todayappointments($doctor->id) * $doctor->fees,2) }}</h5>
                                     <p class="text-muted mb-0">Revenue Today</p>
                                 </div>
                             </div>
@@ -118,7 +118,7 @@
                         <div class="media">
                             <div class="media-body">
                                 <p class="text-muted fw-medium mb-2">Total Appointments</p>
-                                <h4 class="mb-0">125</h4>
+                                <h4 class="mb-0">{{ @App\Models\Appointment::totalappointments($doctor->id) }}</h4>
                             </div>
 
                             <div class="mini-stat-icon avatar-sm align-self-center rounded-circle bg-primary">
@@ -136,7 +136,7 @@
                         <div class="media">
                             <div class="media-body">
                                 <p class="text-muted fw-medium mb-2">Todays Appointments</p>
-                                <h4 class="mb-0">12</h4>
+                                <h4 class="mb-0">{{ @App\Models\Appointment::todayappointments($doctor->id) }}</h4>
                             </div>
 
                             <div class="avatar-sm align-self-center mini-stat-icon rounded-circle bg-primary">
@@ -154,7 +154,7 @@
                         <div class="media">
                             <div class="media-body">
                                 <p class="text-muted fw-medium mb-2">Total Revenue</p>
-                                <h4 class="mb-0">$36,524</h4>
+                                <h4 class="mb-0">$ {{ number_format(@App\Models\Appointment::totalappointments($doctor->id) * $doctor->fees,2) }}</h4>
                             </div>
 
                             <div class="avatar-sm align-self-center mini-stat-icon rounded-circle bg-primary">
@@ -178,19 +178,32 @@
                                 <th scope="col">#</th>
                                 <th scope="col">Patient Name</th>
                                 <th scope="col">Date</th>
-                                <th scope="col">Time</th>
+                                <th scope="col">Token</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>
 
+                            @foreach ($appointments as $appointment)
                             <tr>
-                                <th scope="row">1</th>
-                                <td>Skote admin UI</td>
-                                <td>2 Sep, 2019</td>
-                                <td>20 Oct, 2019</td>
-                                <td>$506</td>
+                                <th scope="row">{{ $loop->index +1 }}</th>
+                                <td>
+                                    {{ $appointment->patient->first_name.' '.$appointment->patient->last_name }}
+                                </td>
+                                <td>
+                                    {{ Carbon\carbon::parse($appointment->date)->format('d M, Y') }}
+                                    <span class="badge bg-primary">
+                                        {{ Carbon\carbon::parse($appointment->date)->format('D') }}
+                                    </span>
+                                </td>
+                                <td>{{ $appointment->token_no }}</td>
+                                <td>
+                                    @can('appointment_view')
+                                        <a href="{{ route('appointment.show',$appointment->id) }}" class="btn btn-primary btn-sm float-left mr-1" style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" title="edit" data-placement="bottom"><i class="fas fa-eye"></i></a>
+                                    @endcan
+                                </td>
                             </tr>
+                            @endforeach
 
                         </tbody>
                     </table>
