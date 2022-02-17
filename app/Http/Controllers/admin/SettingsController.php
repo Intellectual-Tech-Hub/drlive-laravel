@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\MailConfig;
 use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -142,8 +143,57 @@ class SettingsController extends Controller
 
     public function mail()
     {
-        //$setting = Setting::orderBy('id','ASC')->first();
-        return view('admin.settings.smtp');
+        $mail = MailConfig::first();
+        return view('admin.settings.smtp', compact('mail'));
+    }
+
+    public function mailsave(Request $request)
+    {
+        $this->validate($request, [
+            'driver' => 'required|string',
+            'host' => 'required',
+            'port' => 'required',
+            'from' => 'required',
+            'name' => 'required',
+            'encryption' => 'required',
+            'username' => 'required',
+            'password' => 'required'
+        ]);
+
+        if ($request->id) {
+            $mail = MailConfig::findOrFail($request->id);
+            $mail->driver = $request->driver;
+            $mail->host = $request->host;
+            $mail->port = $request->port;
+            $mail->from = $request->from;
+            $mail->name = $request->name;
+            $mail->encryption = $request->encryption;
+            $mail->username = $request->username;
+            $mail->password = $request->password;
+            $status = $mail->save();
+        }
+        else {
+            $mail = new MailConfig();
+            $mail->driver = $request->driver;
+            $mail->host = $request->host;
+            $mail->port = $request->port;
+            $mail->from = $request->from;
+            $mail->name = $request->name;
+            $mail->encryption = $request->encryption;
+            $mail->username = $request->username;
+            $mail->password = $request->password;
+            $status = $mail->save();
+        }
+
+        if ($status) {
+            Toastr::success('Mail config Updated', 'Success');
+            return redirect()->back();
+        }
+        else {
+            Toastr::error('Mail config failed to Update', 'failed');
+            return redirect()->back();
+        }
+
     }
 
 }

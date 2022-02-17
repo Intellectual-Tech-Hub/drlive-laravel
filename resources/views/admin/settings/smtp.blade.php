@@ -27,11 +27,56 @@
 
                 <form method="POST" action="{{ route('mail.save') }}" enctype="multipart/form-data">
                     @csrf
+                    <input type="hidden" name="id" value="{{ @$mail->id }}">
                     <div class="row"> 
                         <div class="col-md-12">
                             <div class="mb-3">
-                                <label for="formrow-email-input" class="form-label">Site Name</label>
-                                <input type="text" name="name" value="" class="form-control" id="formrow-email-input">
+                                <label for="formrow-email-input" class="form-label">Driver</label>
+                                <input type="text" name="driver" value="{{ @$mail->driver }}" class="form-control" id="formrow-email-input">
+                                @error('driver')
+                                    <span class="badge badge-soft-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="mb-3">
+                                <label for="formrow-email-input" class="form-label">Host</label>
+                                <input type="text" name="host" value="{{ @$mail->host }}" class="form-control" id="formrow-password-input">
+                                @error('host')
+                                    <span class="badge badge-soft-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="mb-3">
+                                <label for="formrow-email-input" class="form-label">Port</label>
+                                <input type="text" name="port" value="{{ @$mail->port }}" class="form-control" id="formrow-password-input">
+                                @error('port')
+                                    <span class="badge badge-soft-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="mb-3">
+                                <label for="formrow-email-input" class="form-label">From</label>
+                                <input type="text" name="from" value="{{ @$mail->from }}" class="form-control" id="formrow-password-input">
+                                @error('from')
+                                    <span class="badge badge-soft-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="mb-3">
+                                <label for="formrow-email-input" class="form-label">Name</label>
+                                <input type="text" name="name" value="{{ @$mail->name }}" class="form-control" id="formrow-password-input">
                                 @error('name')
                                     <span class="badge badge-soft-danger">{{ $message }}</span>
                                 @enderror
@@ -41,9 +86,9 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="mb-3">
-                                <label for="formrow-email-input" class="form-label">Logo Image</label>
-                                <input type="text" name="logo" value="" class="form-control" id="formrow-password-input">
-                                @error('logo')
+                                <label for="formrow-email-input" class="form-label">Encryption</label>
+                                <input type="text" name="encryption" value="{{ @$mail->encryption }}" class="form-control" id="formrow-password-input">
+                                @error('encryption')
                                     <span class="badge badge-soft-danger">{{ $message }}</span>
                                 @enderror
                             </div>
@@ -52,9 +97,9 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="mb-3">
-                                <label for="formrow-email-input" class="form-label">Logo Image</label>
-                                <input type="text" name="logo" value="" class="form-control" id="formrow-password-input">
-                                @error('logo')
+                                <label for="formrow-email-input" class="form-label">User Name</label>
+                                <input type="text" name="username" value="{{ @$mail->username }}" class="form-control" id="formrow-password-input">
+                                @error('username')
                                     <span class="badge badge-soft-danger">{{ $message }}</span>
                                 @enderror
                             </div>
@@ -63,9 +108,9 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="mb-3">
-                                <label for="formrow-email-input" class="form-label">Logo Image</label>
-                                <input type="text" name="logo" value="" class="form-control" id="formrow-password-input">
-                                @error('logo')
+                                <label for="formrow-email-input" class="form-label">Password</label>
+                                <input type="text" name="password" value="{{ @$mail->password }}" class="form-control" id="formrow-password-input">
+                                @error('password')
                                     <span class="badge badge-soft-danger">{{ $message }}</span>
                                 @enderror
                             </div>
