@@ -32,6 +32,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>['auth']], function () {
     Route::resource('/appointment', App\Http\Controllers\admin\AppointmentsController::class);
     Route::get('/appointments/history', [App\Http\Controllers\admin\AppointmentsController::class, 'history'])->name('appointments.history');
     Route::get('/appointments/today', [App\Http\Controllers\admin\AppointmentsController::class, 'today'])->name('appointments.today');
+    Route::get('/prescription/mail/{id}', [App\Http\Controllers\admin\AppointmentsController::class, 'prescriptionmail'])->name('mail.prescription');
     //user management
     Route::resource('/roles', App\Http\Controllers\admin\RoleController::class);
     Route::resource('/users', App\Http\Controllers\admin\UserController::class);
@@ -71,6 +72,8 @@ Route::group(['prefix'=>'admin', 'middleware'=>['auth']], function () {
     Route::any('/settings/save', [App\Http\Controllers\admin\SettingsController::class, 'save'])->name('settings.save');
     Route::get('/profile/{id}', [App\Http\Controllers\admin\SettingsController::class, 'profile'])->name('profile');
     Route::any('/profile/save/{id}', [App\Http\Controllers\admin\SettingsController::class, 'profilesave'])->name('profile.save');
+    Route::get('/settings/mail', [App\Http\Controllers\admin\SettingsController::class, 'mail'])->name('settings.smtp');
+    Route::any('/settings/mail/save', [App\Http\Controllers\admin\SettingsController::class, 'mailsave'])->name('mail.save');
 
 });
 

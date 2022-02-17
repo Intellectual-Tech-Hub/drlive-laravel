@@ -196,7 +196,7 @@
                 <div class="d-print-none">
                     <div class="float-end">
                         <a href="javascript:window.print()" class="btn btn-success waves-effect waves-light me-1"><i class="fa fa-print"></i></a>
-                        <a href="" class="btn btn-primary w-md waves-effect waves-light"><i class="fa fa-envelope"></i> Send Mail</a>
+                        <a href="{{ route('mail.prescription',$appointment->id) }}" class="btn btn-primary w-md waves-effect waves-light"><i class="fa fa-envelope"></i> Send Mail</a>
                     </div>
                 </div>
             </div>

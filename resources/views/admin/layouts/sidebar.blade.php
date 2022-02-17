@@ -273,6 +273,9 @@
                 <li>
                     <a href="{{ route('settings.index') }}" key="t-vertical">General</a>
                 </li>
+                <li>
+                    <a href="{{ route('settings.smtp') }}" key="t-vertical">Mail Config</a>
+                </li>
             </ul>
         </li>
         @endcan

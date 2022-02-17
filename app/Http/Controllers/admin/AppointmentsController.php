@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\Prescription as MailPrescription;
 use App\Models\Appointment;
 use App\Models\Category;
 use App\Models\DoctorAvailability;
@@ -15,6 +16,7 @@ use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class AppointmentsController extends Controller
 {
@@ -26,7 +28,7 @@ class AppointmentsController extends Controller
         $this->middleware('permission:appointment_history', ['only' => ['history']]);
         $this->middleware('permission:appointment_create', ['only' => ['create','store']]);
         $this->middleware('permission:appointment_edit', ['only' => ['edit','update']]);
-        $this->middleware('permission:appointment_view', ['only' => ['show']]);
+        $this->middleware('permission:appointment_view', ['only' => ['show','prescriptionmail']]);
         $this->middleware('permission:appointment_delete', ['only' => ['destroy']]);
     }
 
@@ -235,6 +237,21 @@ class AppointmentsController extends Controller
         $today = Carbon::now()->format('Y-m-d');
         $appoitments = Appointment::where('date',$today)->get();
         return view('admin.appointments.today', compact('appoitments'));
+    }
+
+    public function prescriptionmail($id)
+    {
+        $appointment = Appointment::findOrFail($id);
+        $email = $appointment->patient->email;
+        if ($email == NULL) {
+            Toastr::error('Mail id is not provided by user', 'Failed');
+            return redirect()->back();
+        }
+        else {
+            Mail::to($email)->send(new MailPrescription($appointment));
+            Toastr::success('Mail sended', 'Success');
+            return redirect()->back();
+        }
     }
 
 }

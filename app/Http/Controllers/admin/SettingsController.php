@@ -16,7 +16,7 @@ class SettingsController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('permission:web_settings', ['only' => ['index','save']]);
+        $this->middleware('permission:web_settings', ['only' => ['index','save','mail','mailsave']]);
     }
 
 
@@ -138,6 +138,12 @@ class SettingsController extends Controller
             Toastr::error('Profile updation failed','Failed');
             return redirect()->route('profile',$id);
         }
+    }
+
+    public function mail()
+    {
+        //$setting = Setting::orderBy('id','ASC')->first();
+        return view('admin.settings.smtp');
     }
 
 }
