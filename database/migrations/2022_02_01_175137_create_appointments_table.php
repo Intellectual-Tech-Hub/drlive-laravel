@@ -20,6 +20,7 @@ class CreateAppointmentsTable extends Migration
             $table->integer('doctor_id');
             $table->integer('token_no');
             $table->date('date');
+            $table->string('method')->nullable();
             $table->string('payment_status')->default('unpaid');
             $table->string('status')->default('new');
             $table->float('weight')->nullable();

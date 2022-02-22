@@ -30,5 +30,7 @@ Route::group(['middleware'=>'auth:api'], function () {
     //User Section
     Route::post('/user/profile', [App\Http\Controllers\api\UserController::class, 'profiledetail']);
     Route::post('/user/update', [App\Http\Controllers\api\UserController::class, 'profileupdate']);
+    //Appointment
+    Route::post('/appointment/submit', [App\Http\Controllers\api\AppointmentController::class, 'appointmentsubmit']);
 
 });
