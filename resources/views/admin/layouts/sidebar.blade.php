@@ -276,6 +276,9 @@
                 <li>
                     <a href="{{ route('settings.smtp') }}" key="t-vertical">Mail Config</a>
                 </li>
+                <li>
+                    <a href="{{ route('settings.sms') }}" key="t-vertical">SMS Config</a>
+                </li>
             </ul>
         </li>
         @endcan

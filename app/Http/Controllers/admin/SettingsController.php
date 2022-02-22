@@ -5,11 +5,14 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\MailConfig;
 use App\Models\Setting;
+use App\Models\SmsConfig;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Brian2694\Toastr\Facades\Toastr;
+use Exception;
+use Twilio\Rest\Client;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
@@ -17,7 +20,8 @@ class SettingsController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('permission:web_settings', ['only' => ['index','save','mail','mailsave']]);
+        $this->middleware('permission:web_settings', ['only' => ['index',
+            'save','mail','mailsave','sms','smssave']]);
     }
 
 
@@ -141,59 +145,70 @@ class SettingsController extends Controller
         }
     }
 
-    public function mail()
+    public function sms()
     {
-        $mail = MailConfig::first();
-        return view('admin.settings.smtp', compact('mail'));
+        $sms = SmsConfig::first();
+        return view('admin.settings.sms', compact('sms'));
     }
 
-    public function mailsave(Request $request)
+    public function smssave(Request $request)
     {
         $this->validate($request, [
-            'driver' => 'required|string',
-            'host' => 'required',
-            'port' => 'required',
+            'sid' => 'required',
+            'token' => 'required',
             'from' => 'required',
-            'name' => 'required',
-            'encryption' => 'required',
-            'username' => 'required',
-            'password' => 'required'
         ]);
 
         if ($request->id) {
-            $mail = MailConfig::findOrFail($request->id);
-            $mail->driver = $request->driver;
-            $mail->host = $request->host;
-            $mail->port = $request->port;
-            $mail->from = $request->from;
-            $mail->name = $request->name;
-            $mail->encryption = $request->encryption;
-            $mail->username = $request->username;
-            $mail->password = $request->password;
-            $status = $mail->save();
+            $sms = SmsConfig::findOrFail($request->id);
+            $sms->twilio_sid = $request->sid;
+            $sms->twilio_token = $request->token;
+            $sms->twilio_from = $request->from;
+            $status = $sms->save();
         }
         else {
-            $mail = new MailConfig();
-            $mail->driver = $request->driver;
-            $mail->host = $request->host;
-            $mail->port = $request->port;
-            $mail->from = $request->from;
-            $mail->name = $request->name;
-            $mail->encryption = $request->encryption;
-            $mail->username = $request->username;
-            $mail->password = $request->password;
-            $status = $mail->save();
+            $sms = new SmsConfig();
+            $sms->twilio_sid = $request->sid;
+            $sms->twilio_token = $request->token;
+            $sms->twilio_from = $request->from;
+            $status = $sms->save();
         }
 
         if ($status) {
-            Toastr::success('Mail config Updated', 'Success');
+            Toastr::success('Sms config Updated', 'Success');
             return redirect()->back();
         }
         else {
-            Toastr::error('Mail config failed to Update', 'failed');
+            Toastr::error('Sms config failed to Update', 'failed');
             return redirect()->back();
         }
 
+    }
+
+    public function testsms()
+    {
+        $receiverNumber = "+918111869981";
+        $message = "This is testing sms from drlive.optimisttechhub.com";
+  
+        try {
+            $sms = SmsConfig::first();
+            $account_sid = $sms->twilio_sid;
+            $auth_token = $sms->twilio_token;
+            $twilio_number = $sms->twilio_from;
+  
+            $client = new Client($account_sid, $auth_token);
+            $client->messages->create($receiverNumber, [
+                'from' => $twilio_number, 
+                'body' => $message]);
+  
+            Toastr::success('Test sms sended', 'Success');
+            return redirect()->back();
+  
+        } catch (Exception $e) {
+            /* Toastr::error('Test sms failed to send', 'Failed');
+            return redirect()->back(); */
+            dd("Error: ". $e->getMessage());
+        }
     }
 
 }

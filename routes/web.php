@@ -74,6 +74,10 @@ Route::group(['prefix'=>'admin', 'middleware'=>['auth']], function () {
     Route::any('/profile/save/{id}', [App\Http\Controllers\admin\SettingsController::class, 'profilesave'])->name('profile.save');
     Route::get('/settings/mail', [App\Http\Controllers\admin\SettingsController::class, 'mail'])->name('settings.smtp');
     Route::any('/settings/mail/save', [App\Http\Controllers\admin\SettingsController::class, 'mailsave'])->name('mail.save');
+    Route::get('/settings/sms', [App\Http\Controllers\admin\SettingsController::class, 'sms'])->name('settings.sms');
+    Route::any('/settings/sms/save', [App\Http\Controllers\admin\SettingsController::class, 'smssave'])->name('sms.save');
+    //test sms
+    Route::get('/test/sms', [App\Http\Controllers\admin\SettingsController::class, 'testsms'])->name('test.sms');
 
 });
 
