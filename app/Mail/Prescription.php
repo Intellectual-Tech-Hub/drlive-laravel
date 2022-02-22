@@ -7,6 +7,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use PDF;
 
 class Prescription extends Mailable
 {
@@ -32,11 +33,15 @@ class Prescription extends Mailable
      */
     public function build()
     {
-        /* $data = '%PDF-1.2 6 0 obj << /S /GoTo /D (chapter.1) >>'; */
+        $data = [
+            'title' => 'Welcome to ItSolutionStuff.com',
+            'date' => date('m/d/Y')
+        ];
+        $pdf = PDF::loadView('admin.mail.test', $data);
         return $this->view('admin.mail.prescription')
                     ->subject('Doctor Prescription')
-                    /* ->attachData($data, 'name.pdf', [
+                    ->attachData($pdf->output(), "prescription.pdf" , [
                         'mime' => 'application/pdf',
-                    ]) */;
+                    ]);
     }
 }

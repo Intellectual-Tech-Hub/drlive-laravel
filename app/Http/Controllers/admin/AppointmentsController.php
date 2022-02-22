@@ -14,6 +14,7 @@ use App\Models\User;
 use Brian2694\Toastr\Facades\Toastr;
 use Carbon\Carbon;
 use Exception;
+use PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
@@ -248,6 +249,14 @@ class AppointmentsController extends Controller
             return redirect()->back();
         }
         else {
+            /* $data = [
+                'title' => 'Welcome to ItSolutionStuff.com',
+                'date' => date('m/d/Y')
+            ];
+            $pdf = PDF::loadView('admin.mail.test', $data); */
+            /* return $pdf->download('itsolutionstuff.pdf'); */
+
+
             Mail::to($email)->send(new MailPrescription($appointment));
             Toastr::success('Mail sended', 'Success');
             return redirect()->back();
