@@ -19,7 +19,7 @@ Route::post('/login', [App\Http\Controllers\api\AuthController::class, 'login'])
 Route::post('/register', [App\Http\Controllers\api\AuthController::class, 'register']);
 
 Route::group(['middleware'=>'auth:api'], function () {
-    //Doctorsections
+    //Doctors section
     Route::get('/category', [App\Http\Controllers\api\DoctorSectionController::class, 'category']);
     Route::post('/findcategory', [App\Http\Controllers\api\DoctorSectionController::class, 'findcategory']);
     Route::get('/doctors', [App\Http\Controllers\api\DoctorSectionController::class, 'doctors']);
@@ -30,7 +30,14 @@ Route::group(['middleware'=>'auth:api'], function () {
     //User Section
     Route::post('/user/profile', [App\Http\Controllers\api\UserController::class, 'profiledetail']);
     Route::post('/user/update', [App\Http\Controllers\api\UserController::class, 'profileupdate']);
-    //Appointment
+    //Appointment Section
     Route::post('/appointment/submit', [App\Http\Controllers\api\AppointmentController::class, 'appointmentsubmit']);
+    Route::post('/appointments/today', [App\Http\Controllers\api\AppointmentController::class, 'todayappointment']);
+    Route::post('/patient/active/history', [App\Http\Controllers\api\AppointmentController::class, 'patientactivehistory']);
+    Route::post('/patient/past/history', [App\Http\Controllers\api\AppointmentController::class, 'patientpasthistory']);
+    Route::post('/doctor/active/history', [App\Http\Controllers\api\AppointmentController::class, 'doctoractivehistory']);
+    Route::post('/doctor/past/history', [App\Http\Controllers\api\AppointmentController::class, 'doctorpasthistory']);
+    //Banner Section
+    Route::get('/banners/list', [App\Http\Controllers\api\BannerController::class, 'list']);
 
 });

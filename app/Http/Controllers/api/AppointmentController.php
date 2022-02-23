@@ -10,9 +10,11 @@ use App\Models\DoctorAvailability;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use phpDocumentor\Reflection\Types\Null_;
 
 class AppointmentController extends Controller
 {
+    //submit appointment
     public function appointmentsubmit(Request $request)
     {
         $category_id = $request->category_id;
@@ -79,7 +81,7 @@ class AppointmentController extends Controller
                 'result' => true,
                 'message' => 'appointtment success',
                 'appointment' => $last,
-                'caategory' => $category,
+                'category' => $category,
                 'doctor' => $doctor,
                 'patient' => $patient
             ],200);
@@ -87,8 +89,151 @@ class AppointmentController extends Controller
         else {
             return response()->json([
                 'result' => false,
-                'message' => 'aappointment failed',
+                'message' => 'appointment failed',
             ],404);
         }
     }
+
+    //todays appointment for doctors
+    public function todayappointment(Request $request)
+    {
+        $date = Carbon::now()->format('d');
+        $doctor_id = $request->doctor_id;
+
+        if ($doctor_id == NULL) {
+            return response()->json([
+                'result' => false,
+                'message' => 'doctor id is not provided',
+            ],404);
+        }
+
+        $appointment = Appointment::with('category','patient')->whereDay('date',$date)
+                        ->where('doctor_id',$doctor_id)->get();
+        
+        return response()->json([
+            'result' => true,
+            'appointments' => $appointment,
+            'patient image path' =>'/storage/user/',
+        ],200);
+    }
+
+    //patient active history(current month)
+    public function patientactivehistory(Request $request)
+    {
+        $date = Carbon::now()->format('m');
+        $patient_id = $request->patient_id;
+
+        if ($patient_id == NULL) {
+            return response()->json([
+                'result' => false,
+                'message' => 'patient id is not provided'
+            ],404);
+        }
+
+        $history = Appointment::with('category','doctor')->whereMonth('date',$date)->where('user_id',$patient_id)->get();
+
+        return response()->json([
+            'result' => true,
+            'appointments' => $history
+        ],200);
+    }
+
+    //patient past history(full history)
+    public function patientpasthistory(Request $request)
+    {
+        $patient_id = $request->patient_id;
+        $from = $request->from_date;
+        $to = $request->to_date;
+        $search = $request->search;
+
+        if ($patient_id == Null) {
+            return response()->json([
+                'result' => false,
+                'message' => 'patient id is not provided'
+            ],404);
+        }
+        
+        $appointment = Appointment::query();
+
+        if ($from) {
+            $appointment->where('date','>=',$from);
+        }
+
+        if ($to) {
+            $appointment->where('date','<=',$to);
+        }
+
+        if ($search) {
+            $appointment->join('doctors','doctors.id','=','appointments.doctor_id')
+                        ->join('users','users.id','=','doctors.user_id')
+                        ->where('users.first_name','LIKE','%'.$search.'%');
+        }
+
+        $result = $appointment->with('category','doctor')->where('user_id',$patient_id)->get();
+
+        return response()->json([
+            'result' => true,
+            'appointments' => $result
+        ],200);
+    }
+
+    //doctors active history(curret month)
+    public function doctoractivehistory(Request $request)
+    {
+        $date = Carbon::now()->format('m');
+        $doctor_id = $request->doctor_id;
+
+        if ($doctor_id == NULL) {
+            return response()->json([
+                'result' => false,
+                'message' => 'doctor id is not provided'
+            ],404);
+        }
+
+        $history = Appointment::with('category','paatient')->whereMonth('date',$date)->where('doctor_id',$doctor_id)->get();
+
+        return response()->json([
+            'result' => true,
+            'appointments' => $history
+        ],200);
+    }
+
+    //doctor past history (full history)
+    public function doctorpasthistory(Request $request)
+    {
+        $doctor_id = $request->doctor_id;
+        $from = $request->from_date;
+        $to = $request->to_date;
+        $search = $request->search;
+
+        if ($doctor_id == Null) {
+            return response()->json([
+                'result' => false,
+                'message' => 'doctor id is not provided'
+            ],404);
+        }
+        
+        $appointment = Appointment::query();
+
+        if ($from) {
+            $appointment->where('date','>=',$from);
+        }
+
+        if ($to) {
+            $appointment->where('date','<=',$to);
+        }
+
+        if ($search) {
+            $appointment->join('users','users.id','=','appointments.user_id')
+                        ->where('users.first_name','LIKE','%'.$search.'%');
+        }
+
+        $result = $appointment->with('category','patient')->where('doctor_id',$doctor_id)->get();
+
+        return response()->json([
+            'result' => true,
+            'appointments' => $result
+        ],200);
+    }
+
 }
