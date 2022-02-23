@@ -163,13 +163,14 @@ class AppointmentController extends Controller
             $appointment->where('date','<=',$to);
         }
 
+        $appointment->join('doctors','doctors.id','=','appointments.doctor_id')
+                        ->join('users','users.id','=','doctors.user_id');
+
         if ($search) {
-            $appointment->join('doctors','doctors.id','=','appointments.doctor_id')
-                        ->join('users','users.id','=','doctors.user_id')
-                        ->where('users.first_name','LIKE','%'.$search.'%');
+            $appointment->where('users.first_name','LIKE','%'.$search.'%');
         }
 
-        $result = $appointment->with('category','doctor')->where('user_id',$patient_id)->get();
+        $result = $appointment->with('category')->where('appointments.user_id',$patient_id)->get();
 
         return response()->json([
             'result' => true,
@@ -190,7 +191,7 @@ class AppointmentController extends Controller
             ],404);
         }
 
-        $history = Appointment::with('category','paatient')->whereMonth('date',$date)->where('doctor_id',$doctor_id)->get();
+        $history = Appointment::with('category','patient')->whereMonth('date',$date)->where('doctor_id',$doctor_id)->get();
 
         return response()->json([
             'result' => true,
@@ -223,12 +224,13 @@ class AppointmentController extends Controller
             $appointment->where('date','<=',$to);
         }
 
+        $appointment->join('users','users.id','=','appointments.user_id');
+
         if ($search) {
-            $appointment->join('users','users.id','=','appointments.user_id')
-                        ->where('users.first_name','LIKE','%'.$search.'%');
+            $appointment->where('users.first_name','LIKE','%'.$search.'%');
         }
 
-        $result = $appointment->with('category','patient')->where('doctor_id',$doctor_id)->get();
+        $result = $appointment->with('category')->where('appointments.doctor_id',$doctor_id)->get();
 
         return response()->json([
             'result' => true,
