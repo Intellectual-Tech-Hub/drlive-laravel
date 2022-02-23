@@ -34,8 +34,11 @@ class Prescription extends Mailable
     public function build()
     {
         $data = [
-            'title' => 'Welcome to ItSolutionStuff.com',
-            'date' => date('m/d/Y')
+            'patient_name' => $this->appointment->patient->first_name.' '.$this->appointment->patient->last_name,
+            'date' => $this->appointment->date,
+            'doctor_name' => $this->appointment->doctor->doctordetails->first_name.' '.$this->appointment->doctor->doctordetails->last_name,
+            'designation' => $this->appointment->doctor->designation,
+            'id' => $this->appointment->id,
         ];
         $pdf = PDF::loadView('admin.mail.test', $data);
         return $this->view('admin.mail.prescription')
