@@ -145,6 +145,59 @@ class SettingsController extends Controller
         }
     }
 
+    public function mail()
+    {
+        $mail = MailConfig::first();
+        return view('admin.settings.smtp', compact('mail'));
+    }
+
+    public function mailsave(Request $request)
+    {
+        $this->validate($request, [
+            'driver' => 'required|string',
+            'host' => 'required',
+            'port' => 'required',
+            'name' => 'required',
+            'encryption' => 'required',
+            'username' => 'required',
+            'password' => 'required'
+        ]);
+
+        if ($request->id) {
+            $mail = MailConfig::findOrFail($request->id);
+            $mail->driver = $request->driver;
+            $mail->host = $request->host;
+            $mail->port = $request->port;
+            $mail->from = $request->from;
+            $mail->name = $request->name;
+            $mail->encryption = $request->encryption;
+            $mail->username = $request->username;
+            $mail->password = $request->password;
+            $status = $mail->save();
+        }
+        else {
+            $mail = new MailConfig();
+            $mail->driver = $request->driver;
+            $mail->host = $request->host;
+            $mail->port = $request->port;
+            $mail->from = $request->from;
+            $mail->name = $request->name;
+            $mail->encryption = $request->encryption;
+            $mail->username = $request->username;
+            $mail->password = $request->password;
+            $status = $mail->save();
+        }
+
+        if ($status) {
+            Toastr::success('Mail config Updated', 'Success');
+            return redirect()->back();
+        }
+        else {
+            Toastr::error('Mail config failed to Update', 'failed');
+            return redirect()->back();
+        }
+    }
+
     public function sms()
     {
         $sms = SmsConfig::first();
