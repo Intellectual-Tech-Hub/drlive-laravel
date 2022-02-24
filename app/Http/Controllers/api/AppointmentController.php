@@ -109,10 +109,15 @@ class AppointmentController extends Controller
 
         $appointment = Appointment::with('category','patient')->whereDay('date',$date)
                         ->where('doctor_id',$doctor_id)->get();
+
+        foreach ($appointment as $app) {
+            $time[] = Appointment::expectedtime($app->id,$app->doctor_id,Carbon::parse($app->date)->format('D'));
+        }
         
         return response()->json([
             'result' => true,
             'appointments' => $appointment,
+            'time' => $time,
             'patient image path' =>'/storage/user/',
         ],200);
     }

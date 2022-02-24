@@ -90,7 +90,7 @@
                                     <tr>
                                         <th>Expected Time</th>
                                         <td>
-                                            {{ App\Models\Appointment::expectedtime($appointment->doctor_id, $day, $appointment->date) }}
+                                            {{ App\Models\Appointment::expectedtime($appointment->id,$appointment->doctor_id,$day) }}
                                         </td>
                                     </tr>
                                     <tr>

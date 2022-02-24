@@ -25,16 +25,24 @@ class Appointment extends Model
         return $this->belongsTo(Doctor::class, 'doctor_id');
     }
 
-    public static function expectedtime($doctor_id, $day, $date)
+    public function prescription()
     {
-        $appointment = Appointment::where('doctor_id',$doctor_id)->where('date',$date)->first();
+        return $this->hasMany(Prescription::class, 'appointment_id','id');
+    }
+
+    public static function expectedtime($appointment_id,$doctor_id, $day)
+    {
+        $appointment = Appointment::where('id',$appointment_id)->first();
         $available = DoctorAvailability::where('doctor_id',$doctor_id)->where('day',$day)->where('status',1)->first();
         $start_time = Carbon::createFromFormat('H:i', $available->start_time);
         $end_time = Carbon::createFromFormat('H:i', $available->end_time);
         $timediff = $end_time->diffInMinutes($start_time);
         $per_person = $timediff / $available->sit_quantity;
         $time = $per_person * ($appointment->token_no - 1);
-        return $start_time->addMinutes($time)->format('h:i A');
+        $cal1 = $start_time->addMinutes($time);
+        $exp1 = $cal1->format('h:i A');
+        $exp2 = $cal1->addMinutes(10)->format('h:i A');
+        return $exp1.' to '.$exp2;
     }
 
     public static function totalappointments($doctor_id)
