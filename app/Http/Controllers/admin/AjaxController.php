@@ -7,6 +7,7 @@ use App\Models\Doctor;
 use App\Models\DoctorCategory;
 use App\Models\Medicine;
 use App\Models\MedicineType;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AjaxController extends Controller
@@ -31,6 +32,23 @@ class AjaxController extends Controller
     {
         $medicines = Medicine::where('status',1)->get();
         return response()->json($medicines);
+    }
+
+    public function loginphone(Request $request)
+    {
+        $user = User::where('phone',$request->number)->first();
+        if ($user) {
+            return response()->json([
+                'result' => true,
+                'user' => $user
+            ]);
+        }
+        else {
+            return response()->json([
+                'result' => false,
+                'message' => 'not a registered number'
+            ]);
+        }
     }
 
 }

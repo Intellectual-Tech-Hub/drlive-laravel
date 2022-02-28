@@ -44,6 +44,11 @@ class HomeController extends Controller
         }
     }
 
+    public function phonelogin()
+    {
+        return view('admin.auth.login_phone');
+    }
+
     public function logout()
     {
         Auth::logout();

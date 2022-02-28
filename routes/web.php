@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 Route::redirect('/','/loginform');
 Route::get('/loginform', [App\Http\Controllers\HomeController::class, 'login'])->name('login.form');
+Route::get('/phone/login', [App\Http\Controllers\HomeController::class, 'phonelogin'])->name('phone.login.form');
 Route::post('/loginform/submit', [App\Http\Controllers\HomeController::class, 'loginsubmit'])->name('login.form.submit');
 Route::get('/userlogout', [App\Http\Controllers\HomeController::class, 'logout'])->name('user.logout');
 
@@ -86,3 +87,4 @@ Route::group(['prefix'=>'admin', 'middleware'=>['auth']], function () {
 Route::get('/getdoctors', [App\Http\Controllers\admin\AjaxController::class, 'getdoctors']);
 Route::get('/getmedicinetypes', [App\Http\Controllers\admin\AjaxController::class, 'medicinetypes']);
 Route::get('/getmedicines', [App\Http\Controllers\admin\AjaxController::class, 'medicines']);
+Route::get('/getuser', [App\Http\Controllers\admin\AjaxController::class, 'loginphone']);

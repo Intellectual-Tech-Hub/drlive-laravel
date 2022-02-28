@@ -64,8 +64,9 @@
                                         @csrf
         
                                         <div class="mb-3">
-                                            <label for="username" class="form-label">Username</label>
+                                            <label for="username" class="form-label">Email</label>
                                             <input type="text" name="email" value="{{ old('email') }}" class="form-control" placeholder="Enter email">
+                                            <a href="{{ route('phone.login.form') }}">Login with phone number</a>
                                             @error('email')
                                                 <span class="badge badge-soft-danger">{{ $message }}</span>
                                             @enderror
@@ -104,7 +105,7 @@
                             
                             <div>
                                {{--  <p>Don't have an account ? <a href="{{ route('register') }}" class="fw-medium text-primary"> Signup now </a> </p> --}}
-                                <p>{{ @App\Models\Setting::setting()->copyright }}</p>
+                                <p>{!! @App\Models\Setting::setting()->copyright !!}</p>
                             </div>
                         </div>
 
