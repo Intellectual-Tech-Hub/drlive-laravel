@@ -137,9 +137,14 @@ class AppointmentController extends Controller
 
         $history = Appointment::with('category','doctor')->whereMonth('date',$date)->where('user_id',$patient_id)->get();
 
+        foreach ($history as $app) {
+            $time[] = Appointment::expectedtime($app->id,$app->doctor_id,Carbon::parse($app->date)->format('D'));
+        }
+
         return response()->json([
             'result' => true,
-            'appointments' => $history
+            'appointments' => $history,
+            'time' => $time
         ],200);
     }
 
@@ -177,9 +182,14 @@ class AppointmentController extends Controller
 
         $result = $appointment->with('category')->where('appointments.user_id',$patient_id)->get();
 
+        foreach ($result as $app) {
+            $time[] = Appointment::expectedtime($app->id,$app->doctor_id,Carbon::parse($app->date)->format('D'));
+        }
+
         return response()->json([
             'result' => true,
-            'appointments' => $result
+            'appointments' => $result,
+            'time' => $time
         ],200);
     }
 
@@ -198,9 +208,14 @@ class AppointmentController extends Controller
 
         $history = Appointment::with('category','patient')->whereMonth('date',$date)->where('doctor_id',$doctor_id)->get();
 
+        foreach ($history as $app) {
+            $time[] = Appointment::expectedtime($app->id,$app->doctor_id,Carbon::parse($app->date)->format('D'));
+        }
+
         return response()->json([
             'result' => true,
-            'appointments' => $history
+            'appointments' => $history,
+            'time' => $time
         ],200);
     }
 
@@ -237,9 +252,14 @@ class AppointmentController extends Controller
 
         $result = $appointment->with('category')->where('appointments.doctor_id',$doctor_id)->get();
 
+        foreach ($result as $app) {
+            $time[] = Appointment::expectedtime($app->id,$app->doctor_id,Carbon::parse($app->date)->format('D'));
+        }
+
         return response()->json([
             'result' => true,
-            'appointments' => $result
+            'appointments' => $result,
+            'time' => $time
         ],200);
     }
 
