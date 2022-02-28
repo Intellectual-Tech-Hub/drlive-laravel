@@ -9,6 +9,7 @@ use App\Models\Medicine;
 use App\Models\MedicineType;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AjaxController extends Controller
 {
@@ -36,7 +37,7 @@ class AjaxController extends Controller
 
     public function loginphone(Request $request)
     {
-        $user = User::where('phone',$request->number)->first();
+        $user = User::where('phone',$request->number)->where('status',1)->first();
         if ($user) {
             return response()->json([
                 'result' => true,
@@ -46,7 +47,34 @@ class AjaxController extends Controller
         else {
             return response()->json([
                 'result' => false,
-                'message' => 'not a registered number'
+                'message' => 'not a registered number or inactive user'
+            ]);
+        }
+    }
+
+    public function phonelogin(Request $request)
+    {
+        $user = User::where('phone',$request->number)->where('status',1)->first();
+        if ($user) {
+            if ($user->roles[0]['name'] == 'admin' || $user->roles[0]['name'] == 'doctor') {
+                Auth::login($user);
+                return response()->json([
+                    'result' => true,
+                    'redirect' => url("admin/home"),
+                    'message' => 'login success'
+                ]);
+            }
+            else {
+                return response()->json([
+                    'result' => false,
+                    'message' => 'login failed'
+                ]);
+            }
+        }
+        else {
+            return response()->json([
+                'result' => false,
+                'message' => 'login failed'
             ]);
         }
     }

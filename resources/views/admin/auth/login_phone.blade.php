@@ -198,15 +198,35 @@
 
             function codeverify() {
                 var code = $("#verificationCode").val();
+                var number = $("#number").val();
                 coderesult.confirm(code).then(function (result) {
                     var user=result.user;
-                    //console.log(user);
                     $("#error").hide();
                     $("#sentSuccess").hide();
                     $("#successRegsiter").hide();
                     $("#successRegsiter").text("Code verified successfully.");
                     $("#successRegsiter").show();
-                    location.replace('/admin/home')
+                    $.ajax({
+                        url: "{{url('phonelogin')}}",
+                        type: "POST",
+                        data: {
+                            number: number,
+                            _token: '{{csrf_token()}}'
+                        },
+                        dataType: 'json',
+                        success: function (result) {
+                            if (result.result == true) {
+                                window.location = result.redirect;
+                            }
+                            else {
+                                $("#sentSuccess").hide();
+                                $("#error").hide();
+                                $("#successRegsiter").hide();
+                                $("#error").text(result.message);
+                                $("#error").show();
+                            }
+                        }
+                    });
                 }).catch(function (error) {
                     $("#error").hide();
                     $("#sentSuccess").hide();

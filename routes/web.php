@@ -88,3 +88,4 @@ Route::get('/getdoctors', [App\Http\Controllers\admin\AjaxController::class, 'ge
 Route::get('/getmedicinetypes', [App\Http\Controllers\admin\AjaxController::class, 'medicinetypes']);
 Route::get('/getmedicines', [App\Http\Controllers\admin\AjaxController::class, 'medicines']);
 Route::get('/getuser', [App\Http\Controllers\admin\AjaxController::class, 'loginphone']);
+Route::post('/phonelogin', [App\Http\Controllers\admin\AjaxController::class, 'phonelogin']);
