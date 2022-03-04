@@ -40,5 +40,8 @@ Route::group(['middleware'=>'auth:api'], function () {
     Route::post('/doctor/past/history', [App\Http\Controllers\api\AppointmentController::class, 'doctorpasthistory']);
     //Banner Section
     Route::get('/banners/list', [App\Http\Controllers\api\BannerController::class, 'list']);
+    //Leave Section
+    Route::get('/leave/type', [App\Http\Controllers\api\LeaveController::class, 'types']);
+    Route::post('/leave/register', [App\Http\Controllers\api\LeaveController::class, 'register']);
 
 });
