@@ -180,16 +180,19 @@ class AppointmentController extends Controller
             $appointment->where('users.first_name','LIKE','%'.$search.'%');
         }
 
-        $result = $appointment->with('category')->where('appointments.user_id',$patient_id)->get();
+        $result = $appointment->with('category')->where('appointments.user_id',$patient_id)
+                ->select('appointments.*','users.first_name','users.last_name','users.phone','users.email')->get();
 
-        foreach ($result as $app) {
-            $time[] = Appointment::expectedtime($app->id,$app->doctor_id,Carbon::parse($app->date)->format('D'));
+        if ($result) {
+            foreach ($result as $app) {
+                $time[] = Appointment::expectedtime($app->id,$app->doctor_id,Carbon::parse($app->date)->format('D'));
+            }
         }
 
         return response()->json([
             'result' => true,
             'appointments' => $result,
-            'time' => $time
+            'time' => $time ?? ''
         ],200);
     }
 
@@ -208,14 +211,16 @@ class AppointmentController extends Controller
 
         $history = Appointment::with('category','patient')->whereMonth('date',$date)->where('doctor_id',$doctor_id)->get();
 
-        foreach ($history as $app) {
-            $time[] = Appointment::expectedtime($app->id,$app->doctor_id,Carbon::parse($app->date)->format('D'));
+        if ($history) {
+            foreach ($history as $app) {
+                $time[] = Appointment::expectedtime($app->id,$app->doctor_id,Carbon::parse($app->date)->format('D'));
+            }
         }
 
         return response()->json([
             'result' => true,
             'appointments' => $history,
-            'time' => $time
+            'time' => $time ?? ''
         ],200);
     }
 
@@ -250,16 +255,19 @@ class AppointmentController extends Controller
             $appointment->where('users.first_name','LIKE','%'.$search.'%');
         }
 
-        $result = $appointment->with('category')->where('appointments.doctor_id',$doctor_id)->get();
+        $result = $appointment->with('category')->where('appointments.doctor_id',$doctor_id)
+                ->select('appointments.*','users.first_name','users.last_name','users.phone','users.email')->get();
 
-        foreach ($result as $app) {
-            $time[] = Appointment::expectedtime($app->id,$app->doctor_id,Carbon::parse($app->date)->format('D'));
+        if ($result) {
+            foreach ($result as $app) {
+                $time[] = Appointment::expectedtime($app->id,$app->doctor_id,Carbon::parse($app->date)->format('D'));
+            }
         }
 
         return response()->json([
             'result' => true,
             'appointments' => $result,
-            'time' => $time
+            'time' => $time ??  ''
         ],200);
     }
 
