@@ -30,7 +30,7 @@ class LeavedefineController extends Controller
     {
         $leaves = Leavedefine::get();
         //return $leaves;
-        return view('admin.leavedefine.index', compact('leaves'));
+        return view('admin.leave.leavedefine.index', compact('leaves'));
     }
 
     /**
@@ -41,7 +41,7 @@ class LeavedefineController extends Controller
     public function create()
     {
         $leavetable['leave'] = Leave::all();
-        return view('admin.leavedefine.create',$leavetable);   
+        return view('admin.leave.leavedefine.create',$leavetable);   
         
     }
 
@@ -104,7 +104,7 @@ class LeavedefineController extends Controller
     public function edit($id)
     {
         $leavedefine['edit'] = Leavedefine::find($id);
-        return view('admin.leavedefine.edit',$leavedefine);
+        return view('admin.leave.leavedefine.edit',$leavedefine);
     }
 
     /**

@@ -28,7 +28,7 @@ class Approve_leave extends Controller
     public function index()
     {
         $user['users'] = Leavedefine::all();
-        return view('admin.leaveapproval.index',$user);
+        return view('admin.leave.leaveapproval.index',$user);
     }
 
     /**
@@ -102,7 +102,7 @@ class Approve_leave extends Controller
      */
     public function show($id)
     {   $leavedefine['define'] = Leavedefine::find($id);
-        return view('admin.leaveapproval.show',$leavedefine);
+        return view('admin.leave.leaveapproval.show',$leavedefine);
     }
 
     /**

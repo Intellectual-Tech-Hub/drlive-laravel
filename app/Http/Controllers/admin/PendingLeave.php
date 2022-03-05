@@ -27,7 +27,7 @@ class PendingLeave extends Controller
     public function index()
     {
         $user['users'] = Leavedefine::all();
-        return view('admin.pendingleave.index',$user);
+        return view('admin.leave.pendingleave.index',$user);
     }
 
     /**
@@ -100,7 +100,7 @@ class PendingLeave extends Controller
     public function show($id)
     {
         $leavedefine['define'] = Leavedefine::find($id);
-        return view('admin.pendingleave.show',$leavedefine);
+        return view('admin.leave.pendingleave.show',$leavedefine);
     }
 
 

@@ -29,7 +29,7 @@ class LeaveController extends Controller
     public function index()
     {
         $Leave['leavetype'] = Leave::all();
-        return view('admin.Leave.index',$Leave);
+        return view('admin.leave.type.index',$Leave);
     }
 
     /**
