@@ -67,4 +67,82 @@ class LeaveController extends Controller
         ],200);
     }
 
+    //All leaves list
+    public function all(Request $request)
+    {
+        $user = $request->user_id;
+        if ($user == NULL) {
+            return response()->json([
+                'result' => false,
+                'message' => 'user id is required'
+            ],404);
+        }
+
+        $leaves = Leavedefine::with('type')->where('user_id',$user)->get();
+        if ($leaves) {
+            return response()->json([
+                'result' => true,
+                'leaves' => $leaves,
+            ],200);
+        }
+        else {
+            return response()->json([
+                'result' => false,
+                'message' => 'no leaves'
+            ],404);
+        }
+    }
+
+    //Awaitinng leaves list
+    public function awaiting(Request $request)
+    {
+        $user = $request->user_id;
+        if ($user == NULL) {
+            return response()->json([
+                'result' => false,
+                'message' => 'user id is required'
+            ],404);
+        }
+
+        $leaves = Leavedefine::with('type')->where('user_id',$user)->where('status',0)->get();
+        if ($leaves) {
+            return response()->json([
+                'result' => true,
+                'leaves' => $leaves
+            ],200);
+        }
+        else {
+            return response()->json([
+                'result' => false,
+                'message' => 'no leaves'
+            ],404);
+        }
+    }
+
+    //Approved leaves list
+    public function approved(Request $request)
+    {
+        $user = $request->user_id;
+        if ($user == NULL) {
+            return response()->json([
+                'result' => false,
+                'message' => 'user id is required'
+            ],404);
+        }
+
+        $leaves = Leavedefine::with('type')->where('user_id',$user)->where('status',1)->get();
+        if ($leaves) {
+            return response()->json([
+                'result' => true,
+                'leaves' => $leaves
+            ],200);
+        }
+        else {
+            return response()->json([
+                'result' => false,
+                'message' => 'no leaves'
+            ],404);
+        }
+    }
+
 }

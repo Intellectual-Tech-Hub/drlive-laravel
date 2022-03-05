@@ -43,5 +43,8 @@ Route::group(['middleware'=>'auth:api'], function () {
     //Leave Section
     Route::get('/leave/type', [App\Http\Controllers\api\LeaveController::class, 'types']);
     Route::post('/leave/register', [App\Http\Controllers\api\LeaveController::class, 'register']);
+    Route::post('/leave/all', [App\Http\Controllers\api\LeaveController::class, 'all']);
+    Route::post('/leave/awaiting', [App\Http\Controllers\api\LeaveController::class, 'awaiting']);
+    Route::post('/leave/approved', [App\Http\Controllers\api\LeaveController::class, 'approved']);
 
 });

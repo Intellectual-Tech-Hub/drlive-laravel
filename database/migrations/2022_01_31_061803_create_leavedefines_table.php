@@ -20,7 +20,7 @@ class CreateLeavedefinesTable extends Migration
             $table->string('Fromdate');
             $table->string('Todate');
             $table->string('Reason');
-            $table->string('status')->nullable();
+            $table->string('status')->default(0);
             $table->timestamps();
         });
     }
