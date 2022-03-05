@@ -79,6 +79,8 @@ Route::group(['prefix'=>'admin', 'middleware'=>['auth']], function () {
     Route::any('/settings/sms/save', [App\Http\Controllers\admin\SettingsController::class, 'smssave'])->name('sms.save');
     //test sms
     Route::get('/test/sms', [App\Http\Controllers\admin\SettingsController::class, 'testsms'])->name('test.sms');
+    //Notification
+    Route::resource('/notification',App\Http\Controllers\admin\NotificationController::class);
 
 });
 

@@ -17,7 +17,6 @@ class CreateNotificationsTable extends Migration
             $table->id();
             $table->integer('user_id');
             $table->string('message')->nullable();
-            $table->string('image')->nullable();
             $table->string('url')->nullable();
             $table->string('read')->default(0);
             $table->timestamps();
