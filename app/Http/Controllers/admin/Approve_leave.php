@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\Leave;
 use App\Models\Leavedefine;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 use Brian2694\Toastr\Facades\Toastr;
 
@@ -60,6 +61,7 @@ class Approve_leave extends Controller
             $data->status = 1;
             $status = $data->save();
             if ($status) {
+                Notification::create($data->user_id, 'your leave approved');
                 Toastr::success('Leave approved','Success');
                 return redirect()->route('leaveapprove.index');
             }
@@ -81,6 +83,7 @@ class Approve_leave extends Controller
             $data->status = 0;
             $status = $data->save();
             if ($status) {
+                Notification::create($data->user_id, 'your leave declained');
                 Toastr::success('Leave declined','Success');
                 return redirect()->route('leaveapprove.index');
             }

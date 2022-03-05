@@ -7,6 +7,7 @@ use App\Models\Appointment;
 use App\Models\Category;
 use App\Models\Doctor;
 use App\Models\DoctorAvailability;
+use App\Models\Notification;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -77,6 +78,8 @@ class AppointmentController extends Controller
         $category = Category::where('id',$last->category_id)->first();
 
         if ($status) {
+            Notification::create($patient_id, 'appointment done');
+            Notification::create($appointment->doctor->doctordetails->id, 'new appointment recieved');
             return response()->json([
                 'result' => true,
                 'message' => 'appointtment success',

@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\DoctorAvailability;
 use App\Models\Medicine;
 use App\Models\MedicineType;
+use App\Models\Notification;
 use App\Models\Prescription;
 use App\Models\User;
 use Brian2694\Toastr\Facades\Toastr;
@@ -111,6 +112,8 @@ class AppointmentsController extends Controller
         $status = $appointment->save();
 
         if ($status) {
+            Notification::create($request->patient, 'appointment done');
+            Notification::create($appointment->doctor->doctordetails->id, 'new appointment recieved');
             Toastr::success('Appointment added', 'Success');
             return redirect()->route('appointment.index');
         }
@@ -191,6 +194,7 @@ class AppointmentsController extends Controller
                 $prescription->save();
             }
             DB::commit();
+            Notification::create($appointment->user_id, 'new prescription available');
             Toastr::success('Prescription added', 'Success');
             return redirect()->route('appointments.today');
         }

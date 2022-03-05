@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller;
 use App\Models\Leave;
 use App\Models\Leavedefine;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 
 class LeaveController extends Controller
@@ -61,6 +62,8 @@ class LeaveController extends Controller
         $leave->status = 0;
         $leave->save();
 
+        Notification::create($user, 'leave appiled');
+        Notification::create(1, 'new leave application recieved');
         return response()->json([
             'result' => true,
             'leave' => $leave

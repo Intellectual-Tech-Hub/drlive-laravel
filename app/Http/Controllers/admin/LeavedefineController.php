@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\Leave;
 use App\Models\Leavedefine;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Auth;
@@ -74,8 +75,10 @@ class LeavedefineController extends Controller
        $status = $leavedefine->save();
 
        if ($status) {
-           Toastr::success('Leave applied','Success');
-           return redirect()->route('leavedefine.index');
+            Notification::create(1, 'new leave application recieved');
+            Notification::create($leavedefine->user_id, 'leave applied');
+            Toastr::success('Leave applied','Success');
+            return redirect()->route('leavedefine.index');
        }
        else {
             Toastr::error('Leave failed to apply','Failed');
@@ -134,7 +137,7 @@ class LeavedefineController extends Controller
 
         if ($status) {
             Toastr::success('Leaveapplication updated','success');
-             return redirect()->route('leavedefine.index');
+            return redirect()->route('leavedefine.index');
         }
         else {
             Toastr::error('Leaveapplication updation failed','failed');
