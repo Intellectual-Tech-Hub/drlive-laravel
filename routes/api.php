@@ -46,5 +46,7 @@ Route::group(['middleware'=>'auth:api'], function () {
     Route::post('/leave/all', [App\Http\Controllers\api\LeaveController::class, 'all']);
     Route::post('/leave/awaiting', [App\Http\Controllers\api\LeaveController::class, 'awaiting']);
     Route::post('/leave/approved', [App\Http\Controllers\api\LeaveController::class, 'approved']);
+    //notification section
+    Route::post('/notification', [App\Http\Controllers\api\NotificationController::class, 'list']);
 
 });
