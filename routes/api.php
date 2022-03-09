@@ -48,5 +48,10 @@ Route::group(['middleware'=>'auth:api'], function () {
     Route::post('/leave/approved', [App\Http\Controllers\api\LeaveController::class, 'approved']);
     //notification section
     Route::post('/notification', [App\Http\Controllers\api\NotificationController::class, 'list']);
+    //Chat section
+    Route::post('/chat', [App\Http\Controllers\api\ChatController::class, 'chat']);
+    Route::post('/chat/user', [App\Http\Controllers\api\ChatController::class, 'specificchat']);
+    Route::post('/chat/send', [App\Http\Controllers\api\ChatController::class, 'send']);
+
 
 });
