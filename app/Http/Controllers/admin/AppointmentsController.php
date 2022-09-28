@@ -161,7 +161,7 @@ class AppointmentsController extends Controller
     {
         $this->validate($request, [
             'weight' => 'required|numeric',
-            'blood_pressure' => 'required|numeric',
+            'blood_pressure' => 'required',
             'pulse' => 'required|numeric',
             'temperature' => 'required|numeric',
             //'medicine_type' => 'required|array',
@@ -182,6 +182,13 @@ class AppointmentsController extends Controller
             $appointment->payment_status = 'paid';
             $appointment->status = 'completed';
             $status = $appointment->save();
+
+            $exists = Prescription::where('appointment_id',$id)->get();
+            if ($exists) {
+                foreach ($exists as $exist) {
+                    $exist->delete();
+                }
+            }
 
             for ($i=0; $i<count($request->medicine); $i++) {
                 $prescription = new Prescription();

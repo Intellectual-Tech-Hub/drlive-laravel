@@ -24,7 +24,7 @@ class CreateAppointmentsTable extends Migration
             $table->string('payment_status')->default('unpaid');
             $table->string('status')->default('new');
             $table->float('weight')->nullable();
-            $table->float('blood_pressure')->nullable();
+            $table->string('blood_pressure')->nullable();
             $table->float('pulse')->nullable();
             $table->float('temperature')->nullable();
             $table->text('problem')->nullable();

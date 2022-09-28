@@ -99,7 +99,7 @@
         </li>
         @endcanany
 
-        <li class="menu-title" key="t-apps">Medicine Section</li>
+        {{-- <li class="menu-title" key="t-apps">Medicine Section</li>
 
         @can('medicine_type_list')
         <li>
@@ -129,7 +129,7 @@
                 @endcan
             </ul>
         </li>
-        @endcanany
+        @endcanany --}}
 
         <li class="menu-title" key="t-apps">General Options</li>
 

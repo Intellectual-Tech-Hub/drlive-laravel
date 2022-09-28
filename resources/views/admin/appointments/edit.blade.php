@@ -128,25 +128,25 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <input type="text" name="weight" value="{{ old('weight') }}" class="form-control" id="formrow-email-input">
+                                            <input type="text" name="weight" value="{{ old('weight') ?? $appointment->weight }}" class="form-control" id="formrow-email-input">
                                             @error('weight')
                                                 <span class="badge badge-soft-danger">{{ $message }}</span>
                                             @enderror
                                         </td>
                                         <td>
-                                            <input type="text" name="blood_pressure" value="{{ old('blood_pressure') }}" class="form-control" id="formrow-email-input">
+                                            <input type="text" name="blood_pressure" value="{{ old('blood_pressure') ?? $appointment->blood_pressure }}" class="form-control" id="formrow-email-input">
                                             @error('blood_pressure')
                                                 <span class="badge badge-soft-danger">{{ $message }}</span>
                                             @enderror
                                         </td>
                                         <td>
-                                            <input type="text" name="pulse" value="{{ old('pulse') }}" class="form-control" id="formrow-email-input">
+                                            <input type="text" name="pulse" value="{{ old('pulse') ?? $appointment->pulse }}" class="form-control" id="formrow-email-input">
                                             @error('pulse')
                                                 <span class="badge badge-soft-danger">{{ $message }}</span>
                                             @enderror
                                         </td>
                                         <td>
-                                            <input type="text" name="temperature" value="{{ old('temperature') }}" class="form-control" id="formrow-email-input">
+                                            <input type="text" name="temperature" value="{{ old('temperature') ?? $appointment->temperature }}" class="form-control" id="formrow-email-input">
                                             @error('temperature')
                                                 <span class="badge badge-soft-danger">{{ $message }}</span>
                                             @enderror
@@ -157,7 +157,7 @@
                                     </tr>
                                     <tr>
                                         <td colspan="4">
-                                            <textarea name="problem_description"class="form-control"></textarea>
+                                            <textarea name="problem_description"class="form-control">{!! $appointment->problem !!}</textarea>
                                             @error('problem_description')
                                                 <span class="badge badge-soft-danger">{{ $message }}</span>
                                             @enderror
