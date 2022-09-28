@@ -145,6 +145,25 @@
           
         </script>
 
+        {{-- <script>
+            var firebaseConfig = {
+            apiKey: "AIzaSyCgLXVa0XdzqO99MuNqxayegpwXBu_qAvo",
+            authDomain: "mmwebsite-c97f7.firebaseapp.com",
+
+            projectId: "mmwebsite-c97f7",
+
+            storageBucket: "mmwebsite-c97f7.appspot.com",
+
+            messagingSenderId: "124388740390",
+
+            appId: "1:124388740390:web:c93fe39e868c7a755505e7",
+
+            measurementId: "G-G72RQSHT2G"
+        };
+        firebase.initializeApp(firebaseConfig);
+        
+        </script> --}}
+
         <script type="text/javascript">
             window.onload=function () {
                 render();

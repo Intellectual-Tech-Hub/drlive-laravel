@@ -52,6 +52,7 @@ Route::group(['middleware'=>'auth:api'], function () {
     Route::post('/chat', [App\Http\Controllers\api\ChatController::class, 'chat']);
     Route::post('/chat/user', [App\Http\Controllers\api\ChatController::class, 'specificchat']);
     Route::post('/chat/send', [App\Http\Controllers\api\ChatController::class, 'send']);
+    Route::post('/chat/last', [App\Http\Controllers\api\ChatController::class, 'lastchat']);
 
 
 });

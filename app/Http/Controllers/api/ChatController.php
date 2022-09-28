@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\ChMessage;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ChatController extends Controller
 {
@@ -58,7 +59,8 @@ class ChatController extends Controller
             $query->select('id','first_name');
         }])->with(['to' => function($query){
             $query->select('id','first_name');
-        }])->where('from_id',$from)->where('to_id',$to)->select('id','from_id','to_id','body','created_at')->get();
+        }])->whereIn('from_id',[$from,$to])->whereIn('to_id',[$from,$to])
+        ->select('id','from_id','to_id','body','created_at')->orderBy('created_at','asc')->get();
 
         if ($messages) {
             return response()->json([
@@ -85,7 +87,7 @@ class ChatController extends Controller
             return response()->json([
                 'result' => false,
                 'message' => 'insert all required fields'
-            ]);
+            ],404);
         }
 
         $chat = new ChMessage();
@@ -99,8 +101,21 @@ class ChatController extends Controller
         return response()->json([
             'result' => true,
             'chat' => $chat,
-        ]);
+        ],200);
 
+    }
+
+    public function lastchat(Request $request)
+    {
+        $user = $request->user_id;
+        $chat = /* ChMessage::select('to_id', DB::raw('count(id) as total'))
+                ->where('from_id',$user)->groupBy('to_id')->get(); */
+                ChMessage::select('to_id')
+                ->where('from_id',$user)->groupBy('to_id')->get();
+        return response()->json([
+            'result' => true,
+            'chat' => $chat
+        ],200);
     }
 
 }
