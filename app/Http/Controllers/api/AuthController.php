@@ -18,7 +18,7 @@ class AuthController extends Controller
             $user = User::where('email',$request->email_or_phone)->first();
 
             if ($user != NULL) {
-                if (Hash::check($request->password, $user->password)) {
+                if (Hash::check($request->password, $user->password) && $user->roles[0]['name'] == 'doctor') {
                     $tokenResult = $user->createToken('token')->accessToken;
                     $role = $user->roles;
                     return response()->json([
@@ -48,7 +48,7 @@ class AuthController extends Controller
             $user = User::where('phone',$request->email_or_phone)->first();
 
             if ($user != NULL) {
-                if (Hash::check($request->password, $user->password)) {
+                if (Hash::check($request->password, $user->password) && $user->roles[0]['name'] == 'doctor') {
                     $tokenResult = $user->createToken('token')->accessToken;
                     $role = $user->roles;
                     return response()->json([
