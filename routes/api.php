@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 //authentication
 Route::post('/login', [App\Http\Controllers\api\AuthController::class, 'login']);
+Route::post('/mobile/login', [App\Http\Controllers\api\AuthController::class, 'mobile_login']);
 Route::post('/register', [App\Http\Controllers\api\AuthController::class, 'register']);
 
 Route::group(['middleware'=>'auth:api'], function () {
@@ -33,6 +34,7 @@ Route::group(['middleware'=>'auth:api'], function () {
     Route::post('/user/update', [App\Http\Controllers\api\UserController::class, 'profileupdate']);
     //Appointment Section
     Route::post('/appointment/submit', [App\Http\Controllers\api\AppointmentController::class, 'appointmentsubmit']);
+    Route::post('/payment/submit', [App\Http\Controllers\api\AppointmentController::class, 'paymentsubmit']);
     Route::post('/appointments/today', [App\Http\Controllers\api\AppointmentController::class, 'todayappointment']);
     Route::post('/patient/active/history', [App\Http\Controllers\api\AppointmentController::class, 'patientactivehistory']);
     Route::post('/patient/past/history', [App\Http\Controllers\api\AppointmentController::class, 'patientpasthistory']);

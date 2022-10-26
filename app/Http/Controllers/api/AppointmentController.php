@@ -97,6 +97,33 @@ class AppointmentController extends Controller
         }
     }
 
+    //payment update
+    public function paymentsubmit(Request $request)
+    {
+        $appointment_id = $request->appointment_id;
+        $payment_id = $request->payment_id;
+
+        if ($payment_id == NULL || $appointment_id == NULL) {
+            return response()->json([
+                'result' => false,
+                'message' => 'please provide required inputs'
+            ],404);
+        }
+        
+        $appointment = Appointment::findOrFail($appointment_id);
+        $appointment->payment_status = 'paid';
+        $appointment->payment_id = $payment_id;
+        $status = $appointment->save();
+
+        if ($status) {
+            return response()->json([
+                'result' => true,
+                'message' => 'payment status updated',
+                'appointment' => $appointment
+            ],200);
+        }
+    }
+
     //todays appointment for doctors
     public function todayappointment(Request $request)
     {
@@ -112,6 +139,13 @@ class AppointmentController extends Controller
 
         $appointment = Appointment::with('category','patient')->whereDay('date',$date)
                         ->where('doctor_id',$doctor_id)->get();
+
+        if (sizeof($appointment) == 0) {
+            return response()->json([
+                'result' => true,
+                'message' => 'no appointments today',
+            ],200);
+        }
 
         foreach ($appointment as $app) {
             $time[] = Appointment::expectedtime($app->id,$app->doctor_id,Carbon::parse($app->date)->format('D'));

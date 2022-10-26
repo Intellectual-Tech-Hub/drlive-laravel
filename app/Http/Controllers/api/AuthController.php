@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    
+    //doctor login
     public function login(Request $request)
     {
 
@@ -20,7 +20,6 @@ class AuthController extends Controller
             if ($user != NULL) {
                 if (Hash::check($request->password, $user->password) && $user->roles[0]['name'] == 'doctor') {
                     $tokenResult = $user->createToken('token')->accessToken;
-                    $role = $user->roles;
                     return response()->json([
                         'result' => true,
                         'message' => 'login success',
@@ -50,7 +49,6 @@ class AuthController extends Controller
             if ($user != NULL) {
                 if (Hash::check($request->password, $user->password) && $user->roles[0]['name'] == 'doctor') {
                     $tokenResult = $user->createToken('token')->accessToken;
-                    $role = $user->roles;
                     return response()->json([
                         'result' => true,
                         'message' => 'login success',
@@ -80,6 +78,52 @@ class AuthController extends Controller
                 'message' => 'either use email or phone for login',
 
             ],401);
+        }
+    }
+
+    //patient login
+    public function mobile_login(Request $request)
+    {
+        if ($request->mobile == null) {
+            return response()->json([
+                'result' => false,
+                'message' => 'please provide mobile number',
+            ],200);
+        }
+        else {
+            $user = User::where('phone',$request->mobile)->first();
+            if ($user != null && $user->roles[0]['name'] == 'patient') {
+                $tokenResult = $user->createToken('token')->accessToken;
+                return response()->json([
+                    'result' => true,
+                    'message' => 'login success',
+                    'user' => $user,
+                    'token' => $tokenResult,
+                ],200);
+            }
+            elseif ($user != null && $user->roles[0]['name'] != 'patient') {
+                return response()->json([
+                    'result' => false,
+                    'message' => 'the user is not a patient, mobile number already taken',
+                ],200);
+            }
+            else {
+                $new_user = new User();
+                $new_user->first_name = 'new patient';
+                $new_user->phone = $request->mobile;
+                $new_user->password = Hash::make('password');
+                $new_user->gender = 'male';
+                $new_user->save();
+                $role = $new_user->assignRole('patient');
+                $tokenResult = $new_user->createToken('token')->accessToken;
+
+                return response()->json([
+                    'result' => true,
+                    'message' => 'new patient registered with this mobile number',
+                    'user' => $new_user,
+                    'token' => $tokenResult,
+                ],200);
+            }
         }
     }
 
