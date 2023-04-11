@@ -25,9 +25,12 @@ Route::group(['middleware'=>'auth:api'], function () {
     Route::post('/findcategory', [App\Http\Controllers\api\DoctorSectionController::class, 'findcategory']);
     Route::get('/doctors', [App\Http\Controllers\api\DoctorSectionController::class, 'doctors']);
     Route::post('/finddoctor', [App\Http\Controllers\api\DoctorSectionController::class, 'finddoctor']);
+    Route::post('/doctor/search', [App\Http\Controllers\api\DoctorSectionController::class, 'doctor_search']);
     //story section
+    Route::post('/stories/create', [App\Http\Controllers\api\StoryController::class, 'create']);
     Route::get('/stories', [App\Http\Controllers\api\StoryController::class, 'stories']);
-    Route::get('/stories/active', [App\Http\Controllers\api\StoryController::class, 'activestories']);
+    Route::get('/stories/active1', [App\Http\Controllers\api\StoryController::class, 'activestories1']);
+    Route::get('/stories/active2', [App\Http\Controllers\api\StoryController::class, 'activestories2']);
     Route::post('/stories/user', [App\Http\Controllers\api\StoryController::class, 'userstories']);
     //User Section
     Route::post('/user/profile', [App\Http\Controllers\api\UserController::class, 'profiledetail']);

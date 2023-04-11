@@ -51,27 +51,30 @@ class DoctorAvailabilityController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         $this->validate($request, [
             'doctor_id' => 'required',
             'day' => 'required',
             'start_time' => 'required',
             'end_time' => 'required',
+            'period' => 'required',
             'sit_quantity' => 'required',
             'status' => 'required'
         ]);
 
-        $exist = DoctorAvailability::where('doctor_id',$request->doctor_id)->where('day',$request->day)->first();
+        $exist = DoctorAvailability::where('doctor_id',$request->doctor_id)->where('period',$request->period)->first();
         if ($exist) {
             Toastr::error('Doctor availability already added for the selected day','Failed');
             return redirect()->route('availability.index');
         }
-        
+
         $availability = new DoctorAvailability();
         $availability->doctor_id = $request->doctor_id;
         $availability->day = $request->day;
         $availability->start_time = $request->start_time;
         $availability->end_time = $request->end_time;
         $availability->sit_quantity = $request->sit_quantity;
+        $availability->period = $request->period;
         $availability->status = $request->status;
         $status = $availability->save();
 
@@ -126,7 +129,7 @@ class DoctorAvailabilityController extends Controller
             'sit_quantity' => 'required',
             'status' => 'required'
         ]);
-        
+
         $availability = DoctorAvailability::findOrFail($id);
         $availability->doctor_id = $request->doctor_id;
         $availability->day = $request->day;

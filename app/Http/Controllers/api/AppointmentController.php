@@ -137,7 +137,7 @@ class AppointmentController extends Controller
             ],404);
         }
 
-        $appointment = Appointment::with('category','patient')->whereDay('date',$date)
+        $appointment = Appointment::with('category','patient','doctor','doctor.doctordetails')->whereDay('date',$date)
                         ->where('doctor_id',$doctor_id)->get();
 
         if (sizeof($appointment) == 0) {
@@ -172,7 +172,7 @@ class AppointmentController extends Controller
             ],404);
         }
 
-        $history = Appointment::with('category','doctor')->whereMonth('date',$date)->where('user_id',$patient_id)->get();
+        $history = Appointment::with('patient','category','doctor','doctor.doctordetails')->whereMonth('date',$date)->where('user_id',$patient_id)->get();
 
         foreach ($history as $app) {
             $time[] = Appointment::expectedtime($app->id,$app->doctor_id,Carbon::parse($app->date)->format('D'));
@@ -246,7 +246,7 @@ class AppointmentController extends Controller
             ],404);
         }
 
-        $history = Appointment::with('category','patient')->whereMonth('date',$date)->where('doctor_id',$doctor_id)->get();
+        $history = Appointment::with('category','patient','doctor','doctor.doctordetails')->whereMonth('date',$date)->where('doctor_id',$doctor_id)->get();
 
         if ($history) {
             foreach ($history as $app) {

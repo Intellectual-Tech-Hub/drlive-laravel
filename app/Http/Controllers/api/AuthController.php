@@ -18,8 +18,10 @@ class AuthController extends Controller
             $user = User::where('email',$request->email_or_phone)->first();
 
             if ($user != NULL) {
+                // dd($user);
                 if (Hash::check($request->password, $user->password) && $user->roles[0]['name'] == 'doctor') {
                     $tokenResult = $user->createToken('token')->accessToken;
+                    // dd($tokenResult);
                     return response()->json([
                         'result' => true,
                         'message' => 'login success',
@@ -31,7 +33,7 @@ class AuthController extends Controller
                     return response()->json([
                         'result' => false,
                         'message' => 'authentication failed',
-        
+
                     ],401);
                 }
             }
@@ -46,7 +48,7 @@ class AuthController extends Controller
         elseif ($request->type == 'mobile') {
             $user = User::where('phone',$request->email_or_phone)->first();
 
-            if ($user != NULL) {
+            if ( $user != NULL) {
                 if (Hash::check($request->password, $user->password) && $user->roles[0]['name'] == 'doctor') {
                     $tokenResult = $user->createToken('token')->accessToken;
                     return response()->json([
@@ -60,7 +62,7 @@ class AuthController extends Controller
                     return response()->json([
                         'result' => false,
                         'message' => 'authentication failed',
-        
+
                     ],401);
                 }
             }
@@ -84,6 +86,7 @@ class AuthController extends Controller
     //patient login
     public function mobile_login(Request $request)
     {
+        // dd($request);
         if ($request->mobile == null) {
             return response()->json([
                 'result' => false,
@@ -92,7 +95,8 @@ class AuthController extends Controller
         }
         else {
             $user = User::where('phone',$request->mobile)->first();
-            if ($user != null && $user->roles[0]['name'] == 'patient') {
+            $passmatch = Hash::check($request->password, $user->password);
+            if ($user != null && $passmatch && $user->roles[0]['name'] == 'patient') {
                 $tokenResult = $user->createToken('token')->accessToken;
                 return response()->json([
                     'result' => true,
@@ -137,7 +141,7 @@ class AuthController extends Controller
 
             ],401);
         }
-        
+
         if ($request->type == 'email') {
             $new_user = new User();
             $new_user->first_name = $request->name;
@@ -155,7 +159,7 @@ class AuthController extends Controller
                 'user' => $new_user,
                 'token' => $tokenResult,
             ],200);
-        } 
+        }
         elseif ($request->type == 'mobile') {
             $new_user = new User();
             $new_user->first_name = $request->name;

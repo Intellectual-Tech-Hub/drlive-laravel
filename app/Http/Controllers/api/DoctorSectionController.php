@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class DoctorSectionController extends Controller
 {
-    
+
     //get all category of doctors
     public function category()
     {
@@ -49,7 +49,7 @@ class DoctorSectionController extends Controller
     //get all doctors list
     public function doctors()
     {
-        $doctors = Doctor::with('doctordetails','doctorcategory')->get();
+        $doctors = Doctor::with('doctordetails','doctorcategory','doctorAvailability')->get();
         return response()->json([
             'result' => true,
             'image path' =>'/storage/user/',
@@ -83,6 +83,23 @@ class DoctorSectionController extends Controller
                 'message' => 'please input doctor id',
             ],404);
         }
+    }
+
+    //search doctor by name
+    public function doctor_search(Request $request)
+    {
+        $search = $request->search;
+        if ($search) {
+            $doctors = Doctor::join('users','doctors.user_id','=','users.id')->where('users.first_name','LIKE','%'.$search.'%')->get();
+        }
+        else {
+            $doctors = Doctor::join('users','doctors.user_id','=','users.id')->get();
+        }
+
+        return response()->json([
+            'result' => true,
+            'doctors' => $doctors
+        ],200);
     }
 
 }

@@ -19,4 +19,9 @@ class Doctor extends Model
         return $this->hasMany(DoctorCategory::class, 'doctor_id');
     }
 
+    public function doctorAvailability()
+    {
+        return $this->hasMany(DoctorAvailability::class,'doctor_id');
+    }
+
 }
